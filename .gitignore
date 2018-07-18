@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+Face-Detection/Raw-Faces/
+Face-Detection/Videos/
+
+CMakeFiles/

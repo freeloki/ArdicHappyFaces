@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8)
+project( Face-Detection )
+find_package( OpenCV REQUIRED )
+add_executable( ArdicFaceExtractor ardic_face_extractor.cpp )
+target_link_libraries( ArdicFaceExtractor ${OpenCV_LIBS} )
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
