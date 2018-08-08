@@ -37,8 +37,8 @@ public class MyFaceDetector extends Detector<Face> {
     private static final int INPUT_SIZE = 299;
     private static final int IMAGE_MEAN = 0;
     private static final float IMAGE_STD = 255;
-    private static final String INPUT_NAME = "import/Placeholder";
-    private static final String OUTPUT_NAME = "import/final_result";
+    private static final String INPUT_NAME = "Placeholder";
+    private static final String OUTPUT_NAME = "final_result";
 
     private static final String MODEL_FILE = "file:///android_asset/output_graph.pb";
    private static final String LABEL_FILE =
@@ -78,6 +78,7 @@ public class MyFaceDetector extends Detector<Face> {
         Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
 
 
+        /**#########################################################################*/
         /* Bitmap faceBitmap = Bitmap.createBitmap(TempBitmap, (int)currentface.getPosition().x, (int)currentface.getPosition().y, (int)currentface.getWidth(),
                 (int)currentface.getHeight());*/
 
@@ -123,15 +124,15 @@ public class MyFaceDetector extends Detector<Face> {
                 buf.read(bMapArray);
                 bMap = BitmapFactory.decodeByteArray(bMapArray, 0, bMapArray.length);
             }catch (Exception e){
-                Log.e("Except'on ",String.valueOf(e));
+                Log.e("Exception ",String.valueOf(e));
             }
 
             //Bitmap resizedbitmap1=Bitmap.createBitmap(TempBitmap, (int)thisFace.getPosition().x, Math.abs((int)thisFace.getPosition().y), width, height);
-           // Bitmap ne=Bitmap.createBitmap()
+            // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
             Log.i("humf","1");
-           Bitmap bitmaptf = Bitmap.createScaledBitmap(bMap, INPUT_SIZE, INPUT_SIZE, false);
+            Bitmap bitmaptf = Bitmap.createScaledBitmap(bMap, INPUT_SIZE, INPUT_SIZE, false);
 
             Log.i("humf","2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight() );
 
@@ -144,7 +145,6 @@ public class MyFaceDetector extends Detector<Face> {
             //textViewResult=(TextView) textViewResult.findViewById(R.id.imgResult);
             //textViewResult.setText(results.toString());
             System.out.println("Result>>>> "+results.toString());
-            /**#########################################################################*/
 
             /*String root = Environment.getExternalStorageDirectory().toString();
             File myDir = new File(root + "/hhhh");
