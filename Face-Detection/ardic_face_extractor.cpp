@@ -6,7 +6,7 @@
 #include <iostream>
 #include<string> // for string class
 #include <unistd.h> //sleep
-
+#include <chrono>
 int imagecount=0;
 
 using namespace std;
@@ -19,17 +19,28 @@ const String IMAGEPATH="/home/ardic/Documents/faces/img4/ImageFromVideo_";
 int main(int argc, char const *argv[])
 {
   if(argc !=2){
-    cerr<<" Usage: ./exe Video_name.mp4" << endl;
+    cerr<<" Usage: ./exe #of videos" << endl;
     return -1;
   }
-  VideoProcess(argv[1]);
+  int total=atoi(argv[1]);
+  cout<<"total ="<<total<<endl;
+  
+  for(int i=0; i<total; i++){
+        cout<<i<<"  ";
+        String filename="video_"+to_string(i)+".h264";
+        VideoProcess(filename);
+  }
+  cout<<endl;      
+  
   return 0;
 }
 
 void VideoProcess (const String filename){
+cout<<filename<<endl;
   VideoCapture videoCap(filename);
   if(!videoCap.isOpened()){
     cout << "Error opening video stream or file" << endl;
+    cout << "Check: video_#number.h264" << endl;
       exit(1);
     }
     Mat frame;
@@ -42,6 +53,7 @@ void VideoProcess (const String filename){
         	cout<<"empty...."<<endl;
           break;
         }
+        
         int numOffaces=faceDetection(frame);
         if(numOffaces>-1){
           cout<<"face is found :)  "<<numOffaces<<endl;
@@ -68,7 +80,7 @@ int faceDetection(const Mat& frame){
       //cout<<"face is found :)"<<endl;
       returnVal=faces.size();
       // Draw circles on the detected faces
-      for( int i = 0; i < faces.size(); i++ )a
+      for( int i = 0; i < faces.size(); i++ )
       {
           int radius=faces[i].width*0.5;
           Point center( faces[i].x+faces[i].width*0.5 , faces[i].y+faces[i].width*0.5);
@@ -81,6 +93,8 @@ int faceDetection(const Mat& frame){
          
         cv::Mat roi = frame(rect1);
         std::time_t result = std::time(nullptr);
+       
+        
         cv::imwrite(IMAGEPATH+to_string(imagecount)+ std::to_string(result) + ".jpg", roi);
         imagecount++;
           
