@@ -1,0 +1,11 @@
+g++ -std=c++11 ardic_face_extractor.cpp `pkg-config --libs --cflags opencv` -o  exe
+
+./exe /home/ardic/opencv-3.4.1/data/haarcascades/haarcascade_frontalface_alt.xml /home/ardic/development/ArdicHappyFaces/Face-Detection/img/Imagename_ 1
+
+
+Usage: 
+	haarcascadePATH=/home/ardic/opencv-3.4.1/data/haarcascades/haarcascade_frontalface_alt.xml
+	IMAGEPATH=/home/ardic/development/ArdicHappyFaces/Face-Detection/img/Imagename_
+	#bnumberofvideos=1
+note:
+        NAMES OF video must start as "video_0", "video_1" ...

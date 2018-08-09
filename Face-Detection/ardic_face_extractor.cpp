@@ -13,16 +13,19 @@ using namespace std;
 using namespace cv;
 void VideoProcess (const String filename);
 int faceDetection(const Mat& frame);
-const String  HAARCASCADES="/home/ardic/opencv-3.4.1/data/haarcascades/haarcascade_frontalface_alt.xml";
-const String IMAGEPATH="/home/ardic/Documents/faces/img4/ImageFromVideo_";
-
+//const String  HAARCASCADES="/home/ardic/opencv-3.4.1/data/haarcascades/haarcascade_frontalface_alt.xml";
+//const String IMAGEPATH="/home/ardic/Documents/faces/img4/ImageFromVideo_";
+String  HAARCASCADES, IMAGEPATH;
 int main(int argc, char const *argv[])
 {
-  if(argc !=2){
-    cerr<<" Usage: ./exe #of videos" << endl;
+  if(argc !=4){
+    cerr<<" Usage: ./exe haarcascadePATH IMAGEPATH #of_videos" << endl;
     return -1;
   }
-  int total=atoi(argv[1]);
+  HAARCASCADES=argv[1];
+  IMAGEPATH=argv[2];
+
+  int total=atoi(argv[3]);
   cout<<"total ="<<total<<endl;
   
   for(int i=0; i<total; i++){
