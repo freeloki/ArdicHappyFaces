@@ -93,37 +93,7 @@ public class MainActivity_ extends Activity {
      * to other detection examples to enable the barcode detector to detect small barcodes
      * at long distances.
      */
-   /* private void createCameraSource() {
 
-        Context context = getApplicationContext();
-        FaceDetector detector = new FaceDetector.Builder(context)
-                .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
-                .build();
-
-        detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
-                        .build());
-
-        if (!detector.isOperational()) {
-            // Note: The first time that an app using face API is installed on a device, GMS will
-            // download a native library to the device in order to do detection.  Usually this
-            // completes before the app is run for the first time.  But if that download has not yet
-            // completed, then the above call will not detect any faces.
-            //
-            // isOperational() can be used to check if the required native library is currently
-            // available.  The detector will automatically become operational once the library
-            // download completes on device.
-            Log.w(TAG, "Face detector dependencies are not yet available.");
-        }
-
-        mCameraSource = new CameraSource.Builder(context, detector)
-                .setRequestedPreviewSize(640, 480)
-                .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(30.0f)
-                .build();
-
-
-    }*/
     private void createCameraSource() {
 
         Context context = getApplicationContext();
@@ -131,7 +101,9 @@ public class MainActivity_ extends Activity {
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
-                .setProminentFaceOnly(true)
+                .setProminentFaceOnly(false)
+                .setTrackingEnabled(true)
+                .setMode(FaceDetector.ACCURATE_MODE)
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector

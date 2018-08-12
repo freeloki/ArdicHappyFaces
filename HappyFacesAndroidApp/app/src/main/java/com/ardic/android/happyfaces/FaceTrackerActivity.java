@@ -69,8 +69,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        int activity_main_ = R.layout.camera_layout_activity;
-        setContentView(activity_main_);
+        setContentView(R.layout.camera_layout_activity);
 
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay) findViewById(R.id.faceOverlay);
