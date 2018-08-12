@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 
 public class MyFaceDetector extends Detector<Face> {
     private Detector<Face> mDelegate;
-    private Context context=null;
+    private Context context;
     private static final int INPUT_SIZE = 299;
     private static final int IMAGE_MEAN = 0;
     private static final float IMAGE_STD = 255;
@@ -31,10 +31,8 @@ public class MyFaceDetector extends Detector<Face> {
     private static final String OUTPUT_NAME = "final_result";
 
     private static final String MODEL_FILE = "file:///android_asset/output_graph.pb";
-   private static final String LABEL_FILE =
+    private static final String LABEL_FILE =
             "file:///android_asset/labels.txt";
-    private static final String testimg="/home/ardic/development/ArdicHappyFaces/FaceTrackerSAndroid/app/src/main/assets/test.jpg";
-
     private Classifier classifier;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -43,7 +41,7 @@ public class MyFaceDetector extends Detector<Face> {
 
 
         mDelegate = delegate;
-        context=con;
+        context = con;
         try {
             classifier = TensorFlowImageClassifier.create(
                     context.getAssets(),
@@ -74,30 +72,30 @@ public class MyFaceDetector extends Detector<Face> {
         //Log.i(currentface.getPosition().x+"  ", "salam,mmmmmmmmmm");
 
         FaceDetector faceDetector = new FaceDetector.Builder(context).setTrackingEnabled(false).build();
-        if(!faceDetector.isOperational()){
+        if (!faceDetector.isOperational()) {
 
 
         }
         Frame frameface = new Frame.Builder().setBitmap(TempBitmap).build();
         SparseArray<Face> faces = faceDetector.detect(frame);
-        for(int i=0; i<faces.size(); i++) {
+        for (int i = 0; i < faces.size(); i++) {
             Face thisFace = faces.valueAt(i);
-            float x = (thisFace.getPosition().x + thisFace.getWidth()/2);
-            float y = (thisFace.getPosition().y + thisFace.getHeight()/2);
-            float xOffset = (int)(thisFace.getWidth() / 2.0f);
-            float yOffset = (int)(thisFace.getHeight() / 2.0f);
-            int x1 = (int)thisFace.getPosition().x;
-            int y1 = (int)thisFace.getPosition().y;
-            int width = (int)thisFace.getWidth();
-            int height = (int)thisFace.getHeight();
-            int left = (int)(x - xOffset+85.0f);
-            int top =(int)( y - yOffset+115.0f);
-            int right =(int) (x + xOffset-70.0f);
-            int bottom = (int)(y + yOffset-13.0f);
-            System.out.println("fuile>>>>>>x="+x1+"   y="+y1+"     "+width+"      "+height);
+            float x = (thisFace.getPosition().x + thisFace.getWidth() / 2);
+            float y = (thisFace.getPosition().y + thisFace.getHeight() / 2);
+            float xOffset = (int) (thisFace.getWidth() / 2.0f);
+            float yOffset = (int) (thisFace.getHeight() / 2.0f);
+            int x1 = (int) thisFace.getPosition().x;
+            int y1 = (int) thisFace.getPosition().y;
+            int width = (int) thisFace.getWidth();
+            int height = (int) thisFace.getHeight();
+            int left = (int) (x - xOffset + 85.0f);
+            int top = (int) (y - yOffset + 115.0f);
+            int right = (int) (x + xOffset - 70.0f);
+            int bottom = (int) (y + yOffset - 13.0f);
+            System.out.println("fuile>>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
             //boyle olmasi lazim  bir de yatay!!!!!!
-            if(y1<0 || y1>height){
-                y1=height;
+            if (y1 < 0 || y1 > height) {
+                y1 = height;
             }
            /* FileInputStream in = null;
             Bitmap bMap=null;
@@ -116,31 +114,30 @@ public class MyFaceDetector extends Detector<Face> {
                 Log.e("Exception ", String.valueOf(e));
             }*/
 
-            if(y1<0){
-                y1=Math.abs((int)thisFace.getPosition().y);
-            }
-            else if(y1>height){
-                y1=height;
+            if (y1 < 0) {
+                y1 = Math.abs((int) thisFace.getPosition().y);
+            } else if (y1 > height) {
+                y1 = height;
             }
 
-            Bitmap resizedbitmap1= Bitmap.createBitmap(TempBitmap, (int)thisFace.getPosition().x, y1, width, height, null, false);
+            Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, (int) thisFace.getPosition().x, y1, width, height, null, false);
             // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
-            Log.i("humf","1");
+            Log.i("humf", "1");
             Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
 
-            Log.i("humf","2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight() );
+            Log.i("humf", "2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight());
 
             // imageViewResult.setImageBitmap(bitmaptf);
 
-            Log.i("humf","666\n" + classifier);
+            Log.i("humf", "666\n" + classifier);
 
             List<Classifier.Recognition> results = classifier.recognizeImage(bitmaptf);
-            Log.i("humf","3");
+            Log.i("humf", "3");
             //textViewResult=(TextView) textViewResult.findViewById(R.id.imgResult);
             //textViewResult.setText(results.toString());
-            System.out.println("Result>> "+i+" >> "+results.toString());
+            System.out.println("Result>> " + i + " >> " + results.toString());
 
             /*String root = Environment.getExternalStorageDirectory().toString();
             String folder_name=results.toString();//
@@ -167,7 +164,7 @@ public class MyFaceDetector extends Detector<Face> {
 
         faceDetector.release();
 
-       return mDelegate.detect(frame);
+        return mDelegate.detect(frame);
     }
 
     public boolean isOperational() {
@@ -177,7 +174,11 @@ public class MyFaceDetector extends Detector<Face> {
     public boolean setFocus(int id) {
         return mDelegate.setFocus(id);
     }
-    public void setContext(Context context){this.context=context;}
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     private void initTensorFlowAndLoadModel() {
         executor.execute(new Runnable() {
             @Override

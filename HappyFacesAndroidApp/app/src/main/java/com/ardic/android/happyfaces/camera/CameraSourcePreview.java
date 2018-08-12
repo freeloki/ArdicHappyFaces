@@ -23,7 +23,9 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.ardic.android.happyfaces.R;
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.CameraSource;
 
@@ -37,6 +39,7 @@ public class CameraSourcePreview extends ViewGroup {
     private boolean mStartRequested;
     private boolean mSurfaceAvailable;
     private CameraSource mCameraSource;
+    private LinearLayout awesomeLayout;
 
     private GraphicOverlay mOverlay;
 
@@ -46,9 +49,9 @@ public class CameraSourcePreview extends ViewGroup {
         mStartRequested = false;
         mSurfaceAvailable = false;
 
+
         mSurfaceView = new SurfaceView(context);
         mSurfaceView.getHolder().addCallback(new SurfaceCallback());
-        addView(mSurfaceView);
         /*Bitmap bitmap= viewToBitmap(mSurfaceView);
         try {
             FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/home/ardic/Downloads/android-vision-master/visionSamples/FaceTracker/app/src/main/res/drawable-xhdpi/fe.png");
@@ -74,7 +77,9 @@ public class CameraSourcePreview extends ViewGroup {
         }
     }
 
-    public void start(CameraSource cameraSource, GraphicOverlay overlay) throws IOException {
+    public void start(LinearLayout mLinearLayout,CameraSource cameraSource, GraphicOverlay overlay) throws IOException {
+        awesomeLayout = mLinearLayout;
+        awesomeLayout.addView(mSurfaceView);
         mOverlay = overlay;
         start(cameraSource);
     }
@@ -143,6 +148,7 @@ public class CameraSourcePreview extends ViewGroup {
             if (size != null) {
                 width = size.getWidth();
                 height = size.getHeight();
+                Log.i("Humf", "Width: " + width + "  Height: " + height);
             }
         }
 
@@ -158,12 +164,12 @@ public class CameraSourcePreview extends ViewGroup {
 
         // Computes height and width for potentially doing fit width.
         int childWidth = layoutWidth;
-        int childHeight = (int)(((float) layoutWidth / (float) width) * height);
+        int childHeight = (int) (((float) layoutWidth / (float) width) * height);
 
         // If height is too tall using fit width, does fit height instead.
         if (childHeight > layoutHeight) {
             childHeight = layoutHeight;
-            childWidth = (int)(((float) layoutHeight / (float) height) * width);
+            childWidth = (int) (((float) layoutHeight / (float) height) * width);
         }
 
         for (int i = 0; i < getChildCount(); ++i) {
