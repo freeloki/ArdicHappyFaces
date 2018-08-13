@@ -1,8 +1,11 @@
 package com.ardic.android.happyfaces.camera;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -29,16 +32,14 @@ public class CameraSourcePreview extends ViewGroup {
 
     public CameraSourcePreview(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mContext = context;
         mStartRequested = false;
         mSurfaceAvailable = false;
 
-
         mSurfaceView = new SurfaceView(context);
-
         mSurfaceView.getHolder().addCallback(new SurfaceCallback());
         addView(mSurfaceView);
+        //addView(mSurfaceView);
         /*Bitmap bitmap= viewToBitmap(mSurfaceView);
         try {
             FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/home/ardic/Downloads/android-vision-master/visionSamples/FaceTracker/app/src/main/res/drawable-xhdpi/fe.png");
@@ -84,9 +85,18 @@ public class CameraSourcePreview extends ViewGroup {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private void startIfReady() throws IOException {
         if (mStartRequested && mSurfaceAvailable) {
+            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mCameraSource.start(mSurfaceView.getHolder());
             if (mOverlay != null) {
                 Size size = mCameraSource.getPreviewSize();
@@ -135,7 +145,6 @@ public class CameraSourcePreview extends ViewGroup {
             if (size != null) {
                 width = size.getWidth();
                 height = size.getHeight();
-                Log.i("Humf", "Width: " + width + "  Height: " + height+  " Top: " + top);
             }
         }
 
@@ -150,24 +159,17 @@ public class CameraSourcePreview extends ViewGroup {
         final int layoutHeight = bottom - top;
 
         // Computes height and width for potentially doing fit width.
-        int childWidth = layoutWidth/2;
-        int childHeight = (int) (((float) layoutWidth / (float) width) * height) /2;
+        int childWidth = layoutWidth;
+        int childHeight = (int)(((float) layoutWidth / (float) width) * height);
 
         // If height is too tall using fit width, does fit height instead.
         if (childHeight > layoutHeight) {
-            childHeight = layoutHeight/2;
-            childWidth = (int) (((float) layoutHeight / (float) height) * width) /2 ;
+            childHeight = layoutHeight;
+            childWidth = (int)(((float) layoutHeight / (float) height) * width);
         }
-      //  mSurfaceView.getHolder().setFixedSize(childWidth, childHeight);
-        Log.i("Humf","Childcount : " + getChildCount());
 
         for (int i = 0; i < getChildCount(); ++i) {
-
-            Log.i("Humf","Parent " + i + " : " + getWidth() + " ' "  + getHeight());
-
-            Log.i("Humf","Child " + i + " : " + getChildAt(i).getWidth() + " ' "  + getChildAt(i).getHeight());
-            getChildAt(i).setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
-            getChildAt(i).layout(0,0,getWidth(),getHeight());
+            getChildAt(i).layout(0, 0, childWidth, childHeight);
         }
 
         try {
@@ -175,7 +177,6 @@ public class CameraSourcePreview extends ViewGroup {
         } catch (IOException e) {
             Log.e(TAG, "Could not start camera source.", e);
         }
-
     }
 
     private boolean isPortraitMode() {

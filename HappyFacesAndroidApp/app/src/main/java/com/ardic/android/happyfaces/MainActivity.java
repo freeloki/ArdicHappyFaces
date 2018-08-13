@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -44,29 +45,33 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
-       // mPreview = findViewById(R.id.preview);
-      //  mGraphicOverlay = findViewById(R.id.faceOverlay);
-        mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
+       // mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
+        mPreview = findViewById(R.id.preview);
+        mGraphicOverlay = findViewById(R.id.faceOverlay);
+
         //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
 
         //mAwesomeLayout.setLayoutParams(R.id.cameraPreviewLinearLayout.get);
-        Log.i("humf", "cameralinearLayot: "+mAwesomeLayout.getWidth()+" - "+mAwesomeLayout.getHeight());
+        /*Log.i("humf", "cameralinearLayot: "+mAwesomeLayout.getWidth()+" - "+mAwesomeLayout.getHeight());
         mPreview = new CameraSourcePreview(this,null);
         mGraphicOverlay = new GraphicOverlay(this,null);
 
         mPreview.addView(mGraphicOverlay);
 
-        mAwesomeLayout.addView(mPreview);
+        mAwesomeLayout.addView(mPreview);*/
 
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
-        int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        if (rc == PackageManager.PERMISSION_GRANTED) {
-            createCameraSource();
-        } else {
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 50); Log.e("humf", "after create camera --TRUE");
+
             requestCameraPermission();
         }
+        else{
+            createCameraSource();
+        }
+        
     }
 
     /**
@@ -113,19 +118,19 @@ public class MainActivity extends Activity {
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector
-        MyFaceDetector myFaceDetector = new MyFaceDetector(detector, context);
+        /*MyFaceDetector myFaceDetector = new MyFaceDetector(detector, context);
         // You can use your own processor
-        myFaceDetector.setContext(context);
-        myFaceDetector.setProcessor(
+        myFaceDetector.setContext(context);*/
+        detector.setProcessor(
                 new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
                         .build());
 
-        if (!myFaceDetector.isOperational()) {
+        if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
 
         // You can use your own settings for CameraSource
-        mCameraSource = new CameraSource.Builder(context, myFaceDetector)
+        mCameraSource = new CameraSource.Builder(context, detector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setAutoFocusEnabled(false)
                 .setRequestedFps(30.0f)
@@ -204,7 +209,7 @@ public class MainActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Face Tracker sample")
+        builder.setTitle(" sample")
                 .setMessage(R.string.no_camera_permission)
                 .setPositiveButton(R.string.ok, listener)
                 .show();
