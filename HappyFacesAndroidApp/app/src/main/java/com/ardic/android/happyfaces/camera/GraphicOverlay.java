@@ -18,7 +18,10 @@ package com.ardic.android.happyfaces.camera;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.vision.CameraSource;
 
@@ -99,6 +102,7 @@ public class GraphicOverlay extends View {
          */
         public float translateX(float x) {
             if (mOverlay.mFacing == CameraSource.CAMERA_FACING_FRONT) {
+                Log.e("moverlay", "size="+mOverlay.getWidth()+"scaleX= "+scaleX(x));
                 return mOverlay.getWidth() - scaleX(x);
             } else {
                 return scaleX(x);
@@ -120,6 +124,7 @@ public class GraphicOverlay extends View {
 
     public GraphicOverlay(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     /**

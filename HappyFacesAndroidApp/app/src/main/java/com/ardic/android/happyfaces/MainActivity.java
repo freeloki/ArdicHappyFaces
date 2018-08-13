@@ -33,8 +33,7 @@ public class MainActivity extends Activity {
 
     private CameraSourcePreview mPreview;
     private GraphicOverlay mGraphicOverlay;
-    private LinearLayout mLinearLayout;
-
+    private LinearLayout mAwesomeLayout;
     private Face face;
 
     private static final int RC_HANDLE_GMS = 9001;
@@ -45,9 +44,20 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
-        mPreview = findViewById(R.id.preview);
-        mGraphicOverlay = findViewById(R.id.faceOverlay);
-        mLinearLayout = findViewById(R.id.cameraPreviewLinearLayout);
+       // mPreview = findViewById(R.id.preview);
+      //  mGraphicOverlay = findViewById(R.id.faceOverlay);
+        mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
+        //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+
+        //mAwesomeLayout.setLayoutParams(R.id.cameraPreviewLinearLayout.get);
+        Log.i("humf", "cameralinearLayot: "+mAwesomeLayout.getWidth()+" - "+mAwesomeLayout.getHeight());
+        mPreview = new CameraSourcePreview(this,null);
+        mGraphicOverlay = new GraphicOverlay(this,null);
+
+        mPreview.addView(mGraphicOverlay);
+
+        mAwesomeLayout.addView(mPreview);
+
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -91,42 +101,6 @@ public class MainActivity extends Activity {
                 .show();
     }
 
-    /**
-     * Creates and starts the camera.  Note that this uses a higher resolution in comparison
-     * to other detection examples to enable the barcode detector to detect small barcodes
-     * at long distances.
-     */
-   /* private void createCameraSource() {
-
-        Context context = getApplicationContext();
-        FaceDetector detector = new FaceDetector.Builder(context)
-                .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
-                .build();
-
-        detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
-                        .build());
-
-        if (!detector.isOperational()) {
-            // Note: The first time that an app using face API is installed on a device, GMS will
-            // download a native library to the device in order to do detection.  Usually this
-            // completes before the app is run for the first time.  But if that download has not yet
-            // completed, then the above call will not detect any faces.
-            //
-            // isOperational() can be used to check if the required native library is currently
-            // available.  The detector will automatically become operational once the library
-            // download completes on device.
-            Log.w(TAG, "Face detector dependencies are not yet available.");
-        }
-
-        mCameraSource = new CameraSource.Builder(context, detector)
-                .setRequestedPreviewSize(640, 480)
-                .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(30.0f)
-                .build();
-
-
-    }*/
     private void createCameraSource() {
 
         Context context = getApplicationContext();
@@ -134,7 +108,8 @@ public class MainActivity extends Activity {
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
-                .setProminentFaceOnly(true)
+                .setProminentFaceOnly(false)
+                .setTrackingEnabled(true)
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector
@@ -152,7 +127,7 @@ public class MainActivity extends Activity {
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(context, myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setAutoFocusEnabled(true)
+                .setAutoFocusEnabled(false)
                 .setRequestedFps(30.0f)
                 .build();
     }
@@ -257,7 +232,7 @@ public class MainActivity extends Activity {
 
         if (mCameraSource != null) {
             try {
-                mPreview.start(mLinearLayout, mCameraSource, mGraphicOverlay);
+                mPreview.start(mCameraSource, mGraphicOverlay);
             } catch (IOException e) {
                 Log.e(TAG, "Unable to start camera source.", e);
                 mCameraSource.release();

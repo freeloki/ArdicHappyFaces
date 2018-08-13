@@ -65,12 +65,6 @@ public class MyFaceDetector extends Detector<Face> {
         Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
 
 
-        /**#########################################################################*/
-        /* Bitmap faceBitmap = Bitmap.createBitmap(TempBitmap, (int)currentface.getPosition().x, (int)currentface.getPosition().y, (int)currentface.getWidth(),
-                (int)currentface.getHeight());*/
-
-        //Log.i(currentface.getPosition().x+"  ", "salam,mmmmmmmmmm");
-
         FaceDetector faceDetector = new FaceDetector.Builder(context).setTrackingEnabled(false).build();
         if (!faceDetector.isOperational()) {
 
@@ -97,22 +91,6 @@ public class MyFaceDetector extends Detector<Face> {
             if (y1 < 0 || y1 > height) {
                 y1 = height;
             }
-           /* FileInputStream in = null;
-            Bitmap bMap=null;
-            try {
-                //in = new FileInputStream((FileInputStream).);
-
-                BufferedInputStream buf = new BufferedInputStream(context.getAssets().open("test.jpg"));
-                byte[] bMapArray = new byte[0];
-
-                bMapArray = new byte[buf.available()];
-
-
-                buf.read(bMapArray);
-                bMap = BitmapFactory.decodeByteArray(bMapArray, 0, bMapArray.length);
-            }catch (Exception e){
-                Log.e("Exception ", String.valueOf(e));
-            }*/
 
             if (y1 < 0) {
                 y1 = Math.abs((int) thisFace.getPosition().y);
@@ -121,7 +99,6 @@ public class MyFaceDetector extends Detector<Face> {
             }
 
             Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, (int) thisFace.getPosition().x, y1, width, height, null, false);
-            // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
             Log.i("humf", "1");
@@ -129,37 +106,12 @@ public class MyFaceDetector extends Detector<Face> {
 
             Log.i("humf", "2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight());
 
-            // imageViewResult.setImageBitmap(bitmaptf);
-
             Log.i("humf", "666\n" + classifier);
 
             List<Classifier.Recognition> results = classifier.recognizeImage(bitmaptf);
             Log.i("humf", "3");
-            //textViewResult=(TextView) textViewResult.findViewById(R.id.imgResult);
-            //textViewResult.setText(results.toString());
             System.out.println("Result>> " + i + " >> " + results.toString());
 
-            /*String root = Environment.getExternalStorageDirectory().toString();
-            String folder_name=results.toString();//
-            File myDir = new File(root + "/hhhh");
-            myDir.mkdirs();
-            Random generator = new Random();
-            int n = 10000;
-            n = generator.nextInt(n);
-            String fname = "Image555-" + n + ".jpg";
-            File file = new File(myDir, fname);
-            Log.i("salam", "" + file);
-            if (file.exists())
-                file.delete();
-            try {
-                FileOutputStream out = new FileOutputStream(file);
-                resizedbitmap1.compress(Bitmap.CompressFormat.JPEG, 90, out);
-
-                out.flush();
-                out.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
         }
 
         faceDetector.release();
@@ -179,27 +131,7 @@ public class MyFaceDetector extends Detector<Face> {
         this.context = context;
     }
 
-    private void initTensorFlowAndLoadModel() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    classifier = TensorFlowImageClassifier.create(
-                            context.getAssets(),
-                            MODEL_FILE,
-                            LABEL_FILE,
-                            INPUT_SIZE,
-                            IMAGE_MEAN,
-                            IMAGE_STD,
-                            INPUT_NAME,
-                            OUTPUT_NAME);
 
-                } catch (final Exception e) {
-                    throw new RuntimeException("Error initializing TensorFlow!", e);
-                }
-            }
-        });
-    }
 
 
 }

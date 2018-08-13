@@ -25,18 +25,18 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.ardic.android.happyfaces.camera.CameraSourcePreview
+          <!--com.ardic.android.happyfaces.camera.CameraSourcePreview
                 android:id="@+id/preview"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <com.ardic.android.happyfaces.camera.GraphicOverlay
-                    android:id="@+id/faceOverlay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-            </com.ardic.android.happyfaces.camera.CameraSourcePreview>
+              <com.ardic.android.happyfaces.camera.GraphicOverlay
+                  android:id="@+id/faceOverlay"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent" />
+
+            </com.ardic.android.happyfaces.camera.CameraSourcePreview -->
 
 
         </LinearLayout>
@@ -79,45 +79,4 @@
     </LinearLayout>
 
     <!-- Information Layout End -->
-
-
-    <!--
-
-    <RelativeLayout
-        android:layout_width="650dp"
-        android:layout_height="413dp"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/holo_orange_dark"
-        android:orientation="horizontal"
-        android:visibility="visible" tools:targetApi="ice_cream_sandwich">
-
-        <com.ardic.android.happyfaces.camera.CameraSourcePreview
-            android:id="@+id/preview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            tools:ignore="MissingPrefix">
-
-            <com.ardic.android.happyfaces.camera.GraphicOverlay
-                android:id="@+id/faceOverlay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="54dp" />
-
-        </com.ardic.android.happyfaces.camera.CameraSourcePreview>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="550dp"
-        android:layout_height="414dp"
-        android:layout_alignParentTop="false"
-        android:background="#f4f4ba28"
-        android:orientation="vertical">
-
-    </RelativeLayout>
-
--->
 </LinearLayout>

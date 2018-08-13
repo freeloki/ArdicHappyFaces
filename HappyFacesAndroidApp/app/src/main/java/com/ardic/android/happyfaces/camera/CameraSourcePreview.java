@@ -1,18 +1,3 @@
-/*
- * Copyright (C) The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.ardic.android.happyfaces.camera;
 
 import android.annotation.SuppressLint;
@@ -39,19 +24,21 @@ public class CameraSourcePreview extends ViewGroup {
     private boolean mStartRequested;
     private boolean mSurfaceAvailable;
     private CameraSource mCameraSource;
-    private LinearLayout awesomeLayout;
 
     private GraphicOverlay mOverlay;
 
     public CameraSourcePreview(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mContext = context;
         mStartRequested = false;
         mSurfaceAvailable = false;
 
 
         mSurfaceView = new SurfaceView(context);
+
         mSurfaceView.getHolder().addCallback(new SurfaceCallback());
+        addView(mSurfaceView);
         /*Bitmap bitmap= viewToBitmap(mSurfaceView);
         try {
             FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/home/ardic/Downloads/android-vision-master/visionSamples/FaceTracker/app/src/main/res/drawable-xhdpi/fe.png");
@@ -63,6 +50,8 @@ public class CameraSourcePreview extends ViewGroup {
             e.printStackTrace();
         }*/
     }
+
+
 
     public void start(CameraSource cameraSource) throws IOException {
         if (cameraSource == null) {
@@ -77,9 +66,7 @@ public class CameraSourcePreview extends ViewGroup {
         }
     }
 
-    public void start(LinearLayout mLinearLayout,CameraSource cameraSource, GraphicOverlay overlay) throws IOException {
-        awesomeLayout = mLinearLayout;
-        awesomeLayout.addView(mSurfaceView);
+    public void start(CameraSource cameraSource, GraphicOverlay overlay) throws IOException {
         mOverlay = overlay;
         start(cameraSource);
     }
@@ -148,7 +135,7 @@ public class CameraSourcePreview extends ViewGroup {
             if (size != null) {
                 width = size.getWidth();
                 height = size.getHeight();
-                Log.i("Humf", "Width: " + width + "  Height: " + height);
+                Log.i("Humf", "Width: " + width + "  Height: " + height+  " Top: " + top);
             }
         }
 
@@ -163,17 +150,24 @@ public class CameraSourcePreview extends ViewGroup {
         final int layoutHeight = bottom - top;
 
         // Computes height and width for potentially doing fit width.
-        int childWidth = layoutWidth;
-        int childHeight = (int) (((float) layoutWidth / (float) width) * height);
+        int childWidth = layoutWidth/2;
+        int childHeight = (int) (((float) layoutWidth / (float) width) * height) /2;
 
         // If height is too tall using fit width, does fit height instead.
         if (childHeight > layoutHeight) {
-            childHeight = layoutHeight;
-            childWidth = (int) (((float) layoutHeight / (float) height) * width);
+            childHeight = layoutHeight/2;
+            childWidth = (int) (((float) layoutHeight / (float) height) * width) /2 ;
         }
+      //  mSurfaceView.getHolder().setFixedSize(childWidth, childHeight);
+        Log.i("Humf","Childcount : " + getChildCount());
 
         for (int i = 0; i < getChildCount(); ++i) {
-            getChildAt(i).layout(0, 0, childWidth, childHeight);
+
+            Log.i("Humf","Parent " + i + " : " + getWidth() + " ' "  + getHeight());
+
+            Log.i("Humf","Child " + i + " : " + getChildAt(i).getWidth() + " ' "  + getChildAt(i).getHeight());
+            getChildAt(i).setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+            getChildAt(i).layout(0,0,getWidth(),getHeight());
         }
 
         try {
@@ -181,6 +175,7 @@ public class CameraSourcePreview extends ViewGroup {
         } catch (IOException e) {
             Log.e(TAG, "Could not start camera source.", e);
         }
+
     }
 
     private boolean isPortraitMode() {
