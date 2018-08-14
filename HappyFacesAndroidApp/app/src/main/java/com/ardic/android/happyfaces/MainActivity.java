@@ -1,5 +1,4 @@
 package com.ardic.android.happyfaces;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,14 +27,13 @@ import com.google.android.gms.vision.face.FaceDetector;
 import java.io.IOException;
 
 public class MainActivity extends Activity {
-    private static final String TAG = "FaceTracker";
+    private static final String TAG = "MainActivity";
 
     private CameraSource mCameraSource = null;
 
     private CameraSourcePreview mPreview;
     private GraphicOverlay mGraphicOverlay;
     private LinearLayout mAwesomeLayout;
-    private Face face;
 
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
@@ -45,7 +43,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
-       // mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
+        mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
         mPreview = findViewById(R.id.preview);
         mGraphicOverlay = findViewById(R.id.faceOverlay);
 
@@ -55,9 +53,7 @@ public class MainActivity extends Activity {
         /*Log.i("humf", "cameralinearLayot: "+mAwesomeLayout.getWidth()+" - "+mAwesomeLayout.getHeight());
         mPreview = new CameraSourcePreview(this,null);
         mGraphicOverlay = new GraphicOverlay(this,null);
-
         mPreview.addView(mGraphicOverlay);
-
         mAwesomeLayout.addView(mPreview);*/
 
 
@@ -71,7 +67,7 @@ public class MainActivity extends Activity {
         else{
             createCameraSource();
         }
-        
+
     }
 
     /**
@@ -118,9 +114,7 @@ public class MainActivity extends Activity {
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector
-        /*MyFaceDetector myFaceDetector = new MyFaceDetector(detector, context);
-        // You can use your own processor
-        myFaceDetector.setContext(context);*/
+
         detector.setProcessor(
                 new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
                         .build());
@@ -128,13 +122,19 @@ public class MainActivity extends Activity {
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
-
+        MyFaceDetector myFaceDetector = new MyFaceDetector(detector, context);
+        // You can use your own processor
+        myFaceDetector.setContext(context);
+        if (!myFaceDetector.isOperational()) {
+            Log.w(TAG, "Face detector dependencies are not yet available.");
+        }
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(context, detector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setAutoFocusEnabled(false)
                 .setRequestedFps(30.0f)
                 .build();
+
     }
 
     /**
@@ -209,7 +209,7 @@ public class MainActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(" sample")
+        builder.setTitle(" MainActivity")
                 .setMessage(R.string.no_camera_permission)
                 .setPositiveButton(R.string.ok, listener)
                 .show();
@@ -231,7 +231,7 @@ public class MainActivity extends Activity {
                 getApplicationContext());
         if (code != ConnectionResult.SUCCESS) {
             Dialog dlg =
-                    GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
+                    GoogleApiAvailability.getInstance().getErrorDialog(this, code, 5000);
             dlg.show();
         }
 

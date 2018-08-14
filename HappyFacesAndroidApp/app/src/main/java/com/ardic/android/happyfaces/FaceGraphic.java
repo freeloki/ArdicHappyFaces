@@ -97,24 +97,17 @@ class FaceGraphic extends GraphicOverlay.Graphic {
             return;
         }
 
-        // Draws a circle at the position of the detected face, with the face's track id below.
+        // Draws a rectangle at the position of the detected face, with the face's track id below.
         float x = translateX(face.getPosition().x + face.getWidth() / 2);
         float y = translateY(face.getPosition().y + face.getHeight() / 2);
-        //canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
-        //canvas.drawText("id: " + mFaceId, x + ID_X_OFFSET, y + ID_Y_OFFSET, mIdPaint);
-        //canvas.drawText("happiness: " + String.format("%.2f", face.getIsSmilingProbability()), x - ID_X_OFFSET, y - ID_Y_OFFSET, mIdPaint);
-        //canvas.drawText("right eye: " + String.format("%.2f", face.getIsRightEyeOpenProbability()), x + ID_X_OFFSET * 2, y + ID_Y_OFFSET * 2, mIdPaint);
-        //canvas.drawText("left eye: " + String.format("%.2f", face.getIsLeftEyeOpenProbability()), x - ID_X_OFFSET*2, y - ID_Y_OFFSET*2, mIdPaint);
 
-        // Draws a bounding box around the face.
+        // Draws a rectangle around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);
         float yOffset = scaleY(face.getHeight() / 2.0f);
-        float left = x - xOffset+85.0f;
-        float top = y - yOffset+115.0f;
-        float right = x + xOffset-60.0f;
-        float bottom = y + yOffset-33.0f;
-        System.out.println("face=====>>>>x="+x+"   y="+y+"     "+face.getWidth()+"      "+face.getHeight());
-        System.out.println(right+" "+top+"  "+left+"  "+ bottom);
+        float left = x - xOffset+50.0f;
+        float top = y - yOffset+80.0f;
+        float right = x + xOffset-40.0f;
+        float bottom = y + yOffset-23.0f;
         canvas.drawRect(left, top, right, bottom, mBoxPaint);
 
 

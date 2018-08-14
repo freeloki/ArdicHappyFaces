@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/textColorLink"
+    android:background="@android:color/holo_blue_light"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -20,23 +20,23 @@
 
         <LinearLayout
             android:id="@+id/cameraPreviewLinearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_weight="1">
 
-          <com.ardic.android.happyfaces.camera.CameraSourcePreview
+            <com.ardic.android.happyfaces.camera.CameraSourcePreview
                 android:id="@+id/preview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
 
-              <com.ardic.android.happyfaces.camera.GraphicOverlay
-                  android:id="@+id/faceOverlay"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent" />
+                <com.ardic.android.happyfaces.camera.GraphicOverlay
+                    android:id="@+id/faceOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            </com.ardic.android.happyfaces.camera.CameraSourcePreview >
+            </com.ardic.android.happyfaces.camera.CameraSourcePreview>
 
 
         </LinearLayout>
@@ -71,7 +71,7 @@
     <!-- Infomation Layout Start -->
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 

@@ -18,6 +18,7 @@ package com.ardic.android.happyfaces.camera;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.vision.CameraSource;
@@ -158,6 +159,7 @@ public class GraphicOverlay extends View {
      */
     public void setCameraInfo(int previewWidth, int previewHeight, int facing) {
         synchronized (mLock) {
+            //Log.i("humf" , "setCameraInfo: " + previewWidth +"- "+previewHeight);
             mPreviewWidth = previewWidth;
             mPreviewHeight = previewHeight;
             mFacing = facing;
@@ -177,8 +179,10 @@ public class GraphicOverlay extends View {
                 mWidthScaleFactor = (float) canvas.getWidth() / (float) mPreviewWidth;
                 mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;
             }
+            //Log.i("humf" , "canvas: " + canvas.getWidth() +"- "+canvas.getHeight());
 
             for (Graphic graphic : mGraphics) {
+
                 graphic.draw(canvas);
             }
         }

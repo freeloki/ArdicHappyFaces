@@ -65,13 +65,13 @@ public class MyFaceDetector extends Detector<Face> {
         Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
 
 
-        FaceDetector faceDetector = new FaceDetector.Builder(context).setTrackingEnabled(false).build();
+        /*FaceDetector faceDetector = new FaceDetector.Builder(context).setTrackingEnabled(false).build();
         if (!faceDetector.isOperational()) {
 
 
-        }
+        }*/
         Frame frameface = new Frame.Builder().setBitmap(TempBitmap).build();
-        SparseArray<Face> faces = faceDetector.detect(frame);
+        SparseArray<Face> faces = mDelegate.detect(frameface);
         for (int i = 0; i < faces.size(); i++) {
             Face thisFace = faces.valueAt(i);
             float x = (thisFace.getPosition().x + thisFace.getWidth() / 2);
@@ -88,14 +88,11 @@ public class MyFaceDetector extends Detector<Face> {
             int bottom = (int) (y + yOffset - 13.0f);
             System.out.println("fuile>>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
             //boyle olmasi lazim  bir de yatay!!!!!!
-            if (y1 < 0 || y1 > height) {
-                y1 = height;
-            }
 
             if (y1 < 0) {
                 y1 = Math.abs((int) thisFace.getPosition().y);
             } else if (y1 > height) {
-                y1 = height;
+                y1 = height-2;
             }
 
             Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, (int) thisFace.getPosition().x, y1, width, height, null, false);
@@ -114,7 +111,7 @@ public class MyFaceDetector extends Detector<Face> {
 
         }
 
-        faceDetector.release();
+        //faceDetector.release();
 
         return mDelegate.detect(frame);
     }

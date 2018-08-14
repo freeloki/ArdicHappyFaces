@@ -32,6 +32,7 @@ public class CameraSourcePreview extends ViewGroup {
 
     public CameraSourcePreview(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         mContext = context;
         mStartRequested = false;
         mSurfaceAvailable = false;
@@ -39,7 +40,8 @@ public class CameraSourcePreview extends ViewGroup {
         mSurfaceView = new SurfaceView(context);
         mSurfaceView.getHolder().addCallback(new SurfaceCallback());
         addView(mSurfaceView);
-        //addView(mSurfaceView);
+
+
         /*Bitmap bitmap= viewToBitmap(mSurfaceView);
         try {
             FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/home/ardic/Downloads/android-vision-master/visionSamples/FaceTracker/app/src/main/res/drawable-xhdpi/fe.png");
@@ -141,6 +143,7 @@ public class CameraSourcePreview extends ViewGroup {
         int width = 320;
         int height = 240;
         if (mCameraSource != null) {
+
             Size size = mCameraSource.getPreviewSize();
             if (size != null) {
                 width = size.getWidth();
@@ -169,7 +172,7 @@ public class CameraSourcePreview extends ViewGroup {
         }
 
         for (int i = 0; i < getChildCount(); ++i) {
-            getChildAt(i).layout(0, 0, childWidth, childHeight);
+            getChildAt(i).layout(0, 0, childWidth/2, childHeight/2);
         }
 
         try {
