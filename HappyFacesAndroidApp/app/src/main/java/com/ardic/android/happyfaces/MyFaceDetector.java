@@ -94,19 +94,26 @@ public class MyFaceDetector extends Detector<Face> {
             } else if (y1 > height) {
                 y1 = height-2;
             }
+            if (x1 < 0) {
+                x1 = Math.abs((int) thisFace.getPosition().x);
+            } else if (x1+width > width) {
+                x1 = width-2;
+            }
 
-            Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, (int) thisFace.getPosition().x, y1, width, height, null, false);
+            Bitmap resizedbitmap1= Bitmap.createBitmap(TempBitmap, (int)thisFace.getPosition().x, y1, width, height, null, false);
+            // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
-            Log.i("humf", "1");
+            Log.i("humf","1");
             Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
 
-            Log.i("humf", "2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight());
+            Log.i("humf","2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight() );
 
-            Log.i("humf", "666\n" + classifier);
+            // imageViewResult.setImageBitmap(bitmaptf);
+
+            Log.i("humf","666\n" + classifier);
 
             List<Classifier.Recognition> results = classifier.recognizeImage(bitmaptf);
-            Log.i("humf", "3");
             System.out.println("Result>> " + i + " >> " + results.toString());
 
         }

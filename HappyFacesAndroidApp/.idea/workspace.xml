@@ -35,50 +35,12 @@
       <file leaf-file-name="CameraSourcePreview.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="376">
+              <caret line="161" column="12" lean-forward="false" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4620#4621#0" expanded="true" />
-                <element signature="e#4669#4670#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphicOverlay.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TensorFlowImageClassifier.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#10106#10107#0" expanded="true" />
-                <element signature="e#10176#10177#0" expanded="true" />
-                <element signature="e#10798#10799#0" expanded="true" />
-                <element signature="e#10848#10849#0" expanded="true" />
-                <element signature="e#11730#11731#0" expanded="true" />
-                <element signature="e#11783#11784#0" expanded="true" />
+                <element signature="e#4133#4134#0" expanded="true" />
+                <element signature="e#4182#4183#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,9 +52,31 @@
             <state />
           </provider>
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+            <state relative-caret-position="270">
+              <caret line="28" column="50" lean-forward="false" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="137" column="69" lean-forward="false" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8389#8544#0" expanded="true" />
+                <element signature="e#8543#8544#0" expanded="true" />
+                <element signature="e#10646#10647#0" expanded="true" />
+                <element signature="e#10716#10717#0" expanded="true" />
+                <element signature="e#10870#10871#0" expanded="true" />
+                <element signature="e#10905#10906#0" expanded="true" />
+                <element signature="e#11526#11527#0" expanded="true" />
+                <element signature="e#11576#11577#0" expanded="true" />
+                <element signature="e#12458#12459#0" expanded="true" />
+                <element signature="e#12511#12512#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,9 +84,16 @@
       <file leaf-file-name="MyFaceDetector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-950">
-              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="702">
+              <caret line="115" column="87" lean-forward="false" selection-start-line="115" selection-start-column="87" selection-end-line="115" selection-end-column="87" />
+              <folding>
+                <element signature="e#4989#4990#0" expanded="true" />
+                <element signature="e#5037#5038#0" expanded="true" />
+                <element signature="e#5076#5077#0" expanded="true" />
+                <element signature="e#5121#5122#0" expanded="true" />
+                <element signature="e#5168#5169#0" expanded="true" />
+                <element signature="e#5206#5207#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,8 +101,8 @@
       <file leaf-file-name="FaceGraphic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1404">
-              <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
+            <state relative-caret-position="705">
+              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -119,14 +110,14 @@
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="android-manifest">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="40" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -2172,9 +2163,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java" />
@@ -2203,7 +2194,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2214,44 +2206,18 @@
             <path>
               <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+              <item name="assets" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
               <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="happyfaces" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="happyfaces" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="camera" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2259,9 +2225,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$USER_HOME$/android-vision/visionSamples/FaceTracker" />
+    <property name="last_opened_file_path" value="$USER_HOME$/development2/ArdicHappyFaces/HappyFacesApp" />
     <property name="device.picker.selection" value="R32CC02CF4H" />
     <property name="android.profiler.active" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/assets" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2426,8 +2397,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="63" y="25" width="1857" height="1055" extended-state="6" />
-    <editor active="true" />
+    <frame x="83" y="134" width="1857" height="1055" extended-state="6" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2437,7 +2407,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.503037" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2446,7 +2416,6 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958587" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.496963" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -2459,6 +2428,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="0" side_tool="false" content_ui="tabs" />
@@ -2501,6 +2471,271 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2628">
+          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4133#4134#0" expanded="true" />
+            <element signature="e#4182#4183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2628">
+          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2322">
+          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8389#8544#0" expanded="true" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+            <element signature="e#10716#10717#0" expanded="true" />
+            <element signature="e#10870#10871#0" expanded="true" />
+            <element signature="e#10905#10906#0" expanded="true" />
+            <element signature="e#11526#11527#0" expanded="true" />
+            <element signature="e#11576#11577#0" expanded="true" />
+            <element signature="e#12458#12459#0" expanded="true" />
+            <element signature="e#12511#12512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1404">
+          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1872">
+          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8389#8544#0" expanded="true" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+            <element signature="e#10716#10717#0" expanded="true" />
+            <element signature="e#10870#10871#0" expanded="true" />
+            <element signature="e#10905#10906#0" expanded="true" />
+            <element signature="e#11526#11527#0" expanded="true" />
+            <element signature="e#11576#11577#0" expanded="true" />
+            <element signature="e#12458#12459#0" expanded="true" />
+            <element signature="e#12511#12512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1404">
+          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4133#4134#0" expanded="true" />
+            <element signature="e#4182#4183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4133#4134#0" expanded="true" />
+            <element signature="e#4182#4183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2628">
+          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1872">
+          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8389#8544#0" expanded="true" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+            <element signature="e#10716#10717#0" expanded="true" />
+            <element signature="e#10870#10871#0" expanded="true" />
+            <element signature="e#10905#10906#0" expanded="true" />
+            <element signature="e#11526#11527#0" expanded="true" />
+            <element signature="e#11576#11577#0" expanded="true" />
+            <element signature="e#12458#12459#0" expanded="true" />
+            <element signature="e#12511#12512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1404">
+          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2628">
@@ -2523,12 +2758,16 @@
           <caret line="0" column="37" lean-forward="false" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10106#10107#0" expanded="true" />
-            <element signature="e#10176#10177#0" expanded="true" />
-            <element signature="e#10798#10799#0" expanded="true" />
-            <element signature="e#10848#10849#0" expanded="true" />
-            <element signature="e#11730#11731#0" expanded="true" />
-            <element signature="e#11783#11784#0" expanded="true" />
+            <element signature="e#8389#8544#0" expanded="true" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+            <element signature="e#10716#10717#0" expanded="true" />
+            <element signature="e#10870#10871#0" expanded="true" />
+            <element signature="e#10905#10906#0" expanded="true" />
+            <element signature="e#11526#11527#0" expanded="true" />
+            <element signature="e#11576#11577#0" expanded="true" />
+            <element signature="e#12458#12459#0" expanded="true" />
+            <element signature="e#12511#12512#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2574,8 +2813,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4620#4621#0" expanded="true" />
-            <element signature="e#4669#4670#0" expanded="true" />
+            <element signature="e#4133#4134#0" expanded="true" />
+            <element signature="e#4182#4183#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2594,12 +2833,16 @@
           <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10106#10107#0" expanded="true" />
-            <element signature="e#10176#10177#0" expanded="true" />
-            <element signature="e#10798#10799#0" expanded="true" />
-            <element signature="e#10848#10849#0" expanded="true" />
-            <element signature="e#11730#11731#0" expanded="true" />
-            <element signature="e#11783#11784#0" expanded="true" />
+            <element signature="e#8389#8544#0" expanded="true" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+            <element signature="e#10716#10717#0" expanded="true" />
+            <element signature="e#10870#10871#0" expanded="true" />
+            <element signature="e#10905#10906#0" expanded="true" />
+            <element signature="e#11526#11527#0" expanded="true" />
+            <element signature="e#11576#11577#0" expanded="true" />
+            <element signature="e#12458#12459#0" expanded="true" />
+            <element signature="e#12511#12512#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2637,23 +2880,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
+        <state relative-caret-position="381">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2172">
+          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
-          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="40" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
@@ -2661,60 +2928,89 @@
         <state />
       </provider>
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+        <state relative-caret-position="270">
+          <caret line="28" column="50" lean-forward="false" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/labels.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-950">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="376">
+          <caret line="161" column="12" lean-forward="false" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4620#4621#0" expanded="true" />
-            <element signature="e#4669#4670#0" expanded="true" />
+            <element signature="e#4133#4134#0" expanded="true" />
+            <element signature="e#4182#4183#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-          <folding />
+        <state relative-caret-position="702">
+          <caret line="115" column="87" lean-forward="false" selection-start-line="115" selection-start-column="87" selection-end-line="115" selection-end-column="87" />
+          <folding>
+            <element signature="e#4989#4990#0" expanded="true" />
+            <element signature="e#5037#5038#0" expanded="true" />
+            <element signature="e#5076#5077#0" expanded="true" />
+            <element signature="e#5121#5122#0" expanded="true" />
+            <element signature="e#5168#5169#0" expanded="true" />
+            <element signature="e#5206#5207#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/MultiProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2124">
+          <caret line="129" column="34" lean-forward="false" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="34" />
+          <folding>
+            <marker date="1532674977768" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1532674977768" expanded="false" signature="153:346" ph="..." />
+            <marker date="1532674977768" expanded="true" signature="545:753" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="809:888" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="919:986" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="1029:1514" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="1557:2318" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="2361:2722" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="2746:2871" ph="{...}" />
+            <marker date="1532674977768" expanded="false" signature="2827:2842" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="2855:2865" ph=" }" />
+            <marker date="1532674977768" expanded="true" signature="2908:3646" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="3028:3219" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="3288:3557" ph="{...}" />
+            <marker date="1532674977768" expanded="false" signature="3599:3614" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="3630:3640" ph=" }" />
+            <marker date="1532674977768" expanded="true" signature="3680:3722" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+        <state relative-caret-position="292">
+          <caret line="137" column="69" lean-forward="false" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10106#10107#0" expanded="true" />
-            <element signature="e#10176#10177#0" expanded="true" />
-            <element signature="e#10798#10799#0" expanded="true" />
-            <element signature="e#10848#10849#0" expanded="true" />
-            <element signature="e#11730#11731#0" expanded="true" />
-            <element signature="e#11783#11784#0" expanded="true" />
+            <element signature="e#8389#8544#0" expanded="true" />
+            <element signature="e#8543#8544#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+            <element signature="e#10716#10717#0" expanded="true" />
+            <element signature="e#10870#10871#0" expanded="true" />
+            <element signature="e#10905#10906#0" expanded="true" />
+            <element signature="e#11526#11527#0" expanded="true" />
+            <element signature="e#11576#11577#0" expanded="true" />
+            <element signature="e#12458#12459#0" expanded="true" />
+            <element signature="e#12511#12512#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -91,14 +91,9 @@ public class CameraSourcePreview extends ViewGroup {
         if (mStartRequested && mSurfaceAvailable) {
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return;
             }
+
             mCameraSource.start(mSurfaceView.getHolder());
             if (mOverlay != null) {
                 Size size = mCameraSource.getPreviewSize();
@@ -152,11 +147,7 @@ public class CameraSourcePreview extends ViewGroup {
         }
 
         // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
-        if (isPortraitMode()) {
-            int tmp = width;
-            width = height;
-            height = tmp;
-        }
+
 
         final int layoutWidth = right - left;
         final int layoutHeight = bottom - top;
@@ -168,11 +159,13 @@ public class CameraSourcePreview extends ViewGroup {
         // If height is too tall using fit width, does fit height instead.
         if (childHeight > layoutHeight) {
             childHeight = layoutHeight;
-            childWidth = (int)(((float) layoutHeight / (float) height) * width);
+            childWidth = (int) (((float) layoutHeight / (float) height) * width);
         }
 
+
         for (int i = 0; i < getChildCount(); ++i) {
-            getChildAt(i).layout(0, 0, childWidth/2, childHeight/2);
+
+            getChildAt(i).layout(0, 0, childWidth, childHeight);
         }
 
         try {

@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ardic.android.happyfaces.camera.CameraSourcePreview;
@@ -19,6 +20,7 @@ import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.MultiDetector;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
@@ -44,12 +46,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
         mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
+
         mPreview = findViewById(R.id.preview);
+        mPreview.setLayoutParams(new LinearLayout.LayoutParams(480,600));
+        Log.i("humf", "preview size: "+mPreview.getHeight()+"|"+mPreview.getWidth());
         mGraphicOverlay = findViewById(R.id.faceOverlay);
 
-        //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+        //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-        //mAwesomeLayout.setLayoutParams(R.id.cameraPreviewLinearLayout.get);
+
         /*Log.i("humf", "cameralinearLayot: "+mAwesomeLayout.getWidth()+" - "+mAwesomeLayout.getHeight());
         mPreview = new CameraSourcePreview(this,null);
         mGraphicOverlay = new GraphicOverlay(this,null);
@@ -111,6 +116,7 @@ public class MainActivity extends Activity {
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
                 .setProminentFaceOnly(false)
                 .setTrackingEnabled(true)
+                .setMode(FaceDetector.FAST_MODE)
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector
@@ -128,11 +134,18 @@ public class MainActivity extends Activity {
         if (!myFaceDetector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
+        myFaceDetector.setProcessor(
+                new MultiProcessor.Builder<>(new GraphicFaceDetector())
+                        .build());
+        MultiDetector multiDetector = new MultiDetector.Builder()
+                .add(detector)
+                .add(myFaceDetector)
+                .build();
         // You can use your own settings for CameraSource
-        mCameraSource = new CameraSource.Builder(context, detector)
+        mCameraSource = new CameraSource.Builder(context, multiDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setAutoFocusEnabled(false)
-                .setRequestedFps(30.0f)
+                .setRequestedFps(10.0f)
                 .build();
 
     }
@@ -255,12 +268,19 @@ public class MainActivity extends Activity {
      * uses this factory to create face trackers as needed -- one for each individual.
      */
     private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
+
         @Override
         public Tracker<Face> create(Face face) {
             return new GraphicFaceTracker(mGraphicOverlay);
         }
     }
+    private class GraphicFaceDetector implements MultiProcessor.Factory<Face> {
 
+        @Override
+        public Tracker<Face> create(Face face) {
+            return null;
+        }
+    }
     /**
      * Face tracker for each detected individual. This maintains a face graphic within the app's
      * associated face overlay.
