@@ -31,6 +31,7 @@ int main(int argc, char const *argv[])
   for(int i=0; i<total; i++){
         cout<<i<<"  ";
         String filename="video_"+to_string(i)+".h264";
+        cout<<"the current video >>  "<<filename<<endl;
         VideoProcess(filename);
   }
   cout<<endl;      
@@ -39,7 +40,7 @@ int main(int argc, char const *argv[])
 }
 
 void VideoProcess (const String filename){
-cout<<filename<<endl;
+
   VideoCapture videoCap(filename);
   if(!videoCap.isOpened()){
     cout << "Error opening video stream or file" << endl;
@@ -59,7 +60,6 @@ cout<<filename<<endl;
         
         int numOffaces=faceDetection(frame);
         if(numOffaces>-1){
-          cout<<"face is found :)  "<<numOffaces<<endl;
            // Display the resulting frame
           String str="frame ";
           str+=i;         
@@ -67,9 +67,9 @@ cout<<filename<<endl;
       i++;
       //sleep(15);
     }
-    cout<<"release..."<<endl;
+    
     videoCap.release();
-
+    cout<<"closed the video: "<<filename<<endl;
 }
 int faceDetection(const Mat& frame){
   // Load Face cascade (.xml file)
