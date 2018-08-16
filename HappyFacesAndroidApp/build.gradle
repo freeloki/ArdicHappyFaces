@@ -21,7 +21,7 @@ allprojects {
         jcenter()
     }
 }
-
+def nativeBuildSystem = 'none';
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -6,20 +6,22 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ardic.android.happyfaces.camera.CameraSourcePreview;
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.MultiDetector;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
@@ -28,7 +30,7 @@ import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.IOException;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ResultListener {
     private static final String TAG = "MainActivity";
 
     private CameraSource mCameraSource = null;
@@ -36,11 +38,14 @@ public class MainActivity extends Activity {
     private CameraSourcePreview mPreview;
     private GraphicOverlay mGraphicOverlay;
     private LinearLayout mAwesomeLayout;
-
+    private TextView tfModelResultTextView;
+    private ImageView profilePhotoImageView;
+    private TextView detectionResultTextView;
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
+    MyFaceDetector myFaceDetector;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +53,13 @@ public class MainActivity extends Activity {
         mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
 
         mPreview = findViewById(R.id.preview);
-        mPreview.setLayoutParams(new LinearLayout.LayoutParams(480,600));
+        //mPreview.setLayoutParams(new LinearLayout.LayoutParams(640,480));
         Log.i("humf", "preview size: "+mPreview.getHeight()+"|"+mPreview.getWidth());
         mGraphicOverlay = findViewById(R.id.faceOverlay);
 
+        tfModelResultTextView =findViewById(R.id.nmf);
+        detectionResultTextView=findViewById(R.id.detectResult);
+        profilePhotoImageView=findViewById(R.id.profilephoto);
         //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
 
@@ -128,9 +136,10 @@ public class MainActivity extends Activity {
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
-        MyFaceDetector myFaceDetector = new MyFaceDetector(detector, context);
+        myFaceDetector = new MyFaceDetector(detector, context);
+        myFaceDetector.setOnResultListener(this);
         // You can use your own processor
-        myFaceDetector.setContext(context);
+        //myFaceDetector.setContext(context);
         if (!myFaceDetector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
@@ -259,6 +268,17 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    public void showResults(String result) {
+
+        tfModelResultTextView.setText(result);
+    }
+    @Override
+    public void showProfilePhoto(Bitmap result) {
+        profilePhotoImageView.setImageBitmap(result);
+    }
+
+
     //==============================================================================================
     // Graphic Face Tracker
     //==============================================================================================
@@ -267,7 +287,7 @@ public class MainActivity extends Activity {
      * Factory for creating a face tracker to be associated with a new face.  The multiprocessor
      * uses this factory to create face trackers as needed -- one for each individual.
      */
-    private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
+    private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face>{
 
         @Override
         public Tracker<Face> create(Face face) {
@@ -278,8 +298,23 @@ public class MainActivity extends Activity {
 
         @Override
         public Tracker<Face> create(Face face) {
-            return null;
+            return new DetectFaces();
         }
+    }
+    private class DetectFaces extends Tracker<Face>{
+        public DetectFaces() {
+            super();
+        }
+
+
+        @Override
+        public void onUpdate(Detector.Detections<Face> detections, Face face) {
+            super.onUpdate(detections, face);
+            myFaceDetector.setmFace(face);
+
+
+        }
+
     }
     /**
      * Face tracker for each detected individual. This maintains a face graphic within the app's
@@ -288,10 +323,10 @@ public class MainActivity extends Activity {
     private class GraphicFaceTracker extends Tracker<Face> {
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
-
         GraphicFaceTracker(GraphicOverlay overlay) {
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
+
 
         }
 
@@ -301,6 +336,7 @@ public class MainActivity extends Activity {
         @Override
         public void onNewItem(int faceId, Face item) {
             mFaceGraphic.setId(faceId);
+
         }
 
         /**
@@ -308,8 +344,10 @@ public class MainActivity extends Activity {
          */
         @Override
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
+            //detectionResultTextView.setText(detectionResults.toString());
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
+            //myFaceDetector.setmFace(face);
         }
 
         /**

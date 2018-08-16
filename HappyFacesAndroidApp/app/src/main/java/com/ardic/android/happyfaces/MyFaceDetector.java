@@ -12,7 +12,6 @@ import android.util.SparseArray;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
-import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,6 +23,7 @@ import java.util.concurrent.Executors;
 public class MyFaceDetector extends Detector<Face> {
     private Detector<Face> mDelegate;
     private Context context;
+    private Face mFace;
     private static final int INPUT_SIZE = 299;
     private static final int IMAGE_MEAN = 0;
     private static final float IMAGE_STD = 255;
@@ -35,13 +35,16 @@ public class MyFaceDetector extends Detector<Face> {
             "file:///android_asset/labels.txt";
     private Classifier classifier;
     private Executor executor = Executors.newSingleThreadExecutor();
-
-
+    private boolean FaceStatus=false;
+    private ResultListener resultListener;
+    List<Classifier.Recognition> tfmodel;
+    Bitmap profilphoto;
     MyFaceDetector(Detector<Face> delegate, Context con) {
 
 
         mDelegate = delegate;
         context = con;
+        mFace=null;
         try {
             classifier = TensorFlowImageClassifier.create(
                     context.getAssets(),
@@ -71,9 +74,14 @@ public class MyFaceDetector extends Detector<Face> {
 
         }*/
         Frame frameface = new Frame.Builder().setBitmap(TempBitmap).build();
-        SparseArray<Face> faces = mDelegate.detect(frameface);
-        for (int i = 0; i < faces.size(); i++) {
-            Face thisFace = faces.valueAt(i);
+        //get faceee
+        if(mFace!=null){
+            Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
+        }
+       //SparseArray<Face> faces = mDelegate.detect(frameface);
+        //for (int i = 0; i < faces.size(); i++) {
+        if(FaceStatus==true) {
+            Face thisFace = mFace;
             float x = (thisFace.getPosition().x + thisFace.getWidth() / 2);
             float y = (thisFace.getPosition().y + thisFace.getHeight() / 2);
             float xOffset = (int) (thisFace.getWidth() / 2.0f);
@@ -92,31 +100,42 @@ public class MyFaceDetector extends Detector<Face> {
             if (y1 < 0) {
                 y1 = Math.abs((int) thisFace.getPosition().y);
             } else if (y1 > height) {
-                y1 = height-2;
+                y1 = height - 2;
             }
             if (x1 < 0) {
                 x1 = Math.abs((int) thisFace.getPosition().x);
-            } else if (x1+width > width) {
-                x1 = width-2;
+            } else if (x1 + width > width) {
+                x1 = width - 2;
             }
 
-            Bitmap resizedbitmap1= Bitmap.createBitmap(TempBitmap, (int)thisFace.getPosition().x, y1, width, height, null, false);
+            System.out.println("fuile>22>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
+            //boyle olmasi lazim  bir de yatay!!!!!!
+            Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, (int) thisFace.getPosition().x, y1, 299, 299, null, false);
             // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
-            Log.i("humf","1");
+
+
+            Log.i("humf", "1");
             Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
 
-            Log.i("humf","2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight() );
+            Log.i("humf", "2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight());
 
-            // imageViewResult.setImageBitmap(bitmaptf);
+            Log.i("humf", "666\n" + classifier);
 
-            Log.i("humf","666\n" + classifier);
+           tfmodel = classifier.recognizeImage(bitmaptf);
+            profilphoto=resizedbitmap1;
+            System.out.println("Result>> "  + " >> " + tfmodel.toString());
+            if (resultListener != null) {
+                resultListener.showResults(tfmodel.get(0).getTitle().toString());
+                resultListener.showProfilePhoto(resizedbitmap1);
+            }
 
-            List<Classifier.Recognition> results = classifier.recognizeImage(bitmaptf);
-            System.out.println("Result>> " + i + " >> " + results.toString());
 
+            FaceStatus=false;
         }
+
+
 
         //faceDetector.release();
 
@@ -134,8 +153,17 @@ public class MyFaceDetector extends Detector<Face> {
     public void setContext(Context context) {
         this.context = context;
     }
+    public void setOnResultListener(ResultListener listener) {
+        resultListener = listener;
+    }
+    public Bitmap getProfilphoto(){
+        return  profilphoto;
+    }
 
-
+    public void setmFace(Face face){
+        mFace=face;
+        FaceStatus=true;
+    }
 
 
 }

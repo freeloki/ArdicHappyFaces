@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="humf" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="p" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -35,12 +35,12 @@
       <file leaf-file-name="CameraSourcePreview.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="161" column="12" lean-forward="false" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
+            <state relative-caret-position="394">
+              <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4133#4134#0" expanded="true" />
-                <element signature="e#4182#4183#0" expanded="true" />
+                <element signature="e#4134#4135#0" expanded="true" />
+                <element signature="e#4183#4184#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,74 +48,110 @@
       </file>
       <file leaf-file-name="camera_layout_activity.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-          <provider selected="true" editor-type-id="android-designer2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+              <folding>
+                <element signature="e#2262#2276#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
             <state />
           </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="28" column="50" lean-forward="false" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+        </entry>
+      </file>
+      <file leaf-file-name="ResultListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/ResultListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="137" column="69" lean-forward="false" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
+            <state relative-caret-position="173">
+              <caret line="273" column="0" lean-forward="false" selection-start-line="273" selection-start-column="0" selection-end-line="273" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8389#8544#0" expanded="true" />
-                <element signature="e#8543#8544#0" expanded="true" />
-                <element signature="e#10646#10647#0" expanded="true" />
-                <element signature="e#10716#10717#0" expanded="true" />
-                <element signature="e#10870#10871#0" expanded="true" />
-                <element signature="e#10905#10906#0" expanded="true" />
-                <element signature="e#11526#11527#0" expanded="true" />
-                <element signature="e#11576#11577#0" expanded="true" />
-                <element signature="e#12458#12459#0" expanded="true" />
-                <element signature="e#12511#12512#0" expanded="true" />
+                <element signature="e#4255#4499#0" expanded="true" />
+                <element signature="e#4498#4499#0" expanded="true" />
+                <element signature="e#4541#4577#0" expanded="true" />
+                <element signature="e#4650#4661#0" expanded="true" />
+                <element signature="e#8870#9025#0" expanded="true" />
+                <element signature="e#9024#9025#0" expanded="true" />
+                <element signature="e#9167#9196#0" expanded="true" />
+                <element signature="e#9233#9244#0" expanded="true" />
+                <element signature="e#10719#10720#0" expanded="true" />
+                <element signature="e#10779#10780#0" expanded="true" />
+                <element signature="e#11365#11366#0" expanded="true" />
+                <element signature="e#11435#11436#0" expanded="true" />
+                <element signature="e#11589#11590#0" expanded="true" />
+                <element signature="e#11637#11638#0" expanded="true" />
+                <element signature="e#11727#11728#0" expanded="true" />
+                <element signature="e#11758#11759#0" expanded="true" />
+                <element signature="e#13635#13636#0" expanded="true" />
+                <element signature="e#13688#13689#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyFaceDetector.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyFaceDetector.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="115" column="87" lean-forward="false" selection-start-line="115" selection-start-column="87" selection-end-line="115" selection-end-column="87" />
+            <state relative-caret-position="1404">
+              <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
               <folding>
-                <element signature="e#4989#4990#0" expanded="true" />
-                <element signature="e#5037#5038#0" expanded="true" />
-                <element signature="e#5076#5077#0" expanded="true" />
-                <element signature="e#5121#5122#0" expanded="true" />
-                <element signature="e#5168#5169#0" expanded="true" />
-                <element signature="e#5206#5207#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#5614#5615#0" expanded="true" />
+                <element signature="e#5662#5663#0" expanded="true" />
+                <element signature="e#5701#5702#0" expanded="true" />
+                <element signature="e#5746#5747#0" expanded="true" />
+                <element signature="e#5793#5794#0" expanded="true" />
+                <element signature="e#5831#5832#0" expanded="true" />
+                <element signature="e#5894#5895#0" expanded="true" />
+                <element signature="e#5935#5936#0" expanded="true" />
+                <element signature="e#5971#5972#0" expanded="true" />
+                <element signature="e#6006#6007#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FaceGraphic.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+      <file leaf-file-name="TensorFlowImageClassifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+            <state relative-caret-position="184">
+              <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
+      <file leaf-file-name="DetectFaceTF.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/DetectFaceTF.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="40" />
+            <state relative-caret-position="507">
+              <caret line="81" column="10" lean-forward="false" selection-start-line="81" selection-start-column="10" selection-end-line="81" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3465#3466#0" expanded="true" />
+                <element signature="e#3506#3507#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -123,12 +159,22 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="valueResourceFile" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>size</find>
       <find>mPreview</find>
       <find>canvas</find>
       <find>Result</find>
+      <find>showResults</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -2165,11 +2211,18 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/views.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceDetect.java" />
+        <option value="$PROJECT_DIR$/app/src/main/assets/labels.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/OneFaceDetector.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/DetectFaceTF.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/ResultListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java" />
       </list>
     </option>
   </component>
@@ -2194,8 +2247,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2206,7 +2261,36 @@
             <path>
               <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="happyfaces" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="happyfaces" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="camera" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="assets" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="HappyFacesAndroidApp" type="1abcf292:AndroidViewProjectNode" />
@@ -2216,8 +2300,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2225,7 +2307,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$USER_HOME$/development2/ArdicHappyFaces/HappyFacesApp" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/android-vision-master (1)/visionSamples/barcode-reader" />
     <property name="device.picker.selection" value="R32CC02CF4H" />
     <property name="android.profiler.active" value="true" />
   </component>
@@ -2397,7 +2479,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="83" y="134" width="1857" height="1055" extended-state="6" />
+    <frame x="63" y="25" width="1857" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2407,7 +2490,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.503037" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2416,6 +2499,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958587" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.496963" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -2428,36 +2512,35 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32963374" sideWeight="0.49806738" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.503037" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.496963" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.49806738" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.216455" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958587" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -2471,196 +2554,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2628">
-          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4182#4183#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2628">
-          <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2322">
-          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8389#8544#0" expanded="true" />
-            <element signature="e#8543#8544#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-            <element signature="e#10870#10871#0" expanded="true" />
-            <element signature="e#10905#10906#0" expanded="true" />
-            <element signature="e#11526#11527#0" expanded="true" />
-            <element signature="e#11576#11577#0" expanded="true" />
-            <element signature="e#12458#12459#0" expanded="true" />
-            <element signature="e#12511#12512#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8389#8544#0" expanded="true" />
-            <element signature="e#8543#8544#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-            <element signature="e#10870#10871#0" expanded="true" />
-            <element signature="e#10905#10906#0" expanded="true" />
-            <element signature="e#11526#11527#0" expanded="true" />
-            <element signature="e#11576#11577#0" expanded="true" />
-            <element signature="e#12458#12459#0" expanded="true" />
-            <element signature="e#12511#12512#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4182#4183#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4182#4183#0" expanded="true" />
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4183#4184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2669,7 +2570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2628">
           <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2687,36 +2587,58 @@
           <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8389#8544#0" expanded="true" />
-            <element signature="e#8543#8544#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-            <element signature="e#10870#10871#0" expanded="true" />
-            <element signature="e#10905#10906#0" expanded="true" />
-            <element signature="e#11526#11527#0" expanded="true" />
-            <element signature="e#11576#11577#0" expanded="true" />
-            <element signature="e#12458#12459#0" expanded="true" />
-            <element signature="e#12511#12512#0" expanded="true" />
+            <element signature="e#4255#4499#0" expanded="true" />
+            <element signature="e#4498#4499#0" expanded="true" />
+            <element signature="e#4541#4577#0" expanded="true" />
+            <element signature="e#4650#4661#0" expanded="true" />
+            <element signature="e#8870#9025#0" expanded="true" />
+            <element signature="e#9024#9025#0" expanded="true" />
+            <element signature="e#9167#9196#0" expanded="true" />
+            <element signature="e#9233#9244#0" expanded="true" />
+            <element signature="e#10719#10720#0" expanded="true" />
+            <element signature="e#10779#10780#0" expanded="true" />
+            <element signature="e#11365#11366#0" expanded="true" />
+            <element signature="e#11435#11436#0" expanded="true" />
+            <element signature="e#11589#11590#0" expanded="true" />
+            <element signature="e#11637#11638#0" expanded="true" />
+            <element signature="e#11727#11728#0" expanded="true" />
+            <element signature="e#11758#11759#0" expanded="true" />
+            <element signature="e#13635#13636#0" expanded="true" />
+            <element signature="e#13688#13689#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="50" column="38" lean-forward="false" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
-          <folding />
+          <folding>
+            <element signature="e#2262#2276#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5614#5615#0" expanded="true" />
+            <element signature="e#5662#5663#0" expanded="true" />
+            <element signature="e#5701#5702#0" expanded="true" />
+            <element signature="e#5746#5747#0" expanded="true" />
+            <element signature="e#5793#5794#0" expanded="true" />
+            <element signature="e#5831#5832#0" expanded="true" />
+            <element signature="e#5894#5895#0" expanded="true" />
+            <element signature="e#5935#5936#0" expanded="true" />
+            <element signature="e#5971#5972#0" expanded="true" />
+            <element signature="e#6006#6007#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2740,7 +2662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2628">
           <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2758,36 +2679,58 @@
           <caret line="0" column="37" lean-forward="false" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8389#8544#0" expanded="true" />
-            <element signature="e#8543#8544#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-            <element signature="e#10870#10871#0" expanded="true" />
-            <element signature="e#10905#10906#0" expanded="true" />
-            <element signature="e#11526#11527#0" expanded="true" />
-            <element signature="e#11576#11577#0" expanded="true" />
-            <element signature="e#12458#12459#0" expanded="true" />
-            <element signature="e#12511#12512#0" expanded="true" />
+            <element signature="e#4255#4499#0" expanded="true" />
+            <element signature="e#4498#4499#0" expanded="true" />
+            <element signature="e#4541#4577#0" expanded="true" />
+            <element signature="e#4650#4661#0" expanded="true" />
+            <element signature="e#8870#9025#0" expanded="true" />
+            <element signature="e#9024#9025#0" expanded="true" />
+            <element signature="e#9167#9196#0" expanded="true" />
+            <element signature="e#9233#9244#0" expanded="true" />
+            <element signature="e#10719#10720#0" expanded="true" />
+            <element signature="e#10779#10780#0" expanded="true" />
+            <element signature="e#11365#11366#0" expanded="true" />
+            <element signature="e#11435#11436#0" expanded="true" />
+            <element signature="e#11589#11590#0" expanded="true" />
+            <element signature="e#11637#11638#0" expanded="true" />
+            <element signature="e#11727#11728#0" expanded="true" />
+            <element signature="e#11758#11759#0" expanded="true" />
+            <element signature="e#13635#13636#0" expanded="true" />
+            <element signature="e#13688#13689#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="23" column="47" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="47" />
-          <folding />
+          <folding>
+            <element signature="e#2262#2276#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1602">
           <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5614#5615#0" expanded="true" />
+            <element signature="e#5662#5663#0" expanded="true" />
+            <element signature="e#5701#5702#0" expanded="true" />
+            <element signature="e#5746#5747#0" expanded="true" />
+            <element signature="e#5793#5794#0" expanded="true" />
+            <element signature="e#5831#5832#0" expanded="true" />
+            <element signature="e#5894#5895#0" expanded="true" />
+            <element signature="e#5935#5936#0" expanded="true" />
+            <element signature="e#5971#5972#0" expanded="true" />
+            <element signature="e#6006#6007#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2813,8 +2756,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4182#4183#0" expanded="true" />
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4183#4184#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2823,7 +2766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="15" column="44" lean-forward="false" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2833,29 +2775,39 @@
           <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8389#8544#0" expanded="true" />
-            <element signature="e#8543#8544#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-            <element signature="e#10870#10871#0" expanded="true" />
-            <element signature="e#10905#10906#0" expanded="true" />
-            <element signature="e#11526#11527#0" expanded="true" />
-            <element signature="e#11576#11577#0" expanded="true" />
-            <element signature="e#12458#12459#0" expanded="true" />
-            <element signature="e#12511#12512#0" expanded="true" />
+            <element signature="e#4255#4499#0" expanded="true" />
+            <element signature="e#4498#4499#0" expanded="true" />
+            <element signature="e#4541#4577#0" expanded="true" />
+            <element signature="e#4650#4661#0" expanded="true" />
+            <element signature="e#8870#9025#0" expanded="true" />
+            <element signature="e#9024#9025#0" expanded="true" />
+            <element signature="e#9167#9196#0" expanded="true" />
+            <element signature="e#9233#9244#0" expanded="true" />
+            <element signature="e#10719#10720#0" expanded="true" />
+            <element signature="e#10779#10780#0" expanded="true" />
+            <element signature="e#11365#11366#0" expanded="true" />
+            <element signature="e#11435#11436#0" expanded="true" />
+            <element signature="e#11589#11590#0" expanded="true" />
+            <element signature="e#11637#11638#0" expanded="true" />
+            <element signature="e#11727#11728#0" expanded="true" />
+            <element signature="e#11758#11759#0" expanded="true" />
+            <element signature="e#13635#13636#0" expanded="true" />
+            <element signature="e#13688#13689#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="27" column="10" lean-forward="false" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-          <folding />
+          <folding>
+            <element signature="e#2262#2276#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
@@ -2866,75 +2818,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-27/android.jar!/android/view/View.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="1364" column="21" lean-forward="false" selection-start-line="1364" selection-start-column="21" selection-end-line="1364" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-27/android.jar!/android/view/ViewGroup.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6782">
-          <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/GraphicOverlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2172">
           <caret line="181" column="14" lean-forward="false" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="40" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
+      <provider editor-type-id="android-manifest">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="28" column="50" lean-forward="false" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/assets/labels.txt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -2942,75 +2844,640 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="161" column="12" lean-forward="false" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/views.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/Detector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/MultiProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1476">
+          <caret line="15" column="46" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceDetect.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/ResultsListener.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/assets/labels.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-27/android.jar!/android/view/ViewGroup.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="48" column="11" lean-forward="false" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
+          <folding>
+            <marker date="1532071978402" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1532071978402" expanded="false" signature="136:1014" ph="..." />
+            <marker date="1532071978402" expanded="true" signature="1727:1835" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="1895:2003" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="2081:2189" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="2284:2392" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="2398:2683" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="2726:2737" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="2773:2779" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="2840:2851" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="2887:2893" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="2954:2965" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="3001:3007" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="3055:3066" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="3102:3108" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="3172:3224" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="3306:3358" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="3444:3496" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="3592:3644" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="3702:3713" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="3749:3755" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="3853:3905" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="3994:4046" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="4137:4189" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="4281:4333" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="4373:4384" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="4420:4426" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="4498:4550" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="4595:4606" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="4642:4648" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="4678:4689" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="4725:4731" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="4766:4777" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="4813:4819" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="4850:4861" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="4897:4903" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="4932:4943" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="4979:4985" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="5074:5126" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="5213:5265" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="5341:5393" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="5399:5450" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="5497:5508" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="5544:5550" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="5642:5694" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="5757:5809" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="5863:5874" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="5910:5916" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="5963:5974" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="6010:6016" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="6097:6149" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="6215:6267" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="6339:6391" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="6444:6455" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="6491:6497" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="6544:6555" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="6591:6597" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="6652:6663" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="6699:6705" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="6775:6827" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="6892:6944" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="7003:7014" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="7050:7056" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="7109:7120" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="7156:7162" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="7223:7234" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="7270:7276" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="7339:7391" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="7460:7512" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="7580:7632" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="7715:7767" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="7828:7839" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="7875:7881" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="7956:8008" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="8069:8080" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="8116:8122" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="8193:8245" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="8316:8368" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="8423:8434" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="8470:8476" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="8540:8592" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="8644:8655" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="8691:8697" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="8737:8748" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="8784:8790" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="8854:8906" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="8986:9038" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="9096:9107" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="9143:9149" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="9226:9278" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="9373:9425" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="9467:9478" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="9514:9520" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="9588:9640" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="9727:9779" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="9832:9843" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="9879:9885" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="9983:10035" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="10132:10184" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="10266:10318" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="10397:10449" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="10534:10586" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="10663:10715" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="10784:10836" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="10884:10895" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="10931:10937" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="10979:10990" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="11026:11032" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="11096:11148" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="11227:11279" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="11285:11338" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="11375:11386" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="11422:11428" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="11483:11494" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="11530:11536" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="11593:11604" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="11640:11646" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="11652:11705" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="11743:11754" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="11790:11796" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="11851:11862" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="11898:11904" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="11961:11972" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="12008:12014" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="12070:12081" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="12117:12123" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="12190:12242" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="12312:12364" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="12447:12499" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="12536:12547" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="12583:12589" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="12637:12648" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="12684:12690" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="12750:12761" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="12797:12803" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="12872:12924" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="13004:13056" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="13133:13185" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="13253:13305" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="13398:13450" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="13491:13502" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="13538:13544" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="13587:13598" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="13634:13640" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="13681:13692" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="13728:13734" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="13777:13788" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="13824:13830" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="13924:13976" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="14100:14152" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="14203:14214" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="14250:14256" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="14374:14426" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="14465:14476" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="14512:14518" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="14565:14576" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="14612:14618" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="14677:14688" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="14724:14730" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="14771:14782" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="14818:14824" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="14875:14886" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="14922:14928" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="14995:15047" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="15098:15109" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="15145:15151" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="15185:15196" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="15232:15238" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="15280:15291" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="15327:15333" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="15402:15454" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="15548:15600" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="15653:15664" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="15700:15706" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="15758:15769" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="15805:15811" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="15876:15928" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="15975:15986" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="16022:16028" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="16095:16147" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="16153:16171" ph="/**...*/" />
+            <marker date="1532071978402" expanded="true" signature="16250:16302" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="16308:16326" ph="/**...*/" />
+            <marker date="1532071978402" expanded="true" signature="16417:16469" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="16552:16604" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="16687:16739" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="16814:16866" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="16924:16935" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="16971:16977" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="17106:17117" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="17153:17159" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="17199:17210" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="17246:17252" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="17295:17306" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="17342:17348" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="17423:17475" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="17534:17545" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="17581:17587" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="17593:17611" ph="/**...*/" />
+            <marker date="1532071978402" expanded="false" signature="17672:17683" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="17719:17725" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="17731:17749" ph="/**...*/" />
+            <marker date="1532071978402" expanded="false" signature="17823:17834" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="17870:17876" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="17882:17900" ph="/**...*/" />
+            <marker date="1532071978402" expanded="false" signature="17967:17978" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="18014:18020" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="18026:18044" ph="/**...*/" />
+            <marker date="1532071978402" expanded="true" signature="18124:18176" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="18182:18200" ph="/**...*/" />
+            <marker date="1532071978402" expanded="false" signature="18272:18283" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="18319:18325" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="18331:18349" ph="/**...*/" />
+            <marker date="1532071978402" expanded="true" signature="18435:18487" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="18493:18546" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="18600:18611" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="18647:18653" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="18722:18774" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="18780:19050" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="19093:19104" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="19140:19146" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="19214:19266" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="19298:19309" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="19345:19351" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="19398:19409" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="19445:19451" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="19528:19580" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="19666:19718" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="19787:19839" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="19876:19887" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="19923:19929" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="19970:19981" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="20017:20023" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="20055:20066" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="20102:20108" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="20147:20158" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="20194:20200" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="20282:20334" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="20437:20489" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="20634:20686" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="20773:20825" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="20870:20881" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="20917:20923" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="20971:20982" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21018:21024" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="21070:21081" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21117:21123" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="21182:21193" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21229:21235" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="21289:21300" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21336:21342" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="21415:21467" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="21526:21537" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21573:21579" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="21622:21633" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21669:21675" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="21722:21733" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21769:21775" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="21834:21845" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="21881:21887" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="21950:22002" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="22046:22057" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="22093:22099" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="22154:22165" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="22201:22207" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="22289:22341" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="22392:22403" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="22439:22445" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="22533:22585" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="22661:22713" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="22761:22772" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="22808:22814" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="22928:22980" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="23061:23113" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="23213:23265" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="23350:23402" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="23440:23451" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="23487:23493" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="23569:25675" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="23579:23639" ph="@{...}" />
+            <marker date="1532071978402" expanded="true" signature="23681:23741" ph="@{...}" />
+            <marker date="1532071978402" expanded="true" signature="23781:23841" ph="@{...}" />
+            <marker date="1532071978402" expanded="true" signature="23882:23942" ph="@{...}" />
+            <marker date="1532071978402" expanded="true" signature="24039:24148" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="24207:24316" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="24389:24498" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="24565:24674" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="24749:24809" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="24856:24871" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="24907:24917" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="24954:24969" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="25005:25015" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="25058:25073" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="25109:25119" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="25154:25169" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="25205:25215" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="25258:25273" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="25309:25319" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="25380:25395" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="25431:25441" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="25482:25497" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="25533:25543" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="25609:25669" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="25714:27074" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="25724:25742" ph="/**...*/" />
+            <marker date="1532071978402" expanded="true" signature="25923:26119" ph="@{...}" />
+            <marker date="1532071978402" expanded="true" signature="26217:26413" ph="@{...}" />
+            <marker date="1532071978402" expanded="false" signature="26499:26514" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="26550:26560" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="26612:26627" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="26663:26673" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="26733:26748" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="26784:26794" ph=" }" />
+            <marker date="1532071978402" expanded="true" signature="26882:26942" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="27008:27068" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="27123:27239" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-27/android.jar!/android/view/View.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="237" column="0" lean-forward="true" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/Tracker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1532674977768" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1532674977768" expanded="true" signature="252:259" ph="{}" />
+            <marker date="1532674977768" expanded="true" signature="305:312" ph="{}" />
+            <marker date="1532674977768" expanded="true" signature="367:374" ph="{}" />
+            <marker date="1532674977768" expanded="true" signature="422:429" ph="{}" />
+            <marker date="1532674977768" expanded="true" signature="456:463" ph="{}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/face/FaceDetector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="41" />
+          <folding>
+            <marker date="1532674977768" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1532674977768" expanded="false" signature="158:642" ph="..." />
+            <marker date="1532674977768" expanded="true" signature="1127:1348" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="1397:1760" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="1810:3009" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="3049:3367" ph="{...}" />
+            <marker date="1532674977768" expanded="false" signature="3403:3414" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="3446:3452" ph=" }" />
+            <marker date="1532674977768" expanded="true" signature="3481:3649" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="3686:3808" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="3842:6279" ph="{...}" />
+            <marker date="1532674977768" expanded="false" signature="4115:4130" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="4151:4161" ph=" }" />
+            <marker date="1532674977768" expanded="true" signature="4225:4510" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="4583:4648" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="4718:5009" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="5080:5145" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="5201:5501" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="5566:5866" ph="{...}" />
+            <marker date="1532674977768" expanded="true" signature="5904:6273" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/FaceGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1335">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-27/android.jar!/android/media/FaceDetector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="45" column="35" lean-forward="false" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="35" />
+          <folding>
+            <marker date="1532071978402" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1532071978402" expanded="false" signature="137:193" ph="..." />
+            <marker date="1532071978402" expanded="true" signature="284:336" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="405:457" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="506:558" ph="{...}" />
+            <marker date="1532071978402" expanded="true" signature="582:1265" ph="{...}" />
+            <marker date="1532071978402" expanded="false" signature="797:812" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="848:858" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="893:908" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="944:954" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="1001:1016" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="1052:1062" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="1099:1114" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="1150:1160" ph=" }" />
+            <marker date="1532071978402" expanded="false" signature="1198:1213" ph=" { " />
+            <marker date="1532071978402" expanded="false" signature="1249:1259" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/face/Face.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-108">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <marker date="1532674977768" expanded="false" signature="0:104" ph="/.../" />
+            <marker date="1532674977768" expanded="false" signature="158:230" ph="..." />
+            <marker date="1532674977768" expanded="true" signature="585:679" ph="{...}" />
+            <marker date="1532674977768" expanded="false" signature="708:719" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="735:741" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="771:782" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="798:804" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="834:845" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="861:867" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="897:908" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="924:930" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="972:983" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="999:1005" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="1053:1064" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="1080:1086" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="1135:1146" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="1162:1168" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="1212:1223" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="1239:1245" ph=" }" />
+            <marker date="1532674977768" expanded="false" signature="1269:1280" ph=" { " />
+            <marker date="1532674977768" expanded="false" signature="1296:1302" ph=" }" />
+            <marker date="1532674977768" expanded="true" signature="1445:2044" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="72" lean-forward="false" selection-start-line="27" selection-start-column="72" selection-end-line="28" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-11.4.2.aar/874b0fbd85c09ef2e08235681bdac9e5/jars/classes.jar!/com/google/android/gms/vision/Detector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="50" column="16" lean-forward="false" selection-start-line="50" selection-start-column="16" selection-end-line="50" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-11.4.2.aar/874b0fbd85c09ef2e08235681bdac9e5/jars/classes.jar!/com/google/android/gms/vision/MultiDetector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="56" column="16" lean-forward="false" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/OneFaceDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="76" column="28" lean-forward="false" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/DetectFaceTF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="81" column="10" lean-forward="false" selection-start-line="81" selection-start-column="10" selection-end-line="81" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4182#4183#0" expanded="true" />
+            <element signature="e#3465#3466#0" expanded="true" />
+            <element signature="e#3506#3507#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/TensorFlowImageClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/camera/CameraSourcePreview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4183#4184#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/camera_layout_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+          <folding>
+            <element signature="e#2262#2276#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/ResultListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="273" column="0" lean-forward="false" selection-start-line="273" selection-start-column="0" selection-end-line="273" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4255#4499#0" expanded="true" />
+            <element signature="e#4498#4499#0" expanded="true" />
+            <element signature="e#4541#4577#0" expanded="true" />
+            <element signature="e#4650#4661#0" expanded="true" />
+            <element signature="e#8870#9025#0" expanded="true" />
+            <element signature="e#9024#9025#0" expanded="true" />
+            <element signature="e#9167#9196#0" expanded="true" />
+            <element signature="e#9233#9244#0" expanded="true" />
+            <element signature="e#10719#10720#0" expanded="true" />
+            <element signature="e#10779#10780#0" expanded="true" />
+            <element signature="e#11365#11366#0" expanded="true" />
+            <element signature="e#11435#11436#0" expanded="true" />
+            <element signature="e#11589#11590#0" expanded="true" />
+            <element signature="e#11637#11638#0" expanded="true" />
+            <element signature="e#11727#11728#0" expanded="true" />
+            <element signature="e#11758#11759#0" expanded="true" />
+            <element signature="e#13635#13636#0" expanded="true" />
+            <element signature="e#13688#13689#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MyFaceDetector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="115" column="87" lean-forward="false" selection-start-line="115" selection-start-column="87" selection-end-line="115" selection-end-column="87" />
-          <folding>
-            <element signature="e#4989#4990#0" expanded="true" />
-            <element signature="e#5037#5038#0" expanded="true" />
-            <element signature="e#5076#5077#0" expanded="true" />
-            <element signature="e#5121#5122#0" expanded="true" />
-            <element signature="e#5168#5169#0" expanded="true" />
-            <element signature="e#5206#5207#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-vision-9.4.0.aar/ae5918733f66ec27d64100f810d86576/jars/classes.jar!/com/google/android/gms/vision/MultiProcessor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2124">
-          <caret line="129" column="34" lean-forward="false" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="34" />
-          <folding>
-            <marker date="1532674977768" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1532674977768" expanded="false" signature="153:346" ph="..." />
-            <marker date="1532674977768" expanded="true" signature="545:753" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="809:888" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="919:986" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="1029:1514" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="1557:2318" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="2361:2722" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="2746:2871" ph="{...}" />
-            <marker date="1532674977768" expanded="false" signature="2827:2842" ph=" { " />
-            <marker date="1532674977768" expanded="false" signature="2855:2865" ph=" }" />
-            <marker date="1532674977768" expanded="true" signature="2908:3646" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="3028:3219" ph="{...}" />
-            <marker date="1532674977768" expanded="true" signature="3288:3557" ph="{...}" />
-            <marker date="1532674977768" expanded="false" signature="3599:3614" ph=" { " />
-            <marker date="1532674977768" expanded="false" signature="3630:3640" ph=" }" />
-            <marker date="1532674977768" expanded="true" signature="3680:3722" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ardic/android/happyfaces/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="137" column="69" lean-forward="false" selection-start-line="137" selection-start-column="69" selection-end-line="137" selection-end-column="69" />
+        <state relative-caret-position="1404">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8389#8544#0" expanded="true" />
-            <element signature="e#8543#8544#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-            <element signature="e#10870#10871#0" expanded="true" />
-            <element signature="e#10905#10906#0" expanded="true" />
-            <element signature="e#11526#11527#0" expanded="true" />
-            <element signature="e#11576#11577#0" expanded="true" />
-            <element signature="e#12458#12459#0" expanded="true" />
-            <element signature="e#12511#12512#0" expanded="true" />
+            <element signature="e#5614#5615#0" expanded="true" />
+            <element signature="e#5662#5663#0" expanded="true" />
+            <element signature="e#5701#5702#0" expanded="true" />
+            <element signature="e#5746#5747#0" expanded="true" />
+            <element signature="e#5793#5794#0" expanded="true" />
+            <element signature="e#5831#5832#0" expanded="true" />
+            <element signature="e#5894#5895#0" expanded="true" />
+            <element signature="e#5935#5936#0" expanded="true" />
+            <element signature="e#5971#5972#0" expanded="true" />
+            <element signature="e#6006#6007#0" expanded="true" />
           </folding>
         </state>
       </provider>

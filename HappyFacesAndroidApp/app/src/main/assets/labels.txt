@@ -3,7 +3,6 @@ ahmetcakman
 alpparkan
 bahadirbikmaz
 bruainstreamax
-pascalstreamax
 barisinanc
 ceyhunerturk
 duygukalinyilmaz
@@ -19,6 +18,7 @@ mertacel
 metinpar
 oguzcakir
 ozgurozkok
+pascalstreamax
 perihanmirkelam
 samiozdil
 sinanpayaslioglu

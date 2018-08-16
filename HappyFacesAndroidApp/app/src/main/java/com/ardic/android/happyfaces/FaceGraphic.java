@@ -112,7 +112,6 @@ class FaceGraphic extends GraphicOverlay.Graphic {
 
 
     }
-    public Face getmFace(){return  mFace;}
 
 
 }

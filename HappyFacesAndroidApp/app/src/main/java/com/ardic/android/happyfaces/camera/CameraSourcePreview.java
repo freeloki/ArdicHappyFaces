@@ -38,6 +38,7 @@ public class CameraSourcePreview extends ViewGroup {
         mSurfaceAvailable = false;
 
         mSurfaceView = new SurfaceView(context);
+
         mSurfaceView.getHolder().addCallback(new SurfaceCallback());
         addView(mSurfaceView);
 
@@ -157,10 +158,10 @@ public class CameraSourcePreview extends ViewGroup {
         int childHeight = (int)(((float) layoutWidth / (float) width) * height);
 
         // If height is too tall using fit width, does fit height instead.
-        if (childHeight > layoutHeight) {
+        /*if (childHeight > layoutHeight) {
             childHeight = layoutHeight;
             childWidth = (int) (((float) layoutHeight / (float) height) * width);
-        }
+        }*/
 
 
         for (int i = 0; i < getChildCount(); ++i) {
@@ -173,6 +174,7 @@ public class CameraSourcePreview extends ViewGroup {
         } catch (IOException e) {
             Log.e(TAG, "Could not start camera source.", e);
         }
+
     }
 
     private boolean isPortraitMode() {
