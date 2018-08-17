@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ardic.android.happyfaces.R;
+import com.ardic.android.happyfaces.TFbridge;
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.CameraSource;
 
@@ -27,7 +28,7 @@ public class CameraSourcePreview extends ViewGroup {
     private boolean mStartRequested;
     private boolean mSurfaceAvailable;
     private CameraSource mCameraSource;
-
+    private TFbridge toDetectImageTF;
     private GraphicOverlay mOverlay;
 
     public CameraSourcePreview(Context context, AttributeSet attrs) {

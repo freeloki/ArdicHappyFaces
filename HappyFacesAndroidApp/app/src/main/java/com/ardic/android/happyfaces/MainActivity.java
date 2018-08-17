@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -40,12 +41,15 @@ public class MainActivity extends Activity implements ResultListener {
     private LinearLayout mAwesomeLayout;
     private TextView tfModelResultTextView;
     private ImageView profilePhotoImageView;
+    String PROFILEresult;
     private TextView detectionResultTextView;
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
-
+    TFbridge tFbridge;
+    Bitmap previewbtmp=null;
     MyFaceDetector myFaceDetector;
+    Face mPreviewFace=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +102,8 @@ public class MainActivity extends Activity implements ResultListener {
             ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CAMERA_PERM);
             return;
         }
+        PROFILEresult="app_icon.png";
+        profilePhotoImageView.setImageDrawable(Drawable.createFromPath("//drawable-v24/"+profilePhotoImageView));
 
         final Activity thisActivity = this;
 
@@ -118,6 +124,8 @@ public class MainActivity extends Activity implements ResultListener {
     private void createCameraSource() {
 
         Context context = getApplicationContext();
+        //set the tfbridge
+        tFbridge=new TFbridge(context);
 
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(context)
@@ -154,7 +162,7 @@ public class MainActivity extends Activity implements ResultListener {
         mCameraSource = new CameraSource.Builder(context, multiDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setAutoFocusEnabled(false)
-                .setRequestedFps(10.0f)
+                .setRequestedFps(30.0f)
                 .build();
 
     }
@@ -273,10 +281,7 @@ public class MainActivity extends Activity implements ResultListener {
 
         tfModelResultTextView.setText(result);
     }
-    @Override
-    public void showProfilePhoto(Bitmap result) {
-        profilePhotoImageView.setImageBitmap(result);
-    }
+
 
 
     //==============================================================================================
@@ -304,14 +309,57 @@ public class MainActivity extends Activity implements ResultListener {
     private class DetectFaces extends Tracker<Face>{
         public DetectFaces() {
             super();
+
         }
 
 
         @Override
         public void onUpdate(Detector.Detections<Face> detections, Face face) {
             super.onUpdate(detections, face);
-            myFaceDetector.setmFace(face);
+            if(mPreviewFace!=null)
+            {
+                if(!mPreviewFace.equals(face)){
+                    Log.i("face", mPreview.toString());
+                    Log.i("face", face.getId()+"");
+                    Log.i("1-face:", "not null and initialize");
+                    myFaceDetector.setmFace(face);
+                    Bitmap bmpFace=myFaceDetector.getProfilphoto();
+                    if(previewbtmp!=null){
+                        System.out.println("prev btmp:>> "+previewbtmp.getConfig());
+                        System.out.println("current bmp:>> "+bmpFace.sameAs(previewbtmp));
+                    }
+                    if(previewbtmp==null){
+                        previewbtmp=bmpFace;
+                    }
+                    String result=tFbridge.recognizeImagewithTf(bmpFace);
+                    Log.i("tfresult:", result);
+                    System.out.println("not faceid >> "+mPreviewFace.getId());
+                    System.out.println("land faceid >> "+mPreviewFace.getLandmarks().toString());
+                   // profilePhotoImageView.setImageDrawable(Drawable.createFromPath("/drawable/"+result+".jpg"));
+                    mPreviewFace=face;
+                    previewbtmp=bmpFace;
+                }
+                else{
+                    mPreviewFace=face;
+                    System.out.println("faceid >> "+mPreviewFace.getId());
+                    Log.i("face", mPreview.toString());
+                    Log.i("face", face.getId()+"");
+                    Log.i("1-face:", "equal");
+                }
+            }
+            else{
+                Log.i("1-face:", "null and initialize");
 
+                myFaceDetector.setmFace(face);
+                Bitmap bmpFace=myFaceDetector.getProfilphoto();
+                String result=tFbridge.recognizeImagewithTf(bmpFace);
+                Log.i("tfresult", result);
+                mPreviewFace=face;
+                Log.i("face", mPreview.toString());
+                Log.i("face", face.getId()+"");
+            }
+
+            //tfModelResultTextView.setText(result);
 
         }
 

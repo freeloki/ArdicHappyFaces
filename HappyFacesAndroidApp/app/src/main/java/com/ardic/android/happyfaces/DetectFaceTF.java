@@ -68,7 +68,7 @@ public class DetectFaceTF {
             x1 = width-2;
         }
 
-       Bitmap resizedbitmap1= Bitmap.createBitmap(TempBitmap, (int)thisFace.getPosition().x, y1, width, height, null, false);
+       Bitmap resizedbitmap1= Bitmap.createBitmap(TempBitmap, (int)thisFace.getPosition().x, y1, INPUT_SIZE, INPUT_SIZE, null, false);
         // Bitmap ne=Bitmap.createBitmap()
 
         /**#***********************************************************************/

@@ -25,19 +25,9 @@ public class MyFaceDetector extends Detector<Face> {
     private Context context;
     private Face mFace;
     private static final int INPUT_SIZE = 299;
-    private static final int IMAGE_MEAN = 0;
-    private static final float IMAGE_STD = 255;
-    private static final String INPUT_NAME = "Placeholder";
-    private static final String OUTPUT_NAME = "final_result";
-
-    private static final String MODEL_FILE = "file:///android_asset/output_graph.pb";
-    private static final String LABEL_FILE =
-            "file:///android_asset/labels.txt";
-    private Classifier classifier;
-    private Executor executor = Executors.newSingleThreadExecutor();
     private boolean FaceStatus=false;
     private ResultListener resultListener;
-    List<Classifier.Recognition> tfmodel;
+
     Bitmap profilphoto;
     MyFaceDetector(Detector<Face> delegate, Context con) {
 
@@ -45,19 +35,7 @@ public class MyFaceDetector extends Detector<Face> {
         mDelegate = delegate;
         context = con;
         mFace=null;
-        try {
-            classifier = TensorFlowImageClassifier.create(
-                    context.getAssets(),
-                    MODEL_FILE,
-                    LABEL_FILE,
-                    INPUT_SIZE,
-                    IMAGE_MEAN,
-                    IMAGE_STD,
-                    INPUT_NAME,
-                    OUTPUT_NAME);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public SparseArray<Face> detect(Frame frame) {
@@ -78,6 +56,7 @@ public class MyFaceDetector extends Detector<Face> {
         if(mFace!=null){
             Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
         }
+        Log.i("assets: ", context.getAssets()+"  *");
        //SparseArray<Face> faces = mDelegate.detect(frameface);
         //for (int i = 0; i < faces.size(); i++) {
         if(FaceStatus==true) {
@@ -110,25 +89,23 @@ public class MyFaceDetector extends Detector<Face> {
 
             System.out.println("fuile>22>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
             //boyle olmasi lazim  bir de yatay!!!!!!
-            Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, (int) thisFace.getPosition().x, y1, 299, 299, null, false);
+            Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, x1, y1, 299, 299, null, false);
             // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
 
 
-            Log.i("humf", "1");
+
             Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
 
-            Log.i("humf", "2\n" + bitmaptf.getWidth() + "    ?    " + bitmaptf.getHeight());
 
-            Log.i("humf", "666\n" + classifier);
 
-           tfmodel = classifier.recognizeImage(bitmaptf);
+
             profilphoto=resizedbitmap1;
-            System.out.println("Result>> "  + " >> " + tfmodel.toString());
+
             if (resultListener != null) {
-                resultListener.showResults(tfmodel.get(0).getTitle().toString());
-                resultListener.showProfilePhoto(resizedbitmap1);
+                //resultListener.showResults(tfmodel.get(0).getTitle().toString());
+                //resultListener.showProfilePhoto(resizedbitmap1);
             }
 
 
