@@ -16,6 +16,7 @@ int faceDetection(const Mat& frame);
 //const String  HAARCASCADES="/home/ardic/opencv-3.4.1/data/haarcascades/haarcascade_frontalface_alt.xml";
 //const String IMAGEPATH="/home/ardic/Documents/faces/img4/ImageFromVideo_";
 String  HAARCASCADES, IMAGEPATH;
+double startTime;
 int main(int argc, char const *argv[])
 {
   if(argc !=4){
@@ -29,10 +30,15 @@ int main(int argc, char const *argv[])
   cout<<"total ="<<total<<endl;
   
   for(int i=0; i<total; i++){
-        cout<<i<<"  ";
+        
         String filename="video_"+to_string(i)+".h264";
-        cout<<"the current video >>  "<<filename<<endl;
+        cout<<"the current video:  "<<filename<<endl;
+        
+       	
         VideoProcess(filename);
+        double endTime=time(NULL)-startTime;
+		SecondsToHourMinSec((int)(endTime));
+		    
   }
   cout<<endl;      
   
@@ -40,7 +46,9 @@ int main(int argc, char const *argv[])
 }
 
 void VideoProcess (const String filename){
-
+	// register signal SIGINT and signal handler  
+   signal(SIGINT, signalHandler); 
+	startTime=time(NULL);
   VideoCapture videoCap(filename);
   if(!videoCap.isOpened()){
     cout << "Error opening video stream or file" << endl;
@@ -60,6 +68,7 @@ void VideoProcess (const String filename){
         
         int numOffaces=faceDetection(frame);
         if(numOffaces>-1){
+          cout<<"face is found :)  "<<numOffaces<<endl;
            // Display the resulting frame
           String str="frame ";
           str+=i;         
@@ -67,11 +76,12 @@ void VideoProcess (const String filename){
       i++;
       //sleep(15);
     }
-    
+    cout<<"release..."<<endl;
     videoCap.release();
-    cout<<"closed the video: "<<filename<<endl;
+
 }
 int faceDetection(const Mat& frame){
+	 
   // Load Face cascade (.xml file)
     CascadeClassifier face_cascade;
     face_cascade.load(HAARCASCADES);
@@ -92,7 +102,7 @@ int faceDetection(const Mat& frame){
             Point point4(center.x+radius, center.y+radius);
            Rect rect1(point1, point4);
 
-          cout<<faces[i].x <<"  "<<faces[i].width<<"   "<<faces[i].height<<"  "<<faces[i].y<<endl;
+          //cout<<faces[i].x <<"  "<<faces[i].width<<"   "<<faces[i].height<<"  "<<faces[i].y<<endl;
          
         cv::Mat roi = frame(rect1);
         std::time_t result = std::time(nullptr);
@@ -103,10 +113,26 @@ int faceDetection(const Mat& frame){
           
       }
     }
-    else
-    {
-      cout<<"face is empty"<<endl;
-    }
+    
 
     return returnVal;
+}
+void signalHandler( int signum ) {
+   cout << "Interrupt signal () received.\n";
+   int handleTime=(int)(time(NULL)-startTime);
+
+   cout<<"Interrupted at >>";
+   SecondsToHourMinSec(handleTime);
+
+   // cleanup and close up stuff here  
+   // terminate program  
+
+   exit(signum);  
+}
+void SecondsToHourMinSec(int seconds){
+	int hours, minutes;
+	minutes = seconds / 60;
+	hours = minutes / 60;
+	cout <<  int(hours) << ":" << int(minutes%60)<< ":" << int(seconds%60) << "  (H:M:S) \n";
+    
 }
