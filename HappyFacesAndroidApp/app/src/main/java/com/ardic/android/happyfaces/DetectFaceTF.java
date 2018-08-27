@@ -85,9 +85,9 @@ public class DetectFaceTF {
 
         System.out.println("Result>> "  + " >> " + tfmodel.toString());
 
-        if(resultListener != null) {
+        /*if(resultListener != null) {
             resultListener.showResults(tfmodel.toString());
-        }
+        }*/
     }
     public void setOnResultListener(ResultListener listener) {
         resultListener = listener;

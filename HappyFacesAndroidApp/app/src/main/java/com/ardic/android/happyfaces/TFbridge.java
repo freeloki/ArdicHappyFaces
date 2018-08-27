@@ -68,9 +68,11 @@ public class TFbridge {
     }
 
     public String recognizeImagewithTf(Bitmap bmp) {
-        List<Classifier.Recognition>imgrecognize=classifier.recognizeImage(bmp);
-        Log.i("humf: ","%>>"+imgrecognize.get(0).getConfidence()+"-");
-        mTFresult=imgrecognize.get(0).getTitle();
+        if(bmp!=null) {
+            List<Classifier.Recognition> imgrecognize = classifier.recognizeImage(bmp);
+            Log.i("humf: ", "%>>" + imgrecognize.get(0).getConfidence() + "-");
+            mTFresult = imgrecognize.get(0).getTitle();
+        }
         return mTFresult;
     }
 }

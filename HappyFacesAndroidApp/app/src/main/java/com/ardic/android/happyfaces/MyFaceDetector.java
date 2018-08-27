@@ -37,6 +37,11 @@ public class MyFaceDetector extends Detector<Face> {
         mFace=null;
 
     }
+    MyFaceDetector(Context cont){
+        context = cont;
+        mDelegate=this;
+        mFace=null;
+    }
 
     public SparseArray<Face> detect(Frame frame) {
         YuvImage yuvImage = new YuvImage(frame.getGrayscaleImageData().array(), ImageFormat.NV21, frame.getMetadata().getWidth(), frame.getMetadata().getHeight(), null);
@@ -127,9 +132,7 @@ public class MyFaceDetector extends Detector<Face> {
         return mDelegate.setFocus(id);
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
+
     public void setOnResultListener(ResultListener listener) {
         resultListener = listener;
     }

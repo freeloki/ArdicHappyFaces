@@ -18,6 +18,7 @@ package com.ardic.android.happyfaces;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.google.android.gms.vision.face.Face;
@@ -40,9 +41,11 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         Color.MAGENTA,
         Color.RED,
         Color.WHITE,
-        Color.YELLOW
+        Color.YELLOW,
+            Color.BLACK
     };
     private static int mCurrentColorIndex = 0;
+    private int mFaceColor=-1;
 
     private Paint mFacePositionPaint;
     private Paint mIdPaint;
@@ -52,12 +55,13 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     private int mFaceId;
     private float mFaceHappiness;
 
+
     public FaceGraphic(GraphicOverlay overlay) {
         super(overlay);
 
         mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
         final int selectedColor = COLOR_CHOICES[mCurrentColorIndex];
-
+        mFaceColor=mCurrentColorIndex;
         mFacePositionPaint = new Paint();
         mFacePositionPaint.setColor(selectedColor);
 
@@ -111,6 +115,9 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         canvas.drawRect(left, top, right, bottom, mBoxPaint);
 
 
+    }
+    int getFaceColor(){
+        return mFaceColor;
     }
 
 

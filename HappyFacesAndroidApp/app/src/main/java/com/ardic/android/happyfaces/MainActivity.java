@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,8 @@ import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class MainActivity extends Activity implements ResultListener {
     private static final String TAG = "MainActivity";
@@ -40,6 +43,7 @@ public class MainActivity extends Activity implements ResultListener {
     private GraphicOverlay mGraphicOverlay;
     private LinearLayout mAwesomeLayout;
     private TextView tfModelResultTextView;
+    private TextView mFaceColorPreview;
     private ImageView profilePhotoImageView;
     String PROFILEresult;
     private TextView detectionResultTextView;
@@ -50,6 +54,17 @@ public class MainActivity extends Activity implements ResultListener {
     Bitmap previewbtmp=null;
     MyFaceDetector myFaceDetector;
     Face mPreviewFace=null;
+    private static final int COLOR_CHOICES[] = {
+            Color.BLUE,
+            Color.CYAN,
+            Color.GREEN,
+            Color.MAGENTA,
+            Color.RED,
+            Color.WHITE,
+            Color.YELLOW,
+            Color.BLACK
+    };
+    ArrayList<Integer> mFaceColorList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +79,8 @@ public class MainActivity extends Activity implements ResultListener {
         tfModelResultTextView =findViewById(R.id.nmf);
         detectionResultTextView=findViewById(R.id.detectResult);
         profilePhotoImageView=findViewById(R.id.profilephoto);
+        mFaceColorPreview=findViewById(R.id.FaceColortextView);
+
         //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
 
@@ -126,7 +143,8 @@ public class MainActivity extends Activity implements ResultListener {
         Context context = getApplicationContext();
         //set the tfbridge
         tFbridge=new TFbridge(context);
-
+        mFaceColorList=new ArrayList<>();
+        mFaceColorList.add(-1);
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
@@ -138,28 +156,30 @@ public class MainActivity extends Activity implements ResultListener {
         // This is how you merge myFaceDetector and google.vision detector
 
         detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
+                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(this)).setMaxGapFrames(5)
                         .build());
 
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
         myFaceDetector = new MyFaceDetector(detector, context);
-        myFaceDetector.setOnResultListener(this);
         // You can use your own processor
+        myFaceDetector.setProcessor(
+                new MultiProcessor.Builder<>(new GraphicFaceDetector()).setMaxGapFrames(5)
+                        .build());
+
         //myFaceDetector.setContext(context);
         if (!myFaceDetector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
-        myFaceDetector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceDetector())
-                        .build());
+
         MultiDetector multiDetector = new MultiDetector.Builder()
                 .add(detector)
                 .add(myFaceDetector)
                 .build();
+
         // You can use your own settings for CameraSource
-        mCameraSource = new CameraSource.Builder(context, multiDetector)
+        mCameraSource = new CameraSource.Builder(context, detector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setAutoFocusEnabled(false)
                 .setRequestedFps(30.0f)
@@ -277,13 +297,20 @@ public class MainActivity extends Activity implements ResultListener {
     }
 
     @Override
-    public void showResults(String result) {
+    public void showResults(String result, int value) {
+
+            tfModelResultTextView.setTextColor(COLOR_CHOICES[value]);
+
 
         tfModelResultTextView.setText(result);
+
+
     }
 
-
-
+    @Override
+    public void showFaceList(String result) {
+        mFaceColorPreview.setText(result);
+    }
     //==============================================================================================
     // Graphic Face Tracker
     //==============================================================================================
@@ -293,10 +320,14 @@ public class MainActivity extends Activity implements ResultListener {
      * uses this factory to create face trackers as needed -- one for each individual.
      */
     private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face>{
-
+        ResultListener Rlistener;
+        GraphicFaceTrackerFactory(ResultListener listener){
+            super();
+            Rlistener=listener;
+        }
         @Override
         public Tracker<Face> create(Face face) {
-            return new GraphicFaceTracker(mGraphicOverlay);
+            return new GraphicFaceTracker(mGraphicOverlay, Rlistener);
         }
     }
     private class GraphicFaceDetector implements MultiProcessor.Factory<Face> {
@@ -316,7 +347,7 @@ public class MainActivity extends Activity implements ResultListener {
         @Override
         public void onUpdate(Detector.Detections<Face> detections, Face face) {
             super.onUpdate(detections, face);
-            if(mPreviewFace!=null)
+            /*if(mPreviewFace!=null)
             {
                 if(!mPreviewFace.equals(face)){
                     Log.i("face", mPreview.toString());
@@ -359,7 +390,7 @@ public class MainActivity extends Activity implements ResultListener {
                 Log.i("face", face.getId()+"");
             }
 
-            //tfModelResultTextView.setText(result);
+            //tfModelResultTextView.setText(result);*/
 
         }
 
@@ -371,9 +402,13 @@ public class MainActivity extends Activity implements ResultListener {
     private class GraphicFaceTracker extends Tracker<Face> {
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
-        GraphicFaceTracker(GraphicOverlay overlay) {
+        private int mPrevfaceColor =-1;
+        ResultListener mlistenerColor;
+        GraphicFaceTracker(GraphicOverlay overlay, ResultListener listener) {
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
+            mlistenerColor=listener;
+
 
 
         }
@@ -394,8 +429,54 @@ public class MainActivity extends Activity implements ResultListener {
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             //detectionResultTextView.setText(detectionResults.toString());
             mOverlay.add(mFaceGraphic);
+            String strface="face color";
+
+            int faceColorfromClass=mFaceGraphic.getFaceColor();
             mFaceGraphic.updateFace(face);
-            //myFaceDetector.setmFace(face);
+
+            if(faceColorfromClass!= mPrevfaceColor) {
+                mFaceColorList.add(faceColorfromClass);
+                mPrevfaceColor =faceColorfromClass;
+                Log.i("color", "new>>" + mPrevfaceColor);
+
+                mlistenerColor.showResults("result", mPrevfaceColor);
+
+
+
+
+            }
+            else{
+               Log.i("color", "equal>>"+ mPrevfaceColor);
+
+            }
+            String facelistStr="";
+            for (int i = 1; i <mFaceColorList.size() ; i++) {
+                facelistStr+=i+". >>face color is ";
+                switch (mFaceColorList.get(i)){
+                    case 0: facelistStr+="BLUE";
+                        break;
+                    case 1: facelistStr+="CYAN";
+                        break;
+                    case 2: facelistStr+="GREEN";
+                        break;
+                    case 3: facelistStr+="MAGENTA";
+                        break;
+                    case 4: facelistStr+="RED";
+                        break;
+                    case 5: facelistStr+="WHITE";
+                        break;
+                    case 6: facelistStr+="YELLOW";
+                        break;
+                    case 7: facelistStr+="BLACK";
+                        break;
+
+                }
+                facelistStr+="\n";
+            }
+            mlistenerColor.showFaceList(facelistStr);
+
+
+
         }
 
         /**
@@ -406,6 +487,8 @@ public class MainActivity extends Activity implements ResultListener {
         @Override
         public void onMissing(FaceDetector.Detections<Face> detectionResults) {
             mOverlay.remove(mFaceGraphic);
+            Log.i("humf", "onMissing "+mPrevfaceColor);
+
         }
 
         /**
@@ -415,6 +498,48 @@ public class MainActivity extends Activity implements ResultListener {
         @Override
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
+            Log.i("humf", "beforeDone>> "+mFaceColorList);
+            Log.i("humf", "onDone "+mPrevfaceColor);
+
+
+            if(mFaceColorList.size()>2){
+                mFaceColorList.remove(mFaceColorList.size()-1);
+                mPrevfaceColor=mFaceColorList.get(mFaceColorList.size()-1);
+                mlistenerColor.showResults("result", mPrevfaceColor);
+                String facelistStr="";
+                for (int i = 1; i <mFaceColorList.size() ; i++) {
+                    facelistStr+=i+". >>face color is ";
+                    switch (mFaceColorList.get(i)){
+                        case 0: facelistStr+="BLUE";
+                            break;
+                        case 1: facelistStr+="CYAN";
+                            break;
+                        case 2: facelistStr+="GREEN";
+                            break;
+                        case 3: facelistStr+="MAGENTA";
+                            break;
+                        case 4: facelistStr+="RED";
+                            break;
+                        case 5: facelistStr+="WHITE";
+                            break;
+                        case 6: facelistStr+="YELLOW";
+                            break;
+                        case 7: facelistStr+="BLACK";
+                            break;
+
+                    }
+                    facelistStr+="\n";
+                }
+                mlistenerColor.showFaceList(facelistStr);
+            }
+            else if(mFaceColorList.size()==2){
+                mFaceColorList.remove(mFaceColorList.size()-1);
+                mPrevfaceColor=-1;
+            }
+            Log.i("humf", "after>> "+mFaceColorList);
+
+
+
         }
     }
 }
