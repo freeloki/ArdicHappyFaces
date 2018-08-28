@@ -54,6 +54,16 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     private volatile Face mFace;
     private int mFaceId;
     private float mFaceHappiness;
+    private ResultListener mRlistener;
+    public Canvas getAwesomeFace() {
+        return mAwesomeFace;
+    }
+
+    public void setAwesomeFace(Canvas mAwesomeFace) {
+        this.mAwesomeFace = mAwesomeFace;
+    }
+
+    private Canvas mAwesomeFace;
 
 
     public FaceGraphic(GraphicOverlay overlay) {
@@ -76,6 +86,9 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     }
 
 
+    public void setmRlistener(ResultListener mRlistener) {
+        this.mRlistener = mRlistener;
+    }
 
     void setId(int id) {
         mFaceId = id;
@@ -101,6 +114,8 @@ class FaceGraphic extends GraphicOverlay.Graphic {
             return;
         }
 
+        setAwesomeFace(canvas);
+        //mRlistener.previewImage(canvas);
         // Draws a rectangle at the position of the detected face, with the face's track id below.
         float x = translateX(face.getPosition().x + face.getWidth() / 2);
         float y = translateY(face.getPosition().y + face.getHeight() / 2);
@@ -112,6 +127,8 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         float top = y - yOffset+80.0f;
         float right = x + xOffset-40.0f;
         float bottom = y + yOffset-23.0f;
+        canvas.drawText("" + mFaceId, left-3, top-2 , mIdPaint);
+
         canvas.drawRect(left, top, right, bottom, mBoxPaint);
 
 

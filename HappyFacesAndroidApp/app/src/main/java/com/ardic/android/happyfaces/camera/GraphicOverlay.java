@@ -53,6 +53,12 @@ public class GraphicOverlay extends View {
     private int mFacing = CameraSource.CAMERA_FACING_BACK;
     private Set<Graphic> mGraphics = new HashSet<>();
 
+    public Canvas getCanvas() {
+        return mCanvas;
+    }
+
+    private Canvas mCanvas;
+
     /**
      * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
      * this and implement the {@link Graphic#draw(Canvas)} method to define the
@@ -185,6 +191,7 @@ public class GraphicOverlay extends View {
 
                 graphic.draw(canvas);
             }
+            mCanvas = canvas;
         }
     }
 }

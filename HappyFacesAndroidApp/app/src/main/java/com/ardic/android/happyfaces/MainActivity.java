@@ -7,7 +7,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -30,11 +36,12 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class MainActivity extends Activity implements ResultListener {
+public class MainActivity extends Activity implements ResultListener,  AllFacesResultListener {
     private static final String TAG = "MainActivity";
 
     private CameraSource mCameraSource = null;
@@ -52,7 +59,7 @@ public class MainActivity extends Activity implements ResultListener {
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     TFbridge tFbridge;
     Bitmap previewbtmp=null;
-    MyFaceDetector myFaceDetector;
+    private MyFaceDetector myFaceDetector;
     Face mPreviewFace=null;
     private static final int COLOR_CHOICES[] = {
             Color.BLUE,
@@ -64,7 +71,8 @@ public class MainActivity extends Activity implements ResultListener {
             Color.YELLOW,
             Color.BLACK
     };
-    ArrayList<Integer> mFaceColorList;
+    ArrayList<Integer> mFaceColorList, mFaceColorList2;
+    ResultListener listRes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +108,7 @@ public class MainActivity extends Activity implements ResultListener {
         }
         else{
             createCameraSource();
+
         }
 
     }
@@ -145,6 +154,8 @@ public class MainActivity extends Activity implements ResultListener {
         tFbridge=new TFbridge(context);
         mFaceColorList=new ArrayList<>();
         mFaceColorList.add(-1);
+        mFaceColorList2=new ArrayList<>();
+
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
@@ -155,35 +166,36 @@ public class MainActivity extends Activity implements ResultListener {
 
         // This is how you merge myFaceDetector and google.vision detector
 
-        detector.setProcessor(
+       /* detector.setProcessor(
                 new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(this)).setMaxGapFrames(5)
-                        .build());
+                        .build());*/
 
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
-        myFaceDetector = new MyFaceDetector(detector, context);
+      myFaceDetector = new MyFaceDetector(detector, context);
         // You can use your own processor
-        myFaceDetector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceDetector()).setMaxGapFrames(5)
-                        .build());
-
+       myFaceDetector.setProcessor(
+              new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(this))
+                       .build());
+        listRes=this;
         //myFaceDetector.setContext(context);
-        if (!myFaceDetector.isOperational()) {
-            Log.w(TAG, "Face detector dependencies are not yet available.");
-        }
+     if (!myFaceDetector.isOperational()) {
+           Log.w(TAG, "Face detector dependencies are not yet available.");
+       }
 
-        MultiDetector multiDetector = new MultiDetector.Builder()
+     /*   MultiDetector multiDetector = new MultiDetector.Builder()
                 .add(detector)
                 .add(myFaceDetector)
-                .build();
+                .build();*/
 
         // You can use your own settings for CameraSource
-        mCameraSource = new CameraSource.Builder(context, detector)
+        mCameraSource = new CameraSource.Builder(context, myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setAutoFocusEnabled(false)
                 .setRequestedFps(30.0f)
                 .build();
+
 
     }
 
@@ -276,6 +288,7 @@ public class MainActivity extends Activity implements ResultListener {
      */
     private void startCameraSource() {
 
+
         // check that the device has play services available.
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
                 getApplicationContext());
@@ -297,20 +310,56 @@ public class MainActivity extends Activity implements ResultListener {
     }
 
     @Override
-    public void showResults(String result, int value) {
+    public void showResults(final String result,final int value,final boolean addORremove) {
 
-            tfModelResultTextView.setTextColor(COLOR_CHOICES[value]);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                /*f(addORremove==true){
+                    mFaceColorList2.add(value);
+                }
+                else{
+                    mFaceColorList2.remove(mFaceColorList.size()-1);
+
+                }*/
+                if(value==-1){
+                   tfModelResultTextView.setTextColor(COLOR_CHOICES[7]);
+                }
+                tfModelResultTextView.setTextColor(COLOR_CHOICES[value]);
 
 
-        tfModelResultTextView.setText(result);
+                tfModelResultTextView.setText(result);
+            }
+        });
+
+
 
 
     }
 
     @Override
-    public void showFaceList(String result) {
-        mFaceColorPreview.setText(result);
+    public void previewImage(final Bitmap bmp) {
+
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.i(TAG, "canvas:>>  "+bmp);
+
+                Log.i(TAG,"" + bmp.getWidth() + " x " +  bmp.getHeight());
+              //  Drawable d = new BitmapDrawable(getResources(), bmp);
+                profilePhotoImageView.setImageBitmap(bmp);
+
+
+            }
+        });
     }
+
+    @Override
+    public void showAllFaces(String result, int value) {
+
+    }
+
     //==============================================================================================
     // Graphic Face Tracker
     //==============================================================================================
@@ -323,136 +372,10 @@ public class MainActivity extends Activity implements ResultListener {
         ResultListener Rlistener;
         GraphicFaceTrackerFactory(ResultListener listener){
             super();
-            Rlistener=listener;
-        }
-        @Override
-        public Tracker<Face> create(Face face) {
-            return new GraphicFaceTracker(mGraphicOverlay, Rlistener);
-        }
-    }
-    private class GraphicFaceDetector implements MultiProcessor.Factory<Face> {
-
-        @Override
-        public Tracker<Face> create(Face face) {
-            return new DetectFaces();
-        }
-    }
-    private class DetectFaces extends Tracker<Face>{
-        public DetectFaces() {
-            super();
-
-        }
-
-
-        @Override
-        public void onUpdate(Detector.Detections<Face> detections, Face face) {
-            super.onUpdate(detections, face);
-            /*if(mPreviewFace!=null)
-            {
-                if(!mPreviewFace.equals(face)){
-                    Log.i("face", mPreview.toString());
-                    Log.i("face", face.getId()+"");
-                    Log.i("1-face:", "not null and initialize");
-                    myFaceDetector.setmFace(face);
-                    Bitmap bmpFace=myFaceDetector.getProfilphoto();
-                    if(previewbtmp!=null){
-                        System.out.println("prev btmp:>> "+previewbtmp.getConfig());
-                        System.out.println("current bmp:>> "+bmpFace.sameAs(previewbtmp));
-                    }
-                    if(previewbtmp==null){
-                        previewbtmp=bmpFace;
-                    }
-                    String result=tFbridge.recognizeImagewithTf(bmpFace);
-                    Log.i("tfresult:", result);
-                    System.out.println("not faceid >> "+mPreviewFace.getId());
-                    System.out.println("land faceid >> "+mPreviewFace.getLandmarks().toString());
-                   // profilePhotoImageView.setImageDrawable(Drawable.createFromPath("/drawable/"+result+".jpg"));
-                    mPreviewFace=face;
-                    previewbtmp=bmpFace;
-                }
-                else{
-                    mPreviewFace=face;
-                    System.out.println("faceid >> "+mPreviewFace.getId());
-                    Log.i("face", mPreview.toString());
-                    Log.i("face", face.getId()+"");
-                    Log.i("1-face:", "equal");
-                }
-            }
-            else{
-                Log.i("1-face:", "null and initialize");
-
-                myFaceDetector.setmFace(face);
-                Bitmap bmpFace=myFaceDetector.getProfilphoto();
-                String result=tFbridge.recognizeImagewithTf(bmpFace);
-                Log.i("tfresult", result);
-                mPreviewFace=face;
-                Log.i("face", mPreview.toString());
-                Log.i("face", face.getId()+"");
-            }
-
-            //tfModelResultTextView.setText(result);*/
-
-        }
-
-    }
-    /**
-     * Face tracker for each detected individual. This maintains a face graphic within the app's
-     * associated face overlay.
-     */
-    private class GraphicFaceTracker extends Tracker<Face> {
-        private GraphicOverlay mOverlay;
-        private FaceGraphic mFaceGraphic;
-        private int mPrevfaceColor =-1;
-        ResultListener mlistenerColor;
-        GraphicFaceTracker(GraphicOverlay overlay, ResultListener listener) {
-            mOverlay = overlay;
-            mFaceGraphic = new FaceGraphic(overlay);
-            mlistenerColor=listener;
-
-
-
-        }
-
-        /**
-         * Start tracking the detected face instance within the face overlay.
-         */
-        @Override
-        public void onNewItem(int faceId, Face item) {
-            mFaceGraphic.setId(faceId);
-
-        }
-
-        /**
-         * Update the position/characteristics of the face within the overlay.
-         */
-        @Override
-        public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
-            //detectionResultTextView.setText(detectionResults.toString());
-            mOverlay.add(mFaceGraphic);
-            String strface="face color";
-
-            int faceColorfromClass=mFaceGraphic.getFaceColor();
-            mFaceGraphic.updateFace(face);
-
-            if(faceColorfromClass!= mPrevfaceColor) {
-                mFaceColorList.add(faceColorfromClass);
-                mPrevfaceColor =faceColorfromClass;
-                Log.i("color", "new>>" + mPrevfaceColor);
-
-                mlistenerColor.showResults("result", mPrevfaceColor);
-
-
-
-
-            }
-            else{
-               Log.i("color", "equal>>"+ mPrevfaceColor);
-
-            }
             String facelistStr="";
-            for (int i = 1; i <mFaceColorList.size() ; i++) {
+            for (int i = 1; i <mFaceColorList2.size() ; i++) {
                 facelistStr+=i+". >>face color is ";
-                switch (mFaceColorList.get(i)){
+                switch (mFaceColorList2.get(i)){
                     case 0: facelistStr+="BLUE";
                         break;
                     case 1: facelistStr+="CYAN";
@@ -473,7 +396,99 @@ public class MainActivity extends Activity implements ResultListener {
                 }
                 facelistStr+="\n";
             }
-            mlistenerColor.showFaceList(facelistStr);
+
+            Log.i("humf", "list2"+ mFaceColorList2);
+            mFaceColorPreview.setText(facelistStr);
+            Rlistener=listener;
+        }
+        @Override
+        public Tracker<Face> create(Face face) {
+            return new GraphicFaceTracker(mGraphicOverlay, Rlistener);
+        }
+    }
+
+    /**
+     * Face tracker for each detected individual. This maintains a face graphic within the app's
+     * associated face overlay.
+     */
+    private class GraphicFaceTracker extends Tracker<Face> {
+        private GraphicOverlay mOverlay;
+        private FaceGraphic mFaceGraphic;
+        private int mPrevfaceColor =-1;
+        ResultListener mlistenerColor;
+        GraphicFaceTracker(GraphicOverlay overlay, ResultListener listener) {
+            mOverlay = overlay;
+            mFaceGraphic = new FaceGraphic(overlay);
+            mlistenerColor=listener;
+           // mFaceGraphic.setmRlistener(mlistenerColor);
+        }
+
+        /**
+         * Start tracking the detected face instance within the face overlay.
+         */
+        @Override
+        public void onNewItem(int faceId, Face item) {
+            mFaceGraphic.setId(faceId);
+
+            Log.i(TAG,"!!!!         " +  mOverlay.getCanvas());
+
+
+
+
+
+            //.
+
+
+        }
+
+        /**
+         * Update the position/characteristics of the face within the overlay.
+         */
+        @Override
+        public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
+            ;
+            //detectionResultTextView.setText(detectionResults.toString());
+            mOverlay.add(mFaceGraphic);
+            String strface="face color";
+            int faceColorfromClass=mFaceGraphic.getFaceColor();
+            mFaceGraphic.updateFace(face);
+
+            if(faceColorfromClass!= mPrevfaceColor) {
+                mFaceColorList.add(faceColorfromClass);
+                mPrevfaceColor =faceColorfromClass;
+                Log.i("color", "new>>" + mPrevfaceColor);
+                Log.i("humf", "list"+ mFaceColorList);
+                mlistenerColor.showResults("result", mPrevfaceColor, true);
+                int x1 = (int) face.getPosition().x;
+                int y1 = (int) face.getPosition().y;
+                int width = (int) face.getWidth();
+                int height = (int) face.getHeight();
+
+                if (y1 < 0) {
+                    y1 = Math.abs((int) face.getPosition().y);
+                } else if (y1 > height) {
+                    y1 = height - 1;
+                }
+                if (x1 < 0) {
+                    x1 = Math.abs((int) face.getPosition().x);
+                } else if (x1 + width > width) {
+                    x1 = width - 1;
+                }
+                //boyle olmasi lazim  bir de yatay!!!!!!
+                Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
+                mlistenerColor.previewImage(resizedbitmap1);
+
+
+
+
+            }
+            else{
+               Log.i("color", "equal>>"+ mPrevfaceColor);
+                Log.i("humf", "list"+ mFaceColorList);
+
+            }
+
+
 
 
 
@@ -489,6 +504,9 @@ public class MainActivity extends Activity implements ResultListener {
             mOverlay.remove(mFaceGraphic);
             Log.i("humf", "onMissing "+mPrevfaceColor);
 
+
+
+
         }
 
         /**
@@ -498,45 +516,6 @@ public class MainActivity extends Activity implements ResultListener {
         @Override
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
-            Log.i("humf", "beforeDone>> "+mFaceColorList);
-            Log.i("humf", "onDone "+mPrevfaceColor);
-
-
-            if(mFaceColorList.size()>2){
-                mFaceColorList.remove(mFaceColorList.size()-1);
-                mPrevfaceColor=mFaceColorList.get(mFaceColorList.size()-1);
-                mlistenerColor.showResults("result", mPrevfaceColor);
-                String facelistStr="";
-                for (int i = 1; i <mFaceColorList.size() ; i++) {
-                    facelistStr+=i+". >>face color is ";
-                    switch (mFaceColorList.get(i)){
-                        case 0: facelistStr+="BLUE";
-                            break;
-                        case 1: facelistStr+="CYAN";
-                            break;
-                        case 2: facelistStr+="GREEN";
-                            break;
-                        case 3: facelistStr+="MAGENTA";
-                            break;
-                        case 4: facelistStr+="RED";
-                            break;
-                        case 5: facelistStr+="WHITE";
-                            break;
-                        case 6: facelistStr+="YELLOW";
-                            break;
-                        case 7: facelistStr+="BLACK";
-                            break;
-
-                    }
-                    facelistStr+="\n";
-                }
-                mlistenerColor.showFaceList(facelistStr);
-            }
-            else if(mFaceColorList.size()==2){
-                mFaceColorList.remove(mFaceColorList.size()-1);
-                mPrevfaceColor=-1;
-            }
-            Log.i("humf", "after>> "+mFaceColorList);
 
 
 

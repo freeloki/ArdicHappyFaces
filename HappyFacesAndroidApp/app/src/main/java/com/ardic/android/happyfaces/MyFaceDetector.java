@@ -27,7 +27,7 @@ public class MyFaceDetector extends Detector<Face> {
     private static final int INPUT_SIZE = 299;
     private boolean FaceStatus=false;
     private ResultListener resultListener;
-
+    private Bitmap mBitmap;
     Bitmap profilphoto;
     MyFaceDetector(Detector<Face> delegate, Context con) {
 
@@ -51,20 +51,17 @@ public class MyFaceDetector extends Detector<Face> {
         Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
 
 
-        /*FaceDetector faceDetector = new FaceDetector.Builder(context).setTrackingEnabled(false).build();
-        if (!faceDetector.isOperational()) {
+        mBitmap=TempBitmap;
 
-
-        }*/
-        Frame frameface = new Frame.Builder().setBitmap(TempBitmap).build();
         //get faceee
         if(mFace!=null){
             Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
+
         }
         Log.i("assets: ", context.getAssets()+"  *");
        //SparseArray<Face> faces = mDelegate.detect(frameface);
         //for (int i = 0; i < faces.size(); i++) {
-        if(FaceStatus==true) {
+        /*if(FaceStatus==true) {
             Face thisFace = mFace;
             float x = (thisFace.getPosition().x + thisFace.getWidth() / 2);
             float y = (thisFace.getPosition().y + thisFace.getHeight() / 2);
@@ -94,32 +91,32 @@ public class MyFaceDetector extends Detector<Face> {
 
             System.out.println("fuile>22>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
             //boyle olmasi lazim  bir de yatay!!!!!!
-            Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, x1, y1, 299, 299, null, false);
+            //Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, x1, y1, 299, 299, null, false);
             // Bitmap ne=Bitmap.createBitmap()
 
             /**#***********************************************************************/
 
 
 
-            Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
+            //Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
 
 
 
 
-            profilphoto=resizedbitmap1;
+            //profilphoto=resizedbitmap1;
 
-            if (resultListener != null) {
+            //if (resultListener != null) {
                 //resultListener.showResults(tfmodel.get(0).getTitle().toString());
                 //resultListener.showProfilePhoto(resizedbitmap1);
-            }
+           // }
 
 
-            FaceStatus=false;
-        }
+            //FaceStatus=false;
+       // }
 
 
 
-        //faceDetector.release();
+        //faceDetector.release();*/
 
         return mDelegate.detect(frame);
     }
@@ -129,9 +126,13 @@ public class MyFaceDetector extends Detector<Face> {
     }
 
     public boolean setFocus(int id) {
+
         return mDelegate.setFocus(id);
     }
 
+    public Bitmap getmBitmap() {
+        return mBitmap;
+    }
 
     public void setOnResultListener(ResultListener listener) {
         resultListener = listener;

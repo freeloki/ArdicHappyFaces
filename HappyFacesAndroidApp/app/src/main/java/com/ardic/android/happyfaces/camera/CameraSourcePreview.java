@@ -31,6 +31,7 @@ public class CameraSourcePreview extends ViewGroup {
     private TFbridge toDetectImageTF;
     private GraphicOverlay mOverlay;
 
+
     public CameraSourcePreview(Context context, AttributeSet attrs) {
         super(context, attrs);
 
