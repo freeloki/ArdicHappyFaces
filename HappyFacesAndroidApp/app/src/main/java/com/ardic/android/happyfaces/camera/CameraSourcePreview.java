@@ -28,7 +28,7 @@ public class CameraSourcePreview extends ViewGroup {
     private boolean mStartRequested;
     private boolean mSurfaceAvailable;
     private CameraSource mCameraSource;
-    private TFbridge toDetectImageTF;
+
     private GraphicOverlay mOverlay;
 
 
@@ -43,18 +43,6 @@ public class CameraSourcePreview extends ViewGroup {
 
         mSurfaceView.getHolder().addCallback(new SurfaceCallback());
         addView(mSurfaceView);
-
-
-        /*Bitmap bitmap= viewToBitmap(mSurfaceView);
-        try {
-            FileOutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/home/ardic/Downloads/android-vision-master/visionSamples/FaceTracker/app/src/main/res/drawable-xhdpi/fe.png");
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, output);
-            output.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
 
@@ -105,7 +93,7 @@ public class CameraSourcePreview extends ViewGroup {
                 if (isPortraitMode()) {
                     // Swap width and height sizes when in portrait, since it will be rotated by
                     // 90 degrees
-                    mOverlay.setCameraInfo(min, max, mCameraSource.getCameraFacing());
+                    mOverlay.setCameraInfo(max, min, mCameraSource.getCameraFacing());
                 } else {
                     mOverlay.setCameraInfo(max, min, mCameraSource.getCameraFacing());
                 }

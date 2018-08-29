@@ -50,7 +50,7 @@ public class GraphicOverlay extends View {
     private float mWidthScaleFactor = 1.0f;
     private int mPreviewHeight;
     private float mHeightScaleFactor = 1.0f;
-    private int mFacing = CameraSource.CAMERA_FACING_BACK;
+    private int mFacing = CameraSource.CAMERA_FACING_FRONT ;
     private Set<Graphic> mGraphics = new HashSet<>();
 
     public Canvas getCanvas() {

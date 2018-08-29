@@ -7,15 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ImageFormat;
-import android.graphics.Rect;
-import android.graphics.YuvImage;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -30,17 +23,13 @@ import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.MultiDetector;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class MainActivity extends Activity implements ResultListener,  AllFacesResultListener {
     private static final String TAG = "MainActivity";
@@ -55,13 +44,10 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     private ImageView profilePhotoImageView;
     String PROFILEresult;
     private TextView detectionResultTextView;
-    private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     private TFbridge tFbridge;
-    Bitmap previewbtmp=null;
     private MyFaceDetector myFaceDetector;
-    Face mPreviewFace=null;
     private static final int COLOR_CHOICES[] = {
             Color.BLUE,
             Color.CYAN,
@@ -74,6 +60,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     };
     ArrayList<Integer> mFaceColorList, mFaceColorList2;
     ResultListener listRes;
+    int threadCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,16 +77,6 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         profilePhotoImageView=findViewById(R.id.profilephoto);
         mFaceColorPreview=findViewById(R.id.FaceColortextView);
 
-        //LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-
-        /*Log.i("humf", "cameralinearLayot: "+mAwesomeLayout.getWidth()+" - "+mAwesomeLayout.getHeight());
-        mPreview = new CameraSourcePreview(this,null);
-        mGraphicOverlay = new GraphicOverlay(this,null);
-        mPreview.addView(mGraphicOverlay);
-        mAwesomeLayout.addView(mPreview);*/
-
-
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -109,7 +86,6 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         }
         else{
             createCameraSource();
-
         }
 
     }
@@ -162,7 +138,6 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
                 .setProminentFaceOnly(false)
                 .setTrackingEnabled(true)
-                .setMode(FaceDetector.FAST_MODE)
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector
@@ -174,8 +149,9 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
-      myFaceDetector = new MyFaceDetector(detector, context);
+       myFaceDetector = new MyFaceDetector(detector, context);
         // You can use your own processor
+      //  myFaceDetector.
        myFaceDetector.setProcessor(
               new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(this))
                        .build());
@@ -193,8 +169,9 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(context, myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setAutoFocusEnabled(false)
-                .setRequestedFps(30.0f)
+                .setRequestedPreviewSize(320, 240)
+                .setAutoFocusEnabled(true)
+                .setRequestedFps(5.0f)
                 .build();
 
 
@@ -342,6 +319,9 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     public void previewImage(final Bitmap bmp) {
 
 
+
+        Log.i("Humfy", " threadzzzzzzz :" + threadCount);
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -350,6 +330,18 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                 Log.i(TAG,"" + bmp.getWidth() + " x " +  bmp.getHeight());
               //  Drawable d = new BitmapDrawable(getResources(), bmp);
                 profilePhotoImageView.setImageBitmap(bmp);
+
+
+
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                      Log.i("Humfy", tFbridge.recognizeImagewithTf(bmp) + " threadId :" + threadCount);
+                      threadCount++;
+                    }
+                }).start();
 
 
             }
@@ -431,7 +423,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         private int mPrevfaceColor =-1;
         ResultListener mlistenerColor;
         private String TFresultStr;
-        private final int FrameStatus=5;
+        private final int FrameStatus=10;
         private  int frameCount=0;
         GraphicFaceTracker(GraphicOverlay overlay, ResultListener listener) {
             mOverlay = overlay;
@@ -447,36 +439,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         public void onNewItem(int faceId, Face item) {
             mFaceGraphic.setId(faceId);
 
-
-            int x1 = (int) item.getPosition().x;
-            int y1 = (int) item.getPosition().y;
-            int width = (int) item.getWidth();
-            int height = (int) item.getHeight();
-
-            if (y1 < 0) {
-                y1 = Math.abs((int) item.getPosition().y);
-            } else if (y1 > height) {
-                y1 = height - 1;
-            }
-            if (x1 < 0) {
-                x1 = Math.abs((int) item.getPosition().x);
-            } else if (x1 + width > width) {
-                x1 = width - 1;
-            }
-            //boyle olmasi lazim  bir de yatay!!!!!!
-            final Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
-            mlistenerColor.previewImage(resizedbitmap1);
-            final Runnable r = new Runnable() {
-                public void run() {
-                    TFresultStr=tFbridge.recognizeImagewithTf(resizedbitmap1);
-                    Log.i(TAG, "RESULT>> "+TFresultStr);
-                }
-            };
-
-
-
-
-            //.
+          Log.i("Face", "face:" + faceId + "Obj? "+ item.getPosition() + "  " + item.getLandmarks() );
 
 
         }
@@ -488,20 +451,45 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             ;
 
+
+          //  detectionResults.getFrameMetadata().
+
             mOverlay.add(mFaceGraphic);
             String strface="face color";
             int faceColorfromClass=mFaceGraphic.getFaceColor();
             mFaceGraphic.updateFace(face);
-           
+
             if(faceColorfromClass!= mPrevfaceColor) {
                 mFaceColorList.add(faceColorfromClass);
                 mPrevfaceColor =faceColorfromClass;
                 Log.i("color", "new>>" + mPrevfaceColor);
                 Log.i("humf", "list"+ mFaceColorList);
                 mlistenerColor.showResults("result", mPrevfaceColor, true);
-                myFaceDetector.setmFace(face);
+                myFaceDetector.setFace(face);
+                int x1 = (int) face.getPosition().x;
+                int y1 = (int) face.getPosition().y;
+                int width = (int) face.getWidth();
+                int height = (int) face.getHeight();
 
-
+                if (y1 < 0) {
+                    y1 = Math.abs((int) face.getPosition().y);
+                } else if (y1 > height) {
+                    y1 = height - 1;
+                }
+                if (x1 < 0) {
+                    x1 = Math.abs((int) face.getPosition().x);
+                } else if (x1 + width > width) {
+                    x1 = width - 1;
+                }
+                //boyle olmasi lazim  bir de yatay!!!!!!
+                final Bitmap resizedbitmap1 = Bitmap.createBitmap((myFaceDetector.getmBitmap()), x1, y1, width, height);
+                mlistenerColor.previewImage(resizedbitmap1);
+                final Runnable r = new Runnable() {
+                    public void run() {
+                        TFresultStr=tFbridge.recognizeImagewithTf(resizedbitmap1);
+                        Log.i(TAG, "RESULT>> "+TFresultStr);
+                    }
+                };
 
 
 
@@ -509,7 +497,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
             else{
                Log.i("color", "equal>>"+ mPrevfaceColor);
                 Log.i("humf", "list"+ mFaceColorList);
-                if(FrameStatus==frameCount){
+/*                if(FrameStatus==frameCount){
                     int x1 = (int) face.getPosition().x;
                     int y1 = (int) face.getPosition().y;
                     int width = (int) face.getWidth();
@@ -526,9 +514,12 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                         x1 = width - 1;
                     }
                     //boyle olmasi lazim  bir de yatay!!!!!!
+                    Log.i(TAG, "FACE: "+face.getWidth()+" X "+face.getHeight()+"  "+face.getPosition().x+" X "+face.getPosition().y+"   "+face.getEulerY()+" X "+face.getEulerZ());
                     final Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
                     mlistenerColor.previewImage(resizedbitmap1);
-                }
+
+                    frameCount=0;
+                }*/
                 frameCount++;
 
             }

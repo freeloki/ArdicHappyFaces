@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.util.Log;
@@ -29,7 +30,7 @@ public class MyFaceDetector extends Detector<Face> {
     private ResultListener resultListener;
     private Bitmap mBitmap;
     Bitmap profilphoto;
-    MyFaceDetector(Detector<Face> delegate, Context con) {
+    public MyFaceDetector(Detector<Face> delegate, Context con) {
 
 
         mDelegate = delegate;
@@ -37,91 +38,21 @@ public class MyFaceDetector extends Detector<Face> {
         mFace=null;
 
     }
-    MyFaceDetector(Context cont){
-        context = cont;
-        mDelegate=this;
-        mFace=null;
-    }
 
     public SparseArray<Face> detect(Frame frame) {
 
 
 
 
-
-        //get faceee
-        if(mFace!=null){
-
-
-        }
-        Log.i("assets: ", context.getAssets()+"  *");
-       SparseArray<Face> faces = mDelegate.detect(frame);
-       if(faces!=null){
            YuvImage yuvImage = new YuvImage(frame.getGrayscaleImageData().array(), ImageFormat.NV21, frame.getMetadata().getWidth(), frame.getMetadata().getHeight(), null);
            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
            yuvImage.compressToJpeg(new Rect(0, 0, frame.getMetadata().getWidth(), frame.getMetadata().getHeight()), 100, byteArrayOutputStream);
            byte[] jpegArray = byteArrayOutputStream.toByteArray();
            Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
            Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
-           mBitmap=TempBitmap;
-       }
-        //for (int i = 0; i < faces.size(); i++) {
-        /*if(FaceStatus==true) {
-            Face thisFace = mFace;
-            float x = (thisFace.getPosition().x + thisFace.getWidth() / 2);
-            float y = (thisFace.getPosition().y + thisFace.getHeight() / 2);
-            float xOffset = (int) (thisFace.getWidth() / 2.0f);
-            float yOffset = (int) (thisFace.getHeight() / 2.0f);
-            int x1 = (int) thisFace.getPosition().x;
-            int y1 = (int) thisFace.getPosition().y;
-            int width = (int) thisFace.getWidth();
-            int height = (int) thisFace.getHeight();
-            int left = (int) (x - xOffset + 85.0f);
-            int top = (int) (y - yOffset + 115.0f);
-            int right = (int) (x + xOffset - 70.0f);
-            int bottom = (int) (y + yOffset - 13.0f);
-            System.out.println("fuile>>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
-            //boyle olmasi lazim  bir de yatay!!!!!!
-
-            if (y1 < 0) {
-                y1 = Math.abs((int) thisFace.getPosition().y);
-            } else if (y1 > height) {
-                y1 = height - 2;
-            }
-            if (x1 < 0) {
-                x1 = Math.abs((int) thisFace.getPosition().x);
-            } else if (x1 + width > width) {
-                x1 = width - 2;
-            }
-
-            System.out.println("fuile>22>>>>>x=" + x1 + "   y=" + y1 + "     " + width + "      " + height);
-            //boyle olmasi lazim  bir de yatay!!!!!!
-            //Bitmap resizedbitmap1 = Bitmap.createBitmap(TempBitmap, x1, y1, 299, 299, null, false);
-            // Bitmap ne=Bitmap.createBitmap()
-
-            /**#***********************************************************************/
+           mBitmap=flipBitmap(TempBitmap);
 
 
-
-            //Bitmap bitmaptf = Bitmap.createScaledBitmap(resizedbitmap1, INPUT_SIZE, INPUT_SIZE, false);
-
-
-
-
-            //profilphoto=resizedbitmap1;
-
-            //if (resultListener != null) {
-                //resultListener.showResults(tfmodel.get(0).getTitle().toString());
-                //resultListener.showProfilePhoto(resizedbitmap1);
-           // }
-
-
-            //FaceStatus=false;
-       // }
-
-
-
-        //faceDetector.release();*/
 
         return mDelegate.detect(frame);
     }
@@ -146,10 +77,16 @@ public class MyFaceDetector extends Detector<Face> {
         return  profilphoto;
     }
 
-    public void setmFace(Face face){
+    public void setFace(Face face){
         mFace=face;
         FaceStatus=true;
     }
-
+    private Bitmap flipBitmap(Bitmap btmp){
+        Matrix matrix = new Matrix();
+        float cx=btmp.getWidth()/2.0f;
+        float cy=btmp.getHeight()/2.0f;
+        matrix.postScale(-1, 1, cx, cy);
+        return  Bitmap.createBitmap(btmp, 0, 0, btmp.getWidth(), btmp.getHeight(), matrix, true);
+    }
 
 }
