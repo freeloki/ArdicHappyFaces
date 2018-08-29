@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -57,7 +58,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
-    TFbridge tFbridge;
+    private TFbridge tFbridge;
     Bitmap previewbtmp=null;
     private MyFaceDetector myFaceDetector;
     Face mPreviewFace=null;
@@ -360,7 +361,20 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
     }
 
-    //==============================================================================================
+    @Override
+    public void tfResult(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                tfModelResultTextView.setText(str);
+
+
+            }
+        });
+    }
+
+//==============================================================================================
     // Graphic Face Tracker
     //==============================================================================================
 
@@ -411,11 +425,14 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
      * Face tracker for each detected individual. This maintains a face graphic within the app's
      * associated face overlay.
      */
-    private class GraphicFaceTracker extends Tracker<Face> {
+    private class GraphicFaceTracker extends Tracker<Face>{
         private GraphicOverlay mOverlay;
         private FaceGraphic mFaceGraphic;
         private int mPrevfaceColor =-1;
         ResultListener mlistenerColor;
+        private String TFresultStr;
+        private final int FrameStatus=5;
+        private  int frameCount=0;
         GraphicFaceTracker(GraphicOverlay overlay, ResultListener listener) {
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
@@ -430,8 +447,31 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         public void onNewItem(int faceId, Face item) {
             mFaceGraphic.setId(faceId);
 
-            Log.i(TAG,"!!!!         " +  mOverlay.getCanvas());
 
+            int x1 = (int) item.getPosition().x;
+            int y1 = (int) item.getPosition().y;
+            int width = (int) item.getWidth();
+            int height = (int) item.getHeight();
+
+            if (y1 < 0) {
+                y1 = Math.abs((int) item.getPosition().y);
+            } else if (y1 > height) {
+                y1 = height - 1;
+            }
+            if (x1 < 0) {
+                x1 = Math.abs((int) item.getPosition().x);
+            } else if (x1 + width > width) {
+                x1 = width - 1;
+            }
+            //boyle olmasi lazim  bir de yatay!!!!!!
+            final Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
+            mlistenerColor.previewImage(resizedbitmap1);
+            final Runnable r = new Runnable() {
+                public void run() {
+                    TFresultStr=tFbridge.recognizeImagewithTf(resizedbitmap1);
+                    Log.i(TAG, "RESULT>> "+TFresultStr);
+                }
+            };
 
 
 
@@ -447,36 +487,20 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         @Override
         public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
             ;
-            //detectionResultTextView.setText(detectionResults.toString());
+
             mOverlay.add(mFaceGraphic);
             String strface="face color";
             int faceColorfromClass=mFaceGraphic.getFaceColor();
             mFaceGraphic.updateFace(face);
-
+           
             if(faceColorfromClass!= mPrevfaceColor) {
                 mFaceColorList.add(faceColorfromClass);
                 mPrevfaceColor =faceColorfromClass;
                 Log.i("color", "new>>" + mPrevfaceColor);
                 Log.i("humf", "list"+ mFaceColorList);
                 mlistenerColor.showResults("result", mPrevfaceColor, true);
-                int x1 = (int) face.getPosition().x;
-                int y1 = (int) face.getPosition().y;
-                int width = (int) face.getWidth();
-                int height = (int) face.getHeight();
+                myFaceDetector.setmFace(face);
 
-                if (y1 < 0) {
-                    y1 = Math.abs((int) face.getPosition().y);
-                } else if (y1 > height) {
-                    y1 = height - 1;
-                }
-                if (x1 < 0) {
-                    x1 = Math.abs((int) face.getPosition().x);
-                } else if (x1 + width > width) {
-                    x1 = width - 1;
-                }
-                //boyle olmasi lazim  bir de yatay!!!!!!
-                Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
-                mlistenerColor.previewImage(resizedbitmap1);
 
 
 
@@ -485,8 +509,30 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
             else{
                Log.i("color", "equal>>"+ mPrevfaceColor);
                 Log.i("humf", "list"+ mFaceColorList);
+                if(FrameStatus==frameCount){
+                    int x1 = (int) face.getPosition().x;
+                    int y1 = (int) face.getPosition().y;
+                    int width = (int) face.getWidth();
+                    int height = (int) face.getHeight();
+
+                    if (y1 < 0) {
+                        y1 = Math.abs((int) face.getPosition().y);
+                    } else if (y1 > height) {
+                        y1 = height - 1;
+                    }
+                    if (x1 < 0) {
+                        x1 = Math.abs((int) face.getPosition().x);
+                    } else if (x1 + width > width) {
+                        x1 = width - 1;
+                    }
+                    //boyle olmasi lazim  bir de yatay!!!!!!
+                    final Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
+                    mlistenerColor.previewImage(resizedbitmap1);
+                }
+                frameCount++;
 
             }
+            Log.i(TAG,"!!!!         " +  mOverlay.getCanvas());
 
 
 

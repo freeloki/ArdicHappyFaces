@@ -44,22 +44,27 @@ public class MyFaceDetector extends Detector<Face> {
     }
 
     public SparseArray<Face> detect(Frame frame) {
-        YuvImage yuvImage = new YuvImage(frame.getGrayscaleImageData().array(), ImageFormat.NV21, frame.getMetadata().getWidth(), frame.getMetadata().getHeight(), null);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        yuvImage.compressToJpeg(new Rect(0, 0, frame.getMetadata().getWidth(), frame.getMetadata().getHeight()), 100, byteArrayOutputStream);
-        byte[] jpegArray = byteArrayOutputStream.toByteArray();
-        Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
 
 
-        mBitmap=TempBitmap;
+
+
 
         //get faceee
         if(mFace!=null){
-            Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
+
 
         }
         Log.i("assets: ", context.getAssets()+"  *");
-       //SparseArray<Face> faces = mDelegate.detect(frameface);
+       SparseArray<Face> faces = mDelegate.detect(frame);
+       if(faces!=null){
+           YuvImage yuvImage = new YuvImage(frame.getGrayscaleImageData().array(), ImageFormat.NV21, frame.getMetadata().getWidth(), frame.getMetadata().getHeight(), null);
+           ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+           yuvImage.compressToJpeg(new Rect(0, 0, frame.getMetadata().getWidth(), frame.getMetadata().getHeight()), 100, byteArrayOutputStream);
+           byte[] jpegArray = byteArrayOutputStream.toByteArray();
+           Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
+           Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
+           mBitmap=TempBitmap;
+       }
         //for (int i = 0; i < faces.size(); i++) {
         /*if(FaceStatus==true) {
             Face thisFace = mFace;

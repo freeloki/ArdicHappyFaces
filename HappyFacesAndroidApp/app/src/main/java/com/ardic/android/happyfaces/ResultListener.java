@@ -7,4 +7,5 @@ import android.graphics.drawable.BitmapDrawable;
 public interface ResultListener {
     void showResults(String result, int value, boolean addORremove);
     void previewImage(Bitmap btp);
+    void tfResult(String str);
 }
