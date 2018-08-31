@@ -10,7 +10,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ImageFormat;
 import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -33,7 +36,9 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity implements ResultListener,  AllFacesResultListener {
@@ -382,12 +387,12 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
             @Override
             public void run() {
 
-                if(!str.equals("NONE")){
+
                     Resources res = getResources();
 
 
                     mProfilePhotopreview.setImageDrawable(getPhotoFromDrawable(str));
-                }
+
 
 
             }
@@ -457,7 +462,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
           Log.i("Face", "face:" + faceId + "Obj? "+ item.getPosition() + "  " + item.getLandmarks() );
 
-
+          mlistenerColor.previewProfilePhoto("NONE");
 
         }
 
@@ -482,6 +487,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                 Log.i("color", "new>>" + mPrevfaceColor);
                 Log.i("humf", "list"+ mFaceColorList);
                 mlistenerColor.showResults("result", mPrevfaceColor, true);
+                mlistenerColor.previewProfilePhoto("NONE");
                 myFaceDetector.setFace(face);
                 final Face currentface=face;
 
@@ -490,46 +496,68 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                     @Override
                     public void onPictureTaken(byte[] bytes) {
                         Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        SparseArray<Face> mFaces=null;
-                        FaceDetector detector = new FaceDetector.Builder(mContext)
+                        /*Frame outputFrame=new Frame.Builder().setBitmap(bmp).build();
+
+
+                        int w = outputFrame.getMetadata().getWidth();
+                        int h = outputFrame.getMetadata().getHeight();
+                        FaceDetector mDetector = new FaceDetector.Builder(mContext)
                                 .setTrackingEnabled(true)
                                 .setLandmarkType(FaceDetector.ALL_LANDMARKS)
                                 .setMode(FaceDetector.ACCURATE_MODE)
                                 .build();
 
-                        if (!detector.isOperational()) {
+                        if (!mDetector.isOperational()) {
                             //Handle contingency        } else {
+                            Log.w(TAG, "Face detector dependencies are not yet available.");
 
                         }
-                        Frame frame = new Frame.Builder().setBitmap(bmp).build();
-                        mFaces = detector.detect(frame);
-                        detector.release();
-                        if(mFaces!=null) {
-                            int x1 = 0, y1 = 0, right = 0, bottom = 0;
-                            for (int i = 0; i < mFaces.size(); i++) {
-                                Face face = mFaces.valueAt(i);
-                                x1 = (int) (face.getPosition().x);
-                                y1 = (int) (face.getPosition().y);
-                                right = (int) (face.getPosition().x + face.getWidth());
-                                bottom = (int) (face.getPosition().y + face.getHeight());
-                            }
+                        SparseArray<Face> detectedFaces = mDetector.detect(outputFrame);
+                        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+
+                        if (detectedFaces.size() > 0) {
+                            ByteBuffer byteBufferRaw = outputFrame.getGrayscaleImageData();
+                            byte[] byteBuffer = byteBufferRaw.array();
+                            YuvImage yuvimage  = new YuvImage(byteBuffer, ImageFormat.NV21, w, h, null);
+
+                            Face face = detectedFaces.valueAt(0);
+                            int left = (int) face.getPosition().x;
+                            int top = (int) face.getPosition().y;
+                            int right = (int) face.getWidth() + left;
+                            int bottom = (int) face.getHeight() + top;
+
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            yuvimage.compressToJpeg(new Rect(left, top, right, bottom), 80, baos);
+                            byte[] jpegArray = baos.toByteArray();
+                            bitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
+
+                        }*/
                             //boyle olmasi lazim  bir de yatay!!!!!!
-                    /*int x1 =  mFaceGraphic.getLeft();
-                    int y1 =  mFaceGraphic.getTop();
-                    int width = (int) currentface.getWidth();
-                    int height = (int) currentface.getHeight();
-                    float right = (float) (currentface.getPosition().x + currentface.getWidth());
-                    float bottom = (float) (currentface.getPosition().y + currentface.getHeight());*/
+                        int x1 =  mFaceGraphic.getLeft();
+                        int y1 =  mFaceGraphic.getTop();
 
+                        int right = mFaceGraphic.getRight();
+                        int bottom = mFaceGraphic.getBottom();
+                        if (y1 < 0) {
+                            y1 = Math.abs((int) currentface.getPosition().y);
+                        }
 
+                        if (x1 < 0) {
+                            x1 = Math.abs((int) currentface.getPosition().x);
+                        }
                             Log.i("parameters3", currentface.getPosition().x + " X " + currentface.getPosition().y);
-                            bmp = flipBitmap(bmp);
-
-                            Bitmap resize = Bitmap.createBitmap(bmp, x1, y1, right-x1, bottom-y1);
+                           // bmp = flipBitmap(bmp);
+                        bmp=flipBitmap(bmp);
+                        if(y1+mFaceGraphic.getBottom()-mFaceGraphic.getTop()<bmp.getHeight() || x1+mFaceGraphic.getRight()-mFaceGraphic.getLeft()<bmp.getWidth())
+                        {
+                            Bitmap resize = Bitmap.createBitmap(bmp, x1, y1, mFaceGraphic.getRight()-mFaceGraphic.getLeft(), mFaceGraphic.getBottom()-mFaceGraphic.getTop());
                             mlistenerColor.previewImage(resize, mPrevfaceColor);
                         }
-                    }
+
+                        }
+
                 });
+
 
 
 
@@ -605,7 +633,8 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         @Override
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
-
+            mlistenerColor.showResults("result", mPrevfaceColor, true);
+            mlistenerColor.previewProfilePhoto("NONE");
 
 
         }
