@@ -6,13 +6,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +27,7 @@ import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
@@ -41,13 +46,13 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     private LinearLayout mAwesomeLayout;
     private TextView tfModelResultTextView;
     private TextView mFaceColorPreview;
-    private ImageView profilePhotoImageView;
-    String PROFILEresult;
+    private ImageView mSamplePhotopreview,mProfilePhotopreview ;
     private TextView detectionResultTextView;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     private TFbridge tFbridge;
     private MyFaceDetector myFaceDetector;
+    private Context mContext;
     private static final int COLOR_CHOICES[] = {
             Color.BLUE,
             Color.CYAN,
@@ -58,8 +63,8 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
             Color.YELLOW,
             Color.BLACK
     };
-    ArrayList<Integer> mFaceColorList, mFaceColorList2;
-    ResultListener listRes;
+    private ArrayList<Integer> mFaceColorList, mFaceColorList2;
+    private ResultListener listRes;
     int threadCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +79,8 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
         tfModelResultTextView =findViewById(R.id.nmf);
         detectionResultTextView=findViewById(R.id.detectResult);
-        profilePhotoImageView=findViewById(R.id.profilephoto);
-        mFaceColorPreview=findViewById(R.id.FaceColortextView);
-
+        mSamplePhotopreview =findViewById(R.id.samplephoto);
+        mProfilePhotopreview=findViewById(R.id.profilePhoto);
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -105,8 +109,8 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
             ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CAMERA_PERM);
             return;
         }
-        PROFILEresult="app_icon.png";
-        profilePhotoImageView.setImageDrawable(Drawable.createFromPath("//drawable-v24/"+profilePhotoImageView));
+
+        mSamplePhotopreview.setImageDrawable(Drawable.createFromPath("//drawable-v24/"+ mSamplePhotopreview));
 
         final Activity thisActivity = this;
 
@@ -127,6 +131,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     private void createCameraSource() {
 
         Context context = getApplicationContext();
+        mContext=context;
         //set the tfbridge
         tFbridge=new TFbridge(context);
         mFaceColorList=new ArrayList<>();
@@ -142,9 +147,6 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
         // This is how you merge myFaceDetector and google.vision detector
 
-       /* detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(this)).setMaxGapFrames(5)
-                        .build());*/
 
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
@@ -156,22 +158,18 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
               new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(this))
                        .build());
         listRes=this;
-        //myFaceDetector.setContext(context);
+
      if (!myFaceDetector.isOperational()) {
            Log.w(TAG, "Face detector dependencies are not yet available.");
        }
 
-     /*   MultiDetector multiDetector = new MultiDetector.Builder()
-                .add(detector)
-                .add(myFaceDetector)
-                .build();*/
 
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(context, myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
                 .setRequestedPreviewSize(320, 240)
                 .setAutoFocusEnabled(true)
-                .setRequestedFps(5.0f)
+                .setRequestedFps(10.0f)
                 .build();
 
 
@@ -316,7 +314,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     }
 
     @Override
-    public void previewImage(final Bitmap bmp) {
+    public void previewImage(final Bitmap bmp, final int color) {
 
 
 
@@ -329,7 +327,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
                 Log.i(TAG,"" + bmp.getWidth() + " x " +  bmp.getHeight());
               //  Drawable d = new BitmapDrawable(getResources(), bmp);
-                profilePhotoImageView.setImageBitmap(bmp);
+                mSamplePhotopreview.setImageBitmap(bmp);
 
 
 
@@ -337,9 +335,34 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        String facelistStr ="";
+                        switch (color){
 
-                      Log.i("Humfy", tFbridge.recognizeImagewithTf(bmp) + " threadId :" + threadCount);
+                        case 0: facelistStr+="BLUE";
+                            break;
+                        case 1: facelistStr+="CYAN";
+                            break;
+                        case 2: facelistStr+="GREEN";
+                            break;
+                        case 3: facelistStr+="MAGENTA";
+                            break;
+                        case 4: facelistStr+="RED";
+                            break;
+                        case 5: facelistStr+="WHITE";
+                            break;
+                        case 6: facelistStr+="YELLOW";
+                            break;
+                        case 7: facelistStr+="BLACK";
+                            break;
+
+                    }
+                    String tfresult=tFbridge.recognizeImagewithTf(bmp);
+                        Log.i("Humfy", tfresult+ " threadId :" + threadCount+"  color: "+facelistStr);
+                        previewProfilePhoto(tfresult);
+                        tfResult(tfresult);
+
                       threadCount++;
+
                     }
                 }).start();
 
@@ -350,6 +373,25 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
     @Override
     public void showAllFaces(String result, int value) {
+
+    }
+
+    @Override
+    public void previewProfilePhoto(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if(!str.equals("NONE")){
+                    Resources res = getResources();
+
+
+                    mProfilePhotopreview.setImageDrawable(getPhotoFromDrawable(str));
+                }
+
+
+            }
+        });
 
     }
 
@@ -378,33 +420,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         ResultListener Rlistener;
         GraphicFaceTrackerFactory(ResultListener listener){
             super();
-            String facelistStr="";
-            for (int i = 1; i <mFaceColorList2.size() ; i++) {
-                facelistStr+=i+". >>face color is ";
-                switch (mFaceColorList2.get(i)){
-                    case 0: facelistStr+="BLUE";
-                        break;
-                    case 1: facelistStr+="CYAN";
-                        break;
-                    case 2: facelistStr+="GREEN";
-                        break;
-                    case 3: facelistStr+="MAGENTA";
-                        break;
-                    case 4: facelistStr+="RED";
-                        break;
-                    case 5: facelistStr+="WHITE";
-                        break;
-                    case 6: facelistStr+="YELLOW";
-                        break;
-                    case 7: facelistStr+="BLACK";
-                        break;
 
-                }
-                facelistStr+="\n";
-            }
-
-            Log.i("humf", "list2"+ mFaceColorList2);
-            mFaceColorPreview.setText(facelistStr);
             Rlistener=listener;
         }
         @Override
@@ -442,13 +458,14 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
           Log.i("Face", "face:" + faceId + "Obj? "+ item.getPosition() + "  " + item.getLandmarks() );
 
 
+
         }
 
         /**
          * Update the position/characteristics of the face within the overlay.
          */
         @Override
-        public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
+        public void onUpdate(final FaceDetector.Detections<Face> detectionResults, Face face) {
             ;
 
 
@@ -466,30 +483,58 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                 Log.i("humf", "list"+ mFaceColorList);
                 mlistenerColor.showResults("result", mPrevfaceColor, true);
                 myFaceDetector.setFace(face);
-                int x1 = (int) face.getPosition().x;
-                int y1 = (int) face.getPosition().y;
-                int width = (int) face.getWidth();
-                int height = (int) face.getHeight();
+                final Face currentface=face;
 
-                if (y1 < 0) {
-                    y1 = Math.abs((int) face.getPosition().y);
-                } else if (y1 > height) {
-                    y1 = height - 1;
-                }
-                if (x1 < 0) {
-                    x1 = Math.abs((int) face.getPosition().x);
-                } else if (x1 + width > width) {
-                    x1 = width - 1;
-                }
-                //boyle olmasi lazim  bir de yatay!!!!!!
-                final Bitmap resizedbitmap1 = Bitmap.createBitmap((myFaceDetector.getmBitmap()), x1, y1, width, height);
-                mlistenerColor.previewImage(resizedbitmap1);
-                final Runnable r = new Runnable() {
-                    public void run() {
-                        TFresultStr=tFbridge.recognizeImagewithTf(resizedbitmap1);
-                        Log.i(TAG, "RESULT>> "+TFresultStr);
+
+                mCameraSource.takePicture(null, new CameraSource.PictureCallback() {
+                    @Override
+                    public void onPictureTaken(byte[] bytes) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        SparseArray<Face> mFaces=null;
+                        FaceDetector detector = new FaceDetector.Builder(mContext)
+                                .setTrackingEnabled(true)
+                                .setLandmarkType(FaceDetector.ALL_LANDMARKS)
+                                .setMode(FaceDetector.ACCURATE_MODE)
+                                .build();
+
+                        if (!detector.isOperational()) {
+                            //Handle contingency        } else {
+
+                        }
+                        Frame frame = new Frame.Builder().setBitmap(bmp).build();
+                        mFaces = detector.detect(frame);
+                        detector.release();
+                        if(mFaces!=null) {
+                            int x1 = 0, y1 = 0, right = 0, bottom = 0;
+                            for (int i = 0; i < mFaces.size(); i++) {
+                                Face face = mFaces.valueAt(i);
+                                x1 = (int) (face.getPosition().x);
+                                y1 = (int) (face.getPosition().y);
+                                right = (int) (face.getPosition().x + face.getWidth());
+                                bottom = (int) (face.getPosition().y + face.getHeight());
+                            }
+                            //boyle olmasi lazim  bir de yatay!!!!!!
+                    /*int x1 =  mFaceGraphic.getLeft();
+                    int y1 =  mFaceGraphic.getTop();
+                    int width = (int) currentface.getWidth();
+                    int height = (int) currentface.getHeight();
+                    float right = (float) (currentface.getPosition().x + currentface.getWidth());
+                    float bottom = (float) (currentface.getPosition().y + currentface.getHeight());*/
+
+
+                            Log.i("parameters3", currentface.getPosition().x + " X " + currentface.getPosition().y);
+                            bmp = flipBitmap(bmp);
+
+                            Bitmap resize = Bitmap.createBitmap(bmp, x1, y1, right-x1, bottom-y1);
+                            mlistenerColor.previewImage(resize, mPrevfaceColor);
+                        }
                     }
-                };
+                });
+
+
+
+
+
 
 
 
@@ -530,6 +575,13 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
 
         }
+        private Bitmap flipBitmap(Bitmap btmp){
+            Matrix matrix = new Matrix();
+            float cx=btmp.getWidth()/2.0f;
+            float cy=btmp.getHeight()/2.0f;
+            matrix.postScale(-1, 1, cx, cy);
+            return  Bitmap.createBitmap(btmp, 0, 0, btmp.getWidth(), btmp.getHeight(), matrix, true);
+        }
 
         /**
          * Hide the graphic when the corresponding face was not detected.  This can happen for
@@ -557,5 +609,107 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
 
 
         }
+    }
+    private  Drawable getPhotoFromDrawable(final String str){
+        Drawable retDrawable=getResources().getDrawable(R.drawable.app_icon);
+        switch (str){
+            case "taalaialmasova":
+                retDrawable=getResources().getDrawable(R.drawable.taalaialmasova);
+                break;
+            case "afsincelik":
+                retDrawable=getResources().getDrawable(R.drawable.afsincelik);
+                break;
+            case "ahmetcakman":
+                retDrawable=getResources().getDrawable(R.drawable.profile_iconmin);
+                break;
+            case "alpparkan":
+                retDrawable=getResources().getDrawable(R.drawable.alpparkan);
+                break;
+
+            case "barisinanc":
+                retDrawable=getResources().getDrawable(R.drawable.barisinanc);
+                break;
+            case "ceyhunerturk":
+                retDrawable=getResources().getDrawable(R.drawable.ceyhunerturk);
+                break;
+
+            case "duygukalinyilmaz":
+                retDrawable=getResources().getDrawable(R.drawable.duygukalinyilmaz);
+                break;
+            case "ecegercekkayurtar":
+                retDrawable=getResources().getDrawable(R.drawable.profile_iconmin);
+                break;
+
+            case "elifcakmak":
+                retDrawable=getResources().getDrawable(R.drawable.elifcakmak);
+                break;
+            case "farshaddelirabdinia":
+                retDrawable=getResources().getDrawable(R.drawable.farshaddelirabdinia);
+                break;
+            case "haluktufekci":
+                retDrawable=getResources().getDrawable(R.drawable.haluktufekci);
+                break;
+            case "huseyinbashan":
+                retDrawable=getResources().getDrawable(R.drawable.huseyinbashan);
+                break;
+            case "ibrahimtezcan":
+                retDrawable=getResources().getDrawable(R.drawable.ibrahimtezcan);
+                break;
+            case "leventbabacan":
+                retDrawable=getResources().getDrawable(R.drawable.leventbabacan);
+                break;
+
+            case "mertacel":
+                retDrawable=getResources().getDrawable(R.drawable.mertacel);
+                break;
+            case "metinpar":
+                retDrawable=getResources().getDrawable(R.drawable.metinpar);
+                break;
+
+            case "oguzcakir":
+                retDrawable=getResources().getDrawable(R.drawable.oguzcakir);
+                break;
+            case "ozgurozkok":
+                retDrawable=getResources().getDrawable(R.drawable.ozgurozkok);
+                break;
+
+            case "pascalstreamax":
+                retDrawable=getResources().getDrawable(R.drawable.profile_iconmin);
+                break;
+            case "perihanmirkelam":
+                retDrawable=getResources().getDrawable(R.drawable.perihanmirkelam);
+                break;
+            case "samiozdil":
+                retDrawable=getResources().getDrawable(R.drawable.profile_iconmin);
+                break;
+            case "sinanpayaslioglu":
+                retDrawable=getResources().getDrawable(R.drawable.sinanpayaslioglu);
+                break;
+
+            case "sonerugraskan":
+                retDrawable=getResources().getDrawable(R.drawable.sonerugraskan);
+                break;
+            case "sukrankomurcu":
+                retDrawable=getResources().getDrawable(R.drawable.sukrankomurcu);
+                break;
+
+            case "tunckahveci":
+                retDrawable=getResources().getDrawable(R.drawable.tunckahveci);
+                break;
+            case "suleymanfakir":
+                retDrawable=getResources().getDrawable(R.drawable.suleymanfakir);
+                break;
+            case "yavuzerzurumlu":
+                retDrawable=getResources().getDrawable(R.drawable.yavuzerzurumlu);
+                break;
+            case "ugurgelisken":
+                retDrawable=getResources().getDrawable(R.drawable.ugurgelisken);
+                break;
+            case "NONE":
+                retDrawable=getResources().getDrawable(R.drawable.app_icon);
+                break;
+
+        }
+        return retDrawable;
     }
 }

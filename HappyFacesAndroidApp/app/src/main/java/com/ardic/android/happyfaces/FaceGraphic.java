@@ -33,7 +33,7 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     private static final float ID_Y_OFFSET = 50.0f;
     private static final float ID_X_OFFSET = -50.0f;
     private static final float BOX_STROKE_WIDTH = 5.0f;
-
+    private float mTop, mRight, mLeft, mBottom;
     private static final int COLOR_CHOICES[] = {
         Color.BLUE,
         Color.CYAN,
@@ -123,13 +123,16 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         // Draws a rectangle around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);
         float yOffset = scaleY(face.getHeight() / 2.0f);
-        float left = x - xOffset+50.0f;
-        float top = y - yOffset+80.0f;
-        float right = x + xOffset-40.0f;
-        float bottom = y + yOffset-23.0f;
-        canvas.drawText("" + mFaceId, left-3, top-2 , mIdPaint);
+        mLeft = x - xOffset;
+        mTop = y - yOffset;
+        mRight = x + xOffset;
+        mBottom = y + yOffset+10.0f;
+        canvas.drawText("" + mFaceId, mLeft-3, mTop-2 , mIdPaint);
 
-        canvas.drawRect(left, top, right, bottom, mBoxPaint);
+        canvas.drawRect(mLeft, mTop, mRight, mBottom, mBoxPaint);
+
+        Log.i("parameters1",x+" X "+y+"  "+mLeft+" X "+mRight+  "   " +mTop+" X "+mBottom);
+        Log.i("parameters2",face.getPosition().x+" X "+face.getPosition().y+"  "+mLeft+" X "+mRight+  "   " +mTop+" X "+mBottom);
 
 
     }
@@ -137,5 +140,19 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         return mFaceColor;
     }
 
+    public int getTop() {
+        return (int)mTop;
+    }
 
+    public int getRight() {
+        return (int)mRight;
+    }
+
+    public int getLeft() {
+        return (int)mLeft;
+    }
+
+    public int getBottom() {
+        return (int)mBottom;
+    }
 }

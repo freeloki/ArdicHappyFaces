@@ -71,8 +71,16 @@ public class TFbridge {
         if(bmp!=null) {
             Bitmap bitmaptf = Bitmap.createScaledBitmap(bmp, INPUT_SIZE, INPUT_SIZE, false);
             List<Classifier.Recognition> imgrecognize = classifier.recognizeImage(bitmaptf);
+            Log.i("Humfy", "result: "+imgrecognize.toString());
             Log.i("humf: ", "%>>" + imgrecognize.get(0).getConfidence() + "-");
-            mTFresult = imgrecognize.get(0).getTitle();
+
+            if(imgrecognize.get(0).getConfidence()>0.10f){
+                mTFresult = imgrecognize.get(0).getTitle();
+            }
+            else{
+                mTFresult="NONE";
+            }
+
         }
         return mTFresult;
     }

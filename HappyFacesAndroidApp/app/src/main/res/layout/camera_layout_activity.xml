@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/humf"
-                    android:textSize="30sp" />
+                    android:textSize="45sp" />
 
                 <TextView
                     android:id="@+id/detectResult"
@@ -83,19 +83,20 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/profilephoto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/samplephoto"
+                        android:layout_width="116dp"
+                        android:layout_height="81dp"
                         android:layout_weight="1"
                         android:contentDescription="TODO"
                         android:src="@drawable/app_icon" />
 
-                    <TextView
-                        android:id="@+id/FaceColortextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="161dp"
+                    <ImageView
+                        android:id="@+id/profilePhoto"
+                        android:layout_width="98dp"
+                        android:layout_height="75dp"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:src="@drawable/app_icon" />
+
                 </LinearLayout>
 
             </LinearLayout>
