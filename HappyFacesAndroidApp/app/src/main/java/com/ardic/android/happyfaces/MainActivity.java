@@ -16,6 +16,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -37,11 +38,13 @@ import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class MainActivity extends Activity implements ResultListener,  AllFacesResultListener {
+public class MainActivity extends Activity implements ResultListener {
     private static final String TAG = "MainActivity";
 
     private CameraSource mCameraSource = null;
@@ -50,7 +53,6 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     private GraphicOverlay mGraphicOverlay;
     private LinearLayout mAwesomeLayout;
     private TextView tfModelResultTextView;
-    private TextView mFaceColorPreview;
     private ImageView mSamplePhotopreview,mProfilePhotopreview ;
     private TextView detectionResultTextView;
     // permission request codes need to be < 256
@@ -70,7 +72,8 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     };
     private ArrayList<Integer> mFaceColorList, mFaceColorList2;
     private ResultListener listRes;
-    int threadCount=0;
+    private int threadCount=0;
+    private int mCurrentFaceId=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +81,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         mAwesomeLayout = findViewById(R.id.cameraPreviewLinearLayout);
 
         mPreview = findViewById(R.id.preview);
-        //mPreview.setLayoutParams(new LinearLayout.LayoutParams(640,480));
+
         Log.i("humf", "preview size: "+mPreview.getHeight()+"|"+mPreview.getWidth());
         mGraphicOverlay = findViewById(R.id.faceOverlay);
 
@@ -156,7 +159,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         if (!detector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
-       myFaceDetector = new MyFaceDetector(detector, context);
+       myFaceDetector = new MyFaceDetector(detector, context, this);
         // You can use your own processor
       //  myFaceDetector.
        myFaceDetector.setProcessor(
@@ -291,18 +294,12 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     }
 
     @Override
-    public void showResults(final String result,final int value,final boolean addORremove) {
+    public void showResults(final String result,final int value) {
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                /*f(addORremove==true){
-                    mFaceColorList2.add(value);
-                }
-                else{
-                    mFaceColorList2.remove(mFaceColorList.size()-1);
 
-                }*/
                 if(value==-1){
                    tfModelResultTextView.setTextColor(COLOR_CHOICES[7]);
                 }
@@ -319,7 +316,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
     }
 
     @Override
-    public void previewImage(final Bitmap bmp, final int color) {
+    public void previewImage(final Bitmap bmp) {
 
 
 
@@ -328,41 +325,13 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i(TAG, "canvas:>>  "+bmp);
-
-                Log.i(TAG,"" + bmp.getWidth() + " x " +  bmp.getHeight());
-              //  Drawable d = new BitmapDrawable(getResources(), bmp);
                 mSamplePhotopreview.setImageBitmap(bmp);
-
-
-
-
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        String facelistStr ="";
-                        switch (color){
 
-                        case 0: facelistStr+="BLUE";
-                            break;
-                        case 1: facelistStr+="CYAN";
-                            break;
-                        case 2: facelistStr+="GREEN";
-                            break;
-                        case 3: facelistStr+="MAGENTA";
-                            break;
-                        case 4: facelistStr+="RED";
-                            break;
-                        case 5: facelistStr+="WHITE";
-                            break;
-                        case 6: facelistStr+="YELLOW";
-                            break;
-                        case 7: facelistStr+="BLACK";
-                            break;
-
-                    }
                     String tfresult=tFbridge.recognizeImagewithTf(bmp);
-                        Log.i("Humfy", tfresult+ " threadId :" + threadCount+"  color: "+facelistStr);
+                        Log.i("Humfy", tfresult+ " threadId :" + threadCount);
                         previewProfilePhoto(tfresult);
                         tfResult(tfresult);
 
@@ -376,28 +345,61 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         });
     }
 
-    @Override
-    public void showAllFaces(String result, int value) {
-
-    }
 
     @Override
     public void previewProfilePhoto(final String str) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-
-                    Resources res = getResources();
-
-
                     mProfilePhotopreview.setImageDrawable(getPhotoFromDrawable(str));
-
-
 
             }
         });
 
+    }
+
+    @Override
+    public void onFaceFrame(final Frame newFrame, final SparseArray<Face> faceSparseArray) {
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                    YuvImage yuvImage = new YuvImage(newFrame.getGrayscaleImageData().array(), ImageFormat.NV21, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight(), null);
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    yuvImage.compressToJpeg(new Rect(0, 0, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight()), 100, byteArrayOutputStream);
+                    byte[] jpegArray = byteArrayOutputStream.toByteArray();
+                    final Bitmap tempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
+                    for (int i = 0; i < faceSparseArray.size(); i++) {
+                    Face thisFace = faceSparseArray.valueAt(i);
+                    int x1 = (int) (thisFace.getPosition().x);
+                    int y1 = (int) (thisFace.getPosition().y);
+                    int width=(int)thisFace.getWidth();
+                    int height=(int)thisFace.getHeight();
+
+                    Log.i("FaceId", ""+thisFace.getId());
+                    if((int) (thisFace.getPosition().x)>=0 && (int) (thisFace.getPosition().y)>=0 && width+x1<=tempBitmap.getWidth() && height+y1<=tempBitmap.getHeight()) {
+                        final Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
+                        if(mCurrentFaceId!=thisFace.getId())  //give to TF
+                        {
+                            Log.i("Control", "1");
+                           previewImage(resizedbitmap1);
+
+                            mCurrentFaceId=thisFace.getId();
+                        }
+                        
+                    }
+
+
+
+
+                }
+
+
+
+                }
+
+        }).start();
     }
 
     @Override
@@ -405,15 +407,19 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 tfModelResultTextView.setText(str);
-
-
             }
         });
     }
 
-//==============================================================================================
+    private Bitmap flipBitmap(Bitmap btmp){
+        Matrix matrix = new Matrix();
+        float cx=btmp.getWidth()/2.0f;
+        float cy=btmp.getHeight()/2.0f;
+        matrix.postScale(-1, 1, cx, cy);
+        return  Bitmap.createBitmap(btmp, 0, 0, btmp.getWidth(), btmp.getHeight(), matrix, true);
+    }
+    //==============================================================================================
     // Graphic Face Tracker
     //==============================================================================================
 
@@ -443,14 +449,10 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         private FaceGraphic mFaceGraphic;
         private int mPrevfaceColor =-1;
         ResultListener mlistenerColor;
-        private String TFresultStr;
-        private final int FrameStatus=10;
-        private  int frameCount=0;
         GraphicFaceTracker(GraphicOverlay overlay, ResultListener listener) {
             mOverlay = overlay;
             mFaceGraphic = new FaceGraphic(overlay);
             mlistenerColor=listener;
-           // mFaceGraphic.setmRlistener(mlistenerColor);
         }
 
         /**
@@ -471,13 +473,9 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
          */
         @Override
         public void onUpdate(final FaceDetector.Detections<Face> detectionResults, Face face) {
-            ;
 
-
-          //  detectionResults.getFrameMetadata().
 
             mOverlay.add(mFaceGraphic);
-            String strface="face color";
             int faceColorfromClass=mFaceGraphic.getFaceColor();
             mFaceGraphic.updateFace(face);
 
@@ -486,130 +484,22 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
                 mPrevfaceColor =faceColorfromClass;
                 Log.i("color", "new>>" + mPrevfaceColor);
                 Log.i("humf", "list"+ mFaceColorList);
-                mlistenerColor.showResults("result", mPrevfaceColor, true);
+                mlistenerColor.showResults("result", mPrevfaceColor);
                 mlistenerColor.previewProfilePhoto("NONE");
                 myFaceDetector.setFace(face);
                 final Face currentface=face;
 
-
-                mCameraSource.takePicture(null, new CameraSource.PictureCallback() {
-                    @Override
-                    public void onPictureTaken(byte[] bytes) {
-                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        /*Frame outputFrame=new Frame.Builder().setBitmap(bmp).build();
-
-
-                        int w = outputFrame.getMetadata().getWidth();
-                        int h = outputFrame.getMetadata().getHeight();
-                        FaceDetector mDetector = new FaceDetector.Builder(mContext)
-                                .setTrackingEnabled(true)
-                                .setLandmarkType(FaceDetector.ALL_LANDMARKS)
-                                .setMode(FaceDetector.ACCURATE_MODE)
-                                .build();
-
-                        if (!mDetector.isOperational()) {
-                            //Handle contingency        } else {
-                            Log.w(TAG, "Face detector dependencies are not yet available.");
-
-                        }
-                        SparseArray<Face> detectedFaces = mDetector.detect(outputFrame);
-                        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-
-                        if (detectedFaces.size() > 0) {
-                            ByteBuffer byteBufferRaw = outputFrame.getGrayscaleImageData();
-                            byte[] byteBuffer = byteBufferRaw.array();
-                            YuvImage yuvimage  = new YuvImage(byteBuffer, ImageFormat.NV21, w, h, null);
-
-                            Face face = detectedFaces.valueAt(0);
-                            int left = (int) face.getPosition().x;
-                            int top = (int) face.getPosition().y;
-                            int right = (int) face.getWidth() + left;
-                            int bottom = (int) face.getHeight() + top;
-
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            yuvimage.compressToJpeg(new Rect(left, top, right, bottom), 80, baos);
-                            byte[] jpegArray = baos.toByteArray();
-                            bitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
-
-                        }*/
-                            //boyle olmasi lazim  bir de yatay!!!!!!
-                        int x1 =  mFaceGraphic.getLeft();
-                        int y1 =  mFaceGraphic.getTop();
-
-                        int right = mFaceGraphic.getRight();
-                        int bottom = mFaceGraphic.getBottom();
-                        if (y1 < 0) {
-                            y1 = Math.abs((int) currentface.getPosition().y);
-                        }
-
-                        if (x1 < 0) {
-                            x1 = Math.abs((int) currentface.getPosition().x);
-                        }
-                            Log.i("parameters3", currentface.getPosition().x + " X " + currentface.getPosition().y);
-                           // bmp = flipBitmap(bmp);
-                        bmp=flipBitmap(bmp);
-                        if(y1+mFaceGraphic.getBottom()-mFaceGraphic.getTop()<bmp.getHeight() || x1+mFaceGraphic.getRight()-mFaceGraphic.getLeft()<bmp.getWidth())
-                        {
-                            Bitmap resize = Bitmap.createBitmap(bmp, x1, y1, mFaceGraphic.getRight()-mFaceGraphic.getLeft(), mFaceGraphic.getBottom()-mFaceGraphic.getTop());
-                            mlistenerColor.previewImage(resize, mPrevfaceColor);
-                        }
-
-                        }
-
-                });
-
-
-
-
-
-
-
-
-
             }
             else{
                Log.i("color", "equal>>"+ mPrevfaceColor);
-                Log.i("humf", "list"+ mFaceColorList);
-/*                if(FrameStatus==frameCount){
-                    int x1 = (int) face.getPosition().x;
-                    int y1 = (int) face.getPosition().y;
-                    int width = (int) face.getWidth();
-                    int height = (int) face.getHeight();
-
-                    if (y1 < 0) {
-                        y1 = Math.abs((int) face.getPosition().y);
-                    } else if (y1 > height) {
-                        y1 = height - 1;
-                    }
-                    if (x1 < 0) {
-                        x1 = Math.abs((int) face.getPosition().x);
-                    } else if (x1 + width > width) {
-                        x1 = width - 1;
-                    }
-                    //boyle olmasi lazim  bir de yatay!!!!!!
-                    Log.i(TAG, "FACE: "+face.getWidth()+" X "+face.getHeight()+"  "+face.getPosition().x+" X "+face.getPosition().y+"   "+face.getEulerY()+" X "+face.getEulerZ());
-                    final Bitmap resizedbitmap1 = Bitmap.createBitmap(myFaceDetector.getmBitmap(), x1, y1, width, height);
-                    mlistenerColor.previewImage(resizedbitmap1);
-
-                    frameCount=0;
-                }*/
-                frameCount++;
-
             }
-            Log.i(TAG,"!!!!         " +  mOverlay.getCanvas());
 
 
 
 
 
         }
-        private Bitmap flipBitmap(Bitmap btmp){
-            Matrix matrix = new Matrix();
-            float cx=btmp.getWidth()/2.0f;
-            float cy=btmp.getHeight()/2.0f;
-            matrix.postScale(-1, 1, cx, cy);
-            return  Bitmap.createBitmap(btmp, 0, 0, btmp.getWidth(), btmp.getHeight(), matrix, true);
-        }
+
 
         /**
          * Hide the graphic when the corresponding face was not detected.  This can happen for
@@ -633,7 +523,7 @@ public class MainActivity extends Activity implements ResultListener,  AllFacesR
         @Override
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
-            mlistenerColor.showResults("result", mPrevfaceColor, true);
+            mlistenerColor.showResults("result", mPrevfaceColor);
             mlistenerColor.previewProfilePhoto("NONE");
 
 

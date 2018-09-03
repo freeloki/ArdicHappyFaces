@@ -115,11 +115,14 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         }
 
         setAwesomeFace(canvas);
+        mFacePositionPaint.setColor( Color.BLACK);
         //mRlistener.previewImage(canvas);
         // Draws a rectangle at the position of the detected face, with the face's track id below.
         float x = translateX(face.getPosition().x + face.getWidth() / 2);
         float y = translateY(face.getPosition().y + face.getHeight() / 2);
-
+        canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
+        canvas.drawCircle(face.getPosition().x, face.getPosition().y, FACE_POSITION_RADIUS, mFacePositionPaint);
+        canvas.drawCircle(face.getPosition().x+face.getWidth(), face.getPosition().y+face.getHeight(), FACE_POSITION_RADIUS, mFacePositionPaint);
         // Draws a rectangle around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);
         float yOffset = scaleY(face.getHeight() / 2.0f);
@@ -131,8 +134,7 @@ class FaceGraphic extends GraphicOverlay.Graphic {
 
         canvas.drawRect(mLeft, mTop, mRight, mBottom, mBoxPaint);
 
-        Log.i("parameters1",x+" X "+y+"  "+mLeft+" X "+mRight+  "   " +mTop+" X "+mBottom);
-        Log.i("parameters2",face.getPosition().x+" X "+face.getPosition().y+"  "+mLeft+" X "+mRight+  "   " +mTop+" X "+mBottom);
+
 
 
     }

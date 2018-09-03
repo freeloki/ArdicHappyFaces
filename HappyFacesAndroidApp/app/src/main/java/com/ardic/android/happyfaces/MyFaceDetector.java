@@ -29,32 +29,28 @@ public class MyFaceDetector extends Detector<Face> {
     private boolean FaceStatus=false;
     private ResultListener resultListener;
     private Bitmap mBitmap;
-    Bitmap profilphoto;
-    public MyFaceDetector(Detector<Face> delegate, Context con) {
+    private Bitmap profilphoto;
+    private ResultListener mListener;
+    public MyFaceDetector(Detector<Face> delegate, Context con, ResultListener listener) {
 
 
         mDelegate = delegate;
         context = con;
         mFace=null;
+        mListener=listener;
 
     }
 
     public SparseArray<Face> detect(Frame frame) {
 
+        SparseArray<Face> awesomeFaces = mDelegate.detect(frame);
 
 
 
-           YuvImage yuvImage = new YuvImage(frame.getGrayscaleImageData().array(), ImageFormat.NV21, frame.getMetadata().getWidth(), frame.getMetadata().getHeight(), null);
-           ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-           yuvImage.compressToJpeg(new Rect(0, 0, frame.getMetadata().getWidth(), frame.getMetadata().getHeight()), 100, byteArrayOutputStream);
-           byte[] jpegArray = byteArrayOutputStream.toByteArray();
-           Bitmap TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
-           Log.i("myfacdetector:"," myfaceeeeeeeeeeeee");
-           mBitmap=flipBitmap(TempBitmap);
-
-
-
-        return mDelegate.detect(frame);
+        if(mListener != null && awesomeFaces.size() > 0) {
+            mListener.onFaceFrame(frame, awesomeFaces);
+        }
+        return awesomeFaces;
     }
 
     public boolean isOperational() {
