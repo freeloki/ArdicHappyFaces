@@ -74,7 +74,7 @@ public class TFbridge {
             Log.i("Humfy", "result: "+imgrecognize.toString());
             Log.i("humf: ", "%>>" + imgrecognize.get(0).getConfidence() + "-");
 
-            if(imgrecognize.get(0).getConfidence()>0.10f){
+            if(imgrecognize.get(0).getConfidence()>=0.10f){
                 mTFresult = imgrecognize.get(0).getTitle();
             }
             else{

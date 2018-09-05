@@ -37,8 +37,10 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -142,6 +144,7 @@ public class MainActivity extends Activity implements ResultListener {
         mContext=context;
         //set the tfbridge
         tFbridge=new TFbridge(context);
+
         mFaceColorList=new ArrayList<>();
         mFaceColorList.add(-1);
         mFaceColorList2=new ArrayList<>();
@@ -322,16 +325,16 @@ public class MainActivity extends Activity implements ResultListener {
 
         Log.i("Humfy", " threadzzzzzzz :" + threadCount);
 
-        runOnUiThread(new Runnable() {
+        /*runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mSamplePhotopreview.setImageBitmap(bmp);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
-                    String tfresult=tFbridge.recognizeImagewithTf(bmp);
-                        Log.i("Humfy", tfresult+ " threadId :" + threadCount);
+                        long temp = System.currentTimeMillis();
+                   String tfresult=tFbridge.recognizeImagewithTf(bmp);
+                        Log.i("Humfy", tfresult+ " threadId :" + threadCount +"     ms:"+(System.currentTimeMillis()-temp));
                         previewProfilePhoto(tfresult);
                         tfResult(tfresult);
 
@@ -342,7 +345,7 @@ public class MainActivity extends Activity implements ResultListener {
 
 
             }
-        });
+        });*/
     }
 
 
@@ -378,8 +381,17 @@ public class MainActivity extends Activity implements ResultListener {
                     int height=(int)thisFace.getHeight();
 
                     Log.i("FaceId", ""+thisFace.getId());
-                    if((int) (thisFace.getPosition().x)>=0 && (int) (thisFace.getPosition().y)>=0 && width+x1<=tempBitmap.getWidth() && height+y1<=tempBitmap.getHeight()) {
-                        final Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
+                    Log.i("size:", ""+x1+"X"+y1+"   "+width+"X"+height);
+                    if(x1<0){
+                        x1=0;
+                    }
+
+                    if(y1<0){
+                        y1=0;
+                    }
+                    if(x1>=0 && y1>=0 && width+x1<=tempBitmap.getWidth() && height+y1<=tempBitmap.getHeight()) {
+                        final Bitmap resizedbitmap1 = /*Bitmap.createScaledBitmap(*/Bitmap.createBitmap(tempBitmap, x1, y1, width, height)/*, 299, 299, false)*/;
+
                         if(mCurrentFaceId!=thisFace.getId())  //give to TF
                         {
                             Log.i("Control", "1");
@@ -387,8 +399,26 @@ public class MainActivity extends Activity implements ResultListener {
 
                             mCurrentFaceId=thisFace.getId();
                         }
-                        
+                        String root = Environment.getExternalStorageDirectory().toString();
+                        File myDir = new File(root + "/faces__");
+                        myDir.mkdirs();
+
+                        String fname = "Image_" + mCurrentFaceId+"_" +System.currentTimeMillis()+ ".jpg";
+                        File file = new File(myDir, fname);
+                        Log.i("salam", "" + file);
+                        if (file.exists())
+                            file.delete();
+                        try {
+                            FileOutputStream out = new FileOutputStream(file);
+                            resizedbitmap1.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                            out.flush();
+                            out.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
+
 
 
 
@@ -625,7 +655,7 @@ public class MainActivity extends Activity implements ResultListener {
                 retDrawable=getResources().getDrawable(R.drawable.ugurgelisken);
                 break;
             case "NONE":
-                retDrawable=getResources().getDrawable(R.drawable.app_icon);
+                retDrawable=getResources().getDrawable(R.drawable.profile_iconmin);
                 break;
 
         }
