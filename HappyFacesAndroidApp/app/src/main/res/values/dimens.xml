@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Camera Preview Dimensions -->
+    <dimen name="camera_layout_border_width">625dp</dimen>
+    <dimen name="camera_layout_border_height">450dp</dimen>
+    <dimen name="camera_preview_width">600dp</dimen>
+    <dimen name="camera_preview_height">400dp</dimen>
+
+    <!-- Recognition / Profile Layout Dimensions -->
+    <dimen name="profile_layout_border_width">625dp</dimen>
+    <dimen name="profile_layout_border_height">450dp</dimen>
+
+    <dimen name="input_output_processing_margin">10dp</dimen>
+    <dimen name="input_output_processing_image_width">75dp</dimen>
+    <dimen name="input_output_processing_image_height">75dp</dimen>
+
+    <dimen name="arrow_text_size">25sp</dimen>
+    <dimen name="arrow_margin_left">20dp</dimen>
+    <dimen name="arrow_margin_right">20dp</dimen>
+
+    <dimen name="beautiful_image_width">300dp</dimen>
+    <dimen name="beautiful_image_height">350dp</dimen>
+
+    <dimen name="beautiful_information_layout_width">300dp</dimen>
+    <dimen name="beautiful_information_layout_height">350dp</dimen>
+
+    <dimen name="beautiful_text_size">30sp</dimen>
+    <dimen name="beautiful_text_margin">20dp</dimen>
+    <dimen name="beautiful_text_margin2">5dp</dimen>
+
+    <dimen name="arrow_size">24dp</dimen>
+
+
+
     <dimen name="text_size">30sp</dimen>
 
 </resources>

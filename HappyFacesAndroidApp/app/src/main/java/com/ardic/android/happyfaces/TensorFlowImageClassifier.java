@@ -120,7 +120,6 @@ public class TensorFlowImageClassifier implements Classifier {
         c.intValues = new int[inputSize * inputSize];
         c.floatValues = new float[inputSize * inputSize * 3];
         c.outputs = new float[numClasses];
-
         return c;
     }
 

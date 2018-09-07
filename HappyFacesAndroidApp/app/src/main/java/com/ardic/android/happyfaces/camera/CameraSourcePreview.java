@@ -1,7 +1,6 @@
 package com.ardic.android.happyfaces.camera;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -11,10 +10,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.ardic.android.happyfaces.R;
-import com.ardic.android.happyfaces.TFbridge;
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.CameraSource;
 
