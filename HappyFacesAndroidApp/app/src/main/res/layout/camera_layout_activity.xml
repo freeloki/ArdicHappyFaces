@@ -4,38 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
+    android:background="@android:color/white"
     android:orientation="vertical"
+    android:keepScreenOn="true"
     tools:context=".MainActivity">
 
 
     <!-- Camera Preview and Profile Info Layout Start -->
     <LinearLayout
         android:id="@+id/cameraGroupLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
 
         <!-- Camera Preview Start -->
 
         <LinearLayout
             android:id="@+id/cameraPreviewLinearLayout"
-            android:layout_width="270dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_width="@dimen/camera_layout_border_width"
+            android:layout_height="@dimen/camera_layout_border_height"
+            android:gravity="center"
+            android:background="@drawable/mylayoutshape"
+            android:layout_margin="10dp">
 
             <com.ardic.android.happyfaces.camera.CameraSourcePreview
                 android:id="@+id/preview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="@dimen/camera_preview_width"
+                android:layout_height="@dimen/camera_preview_height">
 
 
                 <com.ardic.android.happyfaces.camera.GraphicOverlay
                     android:id="@+id/faceOverlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_width="@dimen/camera_preview_width"
+                    android:layout_height="@dimen/camera_preview_height" />
 
             </com.ardic.android.happyfaces.camera.CameraSourcePreview>
 
@@ -47,60 +50,120 @@
         <!-- Profile Preview Start -->
 
         <LinearLayout
-            android:id="@+id/second"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:id="@+id/profilePreviewLayout"
+            android:layout_width="@dimen/profile_layout_border_width"
+            android:layout_height="@dimen/profile_layout_border_height"
+            android:orientation="vertical"
+            android:background="@drawable/mylayoutshape"
+            android:layout_marginTop="10dp">
 
+            <!-- Profile Info Layout Start -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
-                <TextView
-                    android:id="@+id/nmf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/humf"
-                    android:textSize="45sp" />
-
-                <TextView
-                    android:id="@+id/detectResult"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    tools:text="detection resulrt" />
+                <ImageView
+                    android:id="@+id/beautiful_profile_photo"
+                    android:layout_width="@dimen/beautiful_image_width"
+                    android:layout_height="@dimen/beautiful_image_height"
+                    android:src="@drawable/profile_icon"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
+                    android:layout_width="@dimen/beautiful_information_layout_width"
+                    android:layout_height="@dimen/beautiful_information_layout_height"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/samplephoto"
-                        android:layout_width="116dp"
-                        android:layout_height="81dp"
-                        android:layout_weight="1"
-                        android:contentDescription="TODO"
-                        android:src="@drawable/app_icon" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/beautiful_text_margin"
+                        android:text="Name:"
+                        android:textSize="@dimen/beautiful_text_size"
+                        android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/profilePhoto"
-                        android:layout_width="98dp"
-                        android:layout_height="75dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/app_icon" />
+                    <TextView
+                        android:id="@+id/profile_info_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/beautiful_text_margin2"
+                        android:text="New"
+                        android:textSize="@dimen/beautiful_text_size" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/beautiful_text_margin"
+                        android:text="Surname:"
+                        android:textSize="@dimen/beautiful_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/profile_info_surname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/beautiful_text_margin2"
+                        android:text="Guest"
+                        android:textSize="@dimen/beautiful_text_size" />
                 </LinearLayout>
+
+
 
             </LinearLayout>
 
+            <!-- Profile Info Layout End-->
+
+            <!-- Input/Output Processing Start-->
+
+            <LinearLayout
+                android:id="@+id/input_output_processing_layout"
+                android:layout_width="600dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_margin="@dimen/input_output_processing_margin"
+                android:padding="10dp">
+
+
+                <ImageView
+                    android:id="@+id/input_photo"
+                    android:layout_width="@dimen/input_output_processing_image_width"
+                    android:layout_height="@dimen/input_output_processing_image_height"
+                    android:src="@drawable/profile_iconmin" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:padding="10dp">
+                    <ImageView
+                        android:layout_width="@dimen/arrow_size"
+                        android:layout_height="@dimen/arrow_size"
+                        android:src="@drawable/play_arrow"/>
+                    <ImageView
+                        android:layout_width="@dimen/arrow_size"
+                        android:layout_height="@dimen/arrow_size"
+                        android:src="@drawable/play_arrow"/>
+                    <ImageView
+                        android:layout_width="@dimen/arrow_size"
+                        android:layout_height="@dimen/arrow_size"
+                        android:src="@drawable/play_arrow"/>
+                </LinearLayout>
+
+
+
+                <ImageView
+                    android:id="@+id/output_photo"
+                    android:layout_width="@dimen/input_output_processing_image_width"
+                    android:layout_height="@dimen/input_output_processing_image_height"
+                    android:src="@drawable/profile_iconmin"/>
+            </LinearLayout>
+
+            <!-- Input/Output Processing End-->
 
         </LinearLayout>
 
@@ -109,10 +172,13 @@
 
     </LinearLayout>
 
-    <!-- Camera Preview and Profile Info Layout End -->
-
-
-    <!-- Infomation Layout Start -->
-
-    <!-- Information Layout End -->
+    <TextView
+        android:id="@+id/result_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Welcome Visitor"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:background="@drawable/mylayoutshape"/>
 </LinearLayout>

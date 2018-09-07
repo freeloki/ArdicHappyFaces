@@ -5,8 +5,4 @@ public class PersonInfoToView {
     public PersonInfoToView(String result) {
         mTFresult=result;
     }
-
-
-
-
 }
