@@ -1,3 +1,4 @@
+
 # Built application files
 *.apk
 *.ap_
@@ -51,3 +52,8 @@ obj/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+
+#Training Folders
+Training/
+Face-Training/
+bottlenecks/

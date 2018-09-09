@@ -39,4 +39,12 @@ public class MyFaceDetector extends Detector<Face> {
         return mDelegate.setFocus(id);
     }
 
+    public boolean isFace(Frame frame) {
+
+        if (mDelegate.detect(frame).size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -48,6 +48,7 @@ public class TensorFlowImageClassifier implements Classifier {
     private String outputName;
     private int inputSize;
     private int imageMean;
+    private static int numClasses=31;
     private float imageStd;
 
     // Pre-allocated buffers.
@@ -105,7 +106,7 @@ public class TensorFlowImageClassifier implements Classifier {
 
         c.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
         // The shape of the output is [N, NUM_CLASSES], where N is the batch size.
-        int numClasses =31;
+        //int numClasses =30;
         Log.i(TAG, "Read " + c.labels.size() + " labels, output layer size is " + numClasses);
 
         // Ideally, inputSize could have been retrieved from the shape of the input operation.  Alas,

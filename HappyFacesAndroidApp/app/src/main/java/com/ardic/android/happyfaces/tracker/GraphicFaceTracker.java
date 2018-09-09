@@ -27,12 +27,7 @@ public class GraphicFaceTracker extends Tracker<Face> {
     @Override
     public void onNewItem(int faceId, Face item) {
         mFaceGraphic.setId(faceId);
-
         Log.i("Face", "face:" + faceId + "Obj? " + item.getPosition() + "  " + item.getLandmarks());
-
-        //ArdicFace guest = new ArdicFace("NONE", "NONE", 0, getApplicationContext());
-        // mlistenerColor.previewProfilePhoto(guest);
-
     }
 
     /**
@@ -48,14 +43,7 @@ public class GraphicFaceTracker extends Tracker<Face> {
 
         if (faceColorfromClass != mPrevfaceColor) {
             mPrevfaceColor = faceColorfromClass;
-            //ArdicFace guest = new ArdicFace("NONE", "NONE", 0, getApplicationContext());
-            //mlistenerColor.previewProfilePhoto(guest);
-
-        } else {
-            //   Log.i("color", "equal>>" + mPrevfaceColor);
         }
-
-
     }
 
 
@@ -79,10 +67,5 @@ public class GraphicFaceTracker extends Tracker<Face> {
     @Override
     public void onDone() {
         mOverlay.remove(mFaceGraphic);
-        //mlistenerColor.showResults("result", mPrevfaceColor);
-        //ArdicFace guest = new ArdicFace("NONE", "NONE", 0, getApplicationContext());
-        //mlistenerColor.previewProfilePhoto(guest);
-
-
     }
 }

@@ -3,17 +3,17 @@
 
     <!-- Camera Preview Dimensions -->
     <dimen name="camera_layout_border_width">625dp</dimen>
-    <dimen name="camera_layout_border_height">450dp</dimen>
+    <dimen name="camera_layout_border_height">550dp</dimen>
     <dimen name="camera_preview_width">600dp</dimen>
-    <dimen name="camera_preview_height">400dp</dimen>
+    <dimen name="camera_preview_height">550dp</dimen>
 
     <!-- Recognition / Profile Layout Dimensions -->
     <dimen name="profile_layout_border_width">625dp</dimen>
-    <dimen name="profile_layout_border_height">450dp</dimen>
+    <dimen name="profile_layout_border_height">550dp</dimen>
 
     <dimen name="input_output_processing_margin">10dp</dimen>
-    <dimen name="input_output_processing_image_width">75dp</dimen>
-    <dimen name="input_output_processing_image_height">75dp</dimen>
+    <dimen name="input_output_processing_image_width">150dp</dimen>
+    <dimen name="input_output_processing_image_height">150dp</dimen>
 
     <dimen name="arrow_text_size">25sp</dimen>
     <dimen name="arrow_margin_left">20dp</dimen>

@@ -30,11 +30,11 @@ import java.util.Set;
  * A view which renders a series of custom graphics to be overlayed on top of an associated preview
  * (i.e., the camera preview).  The creator can add graphics objects, update the objects, and remove
  * them, triggering the appropriate drawing and invalidation within the view.<p>
- *
+ * <p>
  * Supports scaling and mirroring of the graphics relative the camera's preview properties.  The
  * idea is that detection items are expressed in terms of a preview size, but need to be scaled up
  * to the full view size, and also mirrored in the case of the front-facing camera.<p>
- *
+ * <p>
  * Associated {@link Graphic} items should use the following methods to convert to view coordinates
  * for the graphics that are drawn:
  * <ol>
@@ -50,14 +50,8 @@ public class GraphicOverlay extends View {
     private float mWidthScaleFactor = 1.0f;
     private int mPreviewHeight;
     private float mHeightScaleFactor = 1.0f;
-    private int mFacing = CameraSource.CAMERA_FACING_FRONT ;
+    private int mFacing = CameraSource.CAMERA_FACING_FRONT;
     private Set<Graphic> mGraphics = new HashSet<>();
-
-    public Canvas getCanvas() {
-        return mCanvas;
-    }
-
-    private Canvas mCanvas;
 
     /**
      * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
@@ -185,13 +179,11 @@ public class GraphicOverlay extends View {
                 mWidthScaleFactor = (float) canvas.getWidth() / (float) mPreviewWidth;
                 mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;
             }
-            //Log.i("humf" , "canvas: " + canvas.getWidth() +"- "+canvas.getHeight());
 
             for (Graphic graphic : mGraphics) {
 
                 graphic.draw(canvas);
             }
-            mCanvas = canvas;
         }
     }
 }

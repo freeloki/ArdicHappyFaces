@@ -11,7 +11,7 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 
 public interface ResultListener {
-    void previewImage(Bitmap btp);
+    void previewImage(Bitmap bmm,int faceId);
     void previewProfilePhoto(ArdicFace face);
     void onFaceFrame(final Frame frame, final SparseArray<Face> faceSparseArray);
 }

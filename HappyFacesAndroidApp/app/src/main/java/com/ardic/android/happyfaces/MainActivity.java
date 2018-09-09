@@ -4,15 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.ImageFormat;
-import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,19 +24,19 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ardic.android.happyfaces.camera.CameraSourcePreview;
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.ardic.android.happyfaces.model.ArdicFace;
 import com.ardic.android.happyfaces.tracker.GraphicFaceTrackerFactory;
+import com.ardic.android.happyfaces.utils.FileUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.MultiProcessor;
-import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
@@ -59,18 +60,7 @@ public class MainActivity extends Activity implements ResultListener {
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     private TensorFlowBridge mTfTensorFlowBridge;
     private MyFaceDetector myFaceDetector;
-    private static final int COLOR_CHOICES[] = {
-            Color.BLUE,
-            Color.CYAN,
-            Color.GREEN,
-            Color.MAGENTA,
-            Color.RED,
-            Color.WHITE,
-            Color.YELLOW,
-            Color.BLACK
-    };
-    private ArrayList<Integer> mFaceColorList, mFaceColorList2;
-    private int threadCount = 0;
+    private ArrayList<Integer> mFaceColorList;
     private int mCurrentFaceId = -1;
 
     @Override
@@ -145,13 +135,12 @@ public class MainActivity extends Activity implements ResultListener {
 
         mFaceColorList = new ArrayList<>();
         mFaceColorList.add(-1);
-        mFaceColorList2 = new ArrayList<>();
-
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(getApplicationContext())
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
                 .setProminentFaceOnly(false)
                 .setTrackingEnabled(true)
+                .setMode(FaceDetector.ACCURATE_MODE)
                 .build();
 
         // This is how you merge myFaceDetector and google.vision detector
@@ -163,9 +152,11 @@ public class MainActivity extends Activity implements ResultListener {
         myFaceDetector = new MyFaceDetector(detector, this);
         // You can use your own processor
         //  myFaceDetector.
-        myFaceDetector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory(mGraphicOverlay))
-                        .build());
+
+        MultiProcessor multiProcessor = new MultiProcessor.Builder(new GraphicFaceTrackerFactory(mGraphicOverlay)).build();
+       // multiProcessor.receiveDetections();
+
+        myFaceDetector.setProcessor(multiProcessor);
 
         if (!myFaceDetector.isOperational()) {
             Log.w(TAG, "Face detector dependencies are not yet available.");
@@ -175,8 +166,8 @@ public class MainActivity extends Activity implements ResultListener {
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(getApplicationContext(), myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedPreviewSize(320, 240)
-                .setAutoFocusEnabled(true)
+                .setRequestedPreviewSize(960, 720)
+                .setAutoFocusEnabled(false)
                 .setRequestedFps(10.0f)
                 .build();
 
@@ -294,18 +285,20 @@ public class MainActivity extends Activity implements ResultListener {
     }
 
     @Override
-    public void previewImage(final Bitmap bmp) {
+    public void previewImage(final Bitmap bmp, final int mCurrentFaceId) {
 
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                Log.i("PreviewImage", "TF Detector faceID: " + mCurrentFaceId);
                 mSampleInputPhotoPreview.setImageBitmap(bmp);
                 long temp = System.currentTimeMillis();
                 List<ArdicFace> tfresult = mTfTensorFlowBridge.recognizeTensorFlowImage(bmp);
-                Log.i("Humfy", tfresult + " Detecting :" + tfresult + "     ms:" + (System.currentTimeMillis() - temp));
+                Log.i("PreviewImage", tfresult.size() + " Possible Faces Detected in :" + (System.currentTimeMillis() - temp) + " ms.");
 
-                if (!tfresult.isEmpty() && tfresult.size() == 1) {
+                if (!tfresult.isEmpty() && tfresult.size() == 1 && tfresult.get(0).getConfidence() > TensorFlowBridge.CONFIDENCE_PERCENTAGE) {
                     previewProfilePhoto(tfresult.get(0));
                 } else {
                     ArdicFace guest = new ArdicFace("NONE", "NONE", 0, getApplicationContext());
@@ -313,7 +306,7 @@ public class MainActivity extends Activity implements ResultListener {
                     mResultTextView.setText("Welcome Guest, We couldn't recognize you just for now :( But you look like:\n[");
                     for (ArdicFace face : tfresult) {
 
-                        if(tfresult.get(tfresult.size()-1).getName().equals(face.getName())) {
+                        if (tfresult.get(tfresult.size() - 1).getName().equals(face.getName())) {
                             mResultTextView.append(" " + face.getTitle() + " (%" + face.getPercentage() + ")].");
                         } else {
                             mResultTextView.append(" " + face.getTitle() + " (%" + face.getPercentage() + "), ");
@@ -321,7 +314,6 @@ public class MainActivity extends Activity implements ResultListener {
                     }
 
                 }
-
             }
         });
     }
@@ -337,7 +329,7 @@ public class MainActivity extends Activity implements ResultListener {
                 if (!"New".equals(face.getName())) {
                     mProfileName.setText(face.getName());
                     mProfileSurname.setText(face.getSurname());
-                    mResultTextView.setText("Welcome, " + face.getName() + " have a nice day.");
+                    mResultTextView.setText("Welcome, " + face.getName() + " have a nice day.(%" + face.getPercentage() + ")");
                 }
             }
         });
@@ -363,45 +355,36 @@ public class MainActivity extends Activity implements ResultListener {
                     int width = (int) thisFace.getWidth();
                     int height = (int) thisFace.getHeight();
 
+
                     if (x1 >= 0 && y1 >= 0 && width + x1 <= tempBitmap.getWidth() && height + y1 <= tempBitmap.getHeight()) {
                         final Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
+
 
                         if (mCurrentFaceId != thisFace.getId())  //give to TF
                         {
                             //  Log.i("Control", "1");
-                            previewImage(resizedbitmap1);
-
-                            mCurrentFaceId = thisFace.getId();
+                            if (myFaceDetector.isFace(newFrame)) {
+                                previewImage(resizedbitmap1, thisFace.getId());
+                                mCurrentFaceId = thisFace.getId();
+                                Log.i("PreviewImage", "TF Detector FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
+                                Log.i("PreviewImage", "TF Detector Size:   " + width + " x " + height);
+                            }
                         }
-                        String root = Environment.getExternalStorageDirectory().toString();
-                        File myDir = new File(root + "/faces__");
-                        myDir.mkdirs();
 
-                        String fname = "Image_" + mCurrentFaceId + "_" + System.currentTimeMillis() + ".jpg";
-                        File file = new File(myDir, fname);
-                        //  Log.i("salam", "" + file);
-                        if (file.exists())
-                            file.delete();
-                        try {
-                            FileOutputStream out = new FileOutputStream(file);
-                            resizedbitmap1.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                            out.flush();
-                            out.close();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        //TODO: Write face to file here.
+
+                        if ((newFrame.getMetadata().getId() % 10 == 0) && FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(mCurrentFaceId)) && myFaceDetector.isFace(newFrame)) {
+                            Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
+                            Log.i("PreviewImage", "Size:   " + width + " x " + height);
+                            Log.i("PreviewImage", "File Write Success !!! ");
                         }
 
                     }
 
 
                 }
-
-
             }
 
         }).start();
     }
-
-
-
 }

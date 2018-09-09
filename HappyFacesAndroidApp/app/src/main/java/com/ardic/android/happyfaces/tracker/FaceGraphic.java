@@ -18,6 +18,8 @@ package com.ardic.android.happyfaces.tracker;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.ardic.android.happyfaces.ResultListener;
@@ -29,24 +31,24 @@ import com.google.android.gms.vision.face.Face;
  * graphic overlay view.
  */
 class FaceGraphic extends GraphicOverlay.Graphic {
-    private static final float FACE_POSITION_RADIUS = 10.0f;
+    private static final float FACE_POSITION_RADIUS = 5.0f;
     private static final float ID_TEXT_SIZE = 40.0f;
     private static final float ID_Y_OFFSET = 50.0f;
     private static final float ID_X_OFFSET = -50.0f;
     private static final float BOX_STROKE_WIDTH = 5.0f;
     private float mTop, mRight, mLeft, mBottom;
     private static final int COLOR_CHOICES[] = {
-        Color.BLUE,
-        Color.CYAN,
-        Color.GREEN,
-        Color.MAGENTA,
-        Color.RED,
-        Color.WHITE,
-        Color.YELLOW,
+            Color.BLUE,
+            Color.CYAN,
+            Color.GREEN,
+            Color.MAGENTA,
+            Color.RED,
+            Color.WHITE,
+            Color.YELLOW,
             Color.BLACK
     };
     private static int mCurrentColorIndex = 0;
-    private int mFaceColor=-1;
+    private int mFaceColor = -1;
 
     private Paint mFacePositionPaint;
     private Paint mIdPaint;
@@ -55,24 +57,13 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     private volatile Face mFace;
     private int mFaceId;
     private float mFaceHappiness;
-    private ResultListener mRlistener;
-    public Canvas getAwesomeFace() {
-        return mAwesomeFace;
-    }
-
-    public void setAwesomeFace(Canvas mAwesomeFace) {
-        this.mAwesomeFace = mAwesomeFace;
-    }
-
-    private Canvas mAwesomeFace;
-
 
     public FaceGraphic(GraphicOverlay overlay) {
         super(overlay);
 
         mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
         final int selectedColor = COLOR_CHOICES[mCurrentColorIndex];
-        mFaceColor=mCurrentColorIndex;
+        mFaceColor = mCurrentColorIndex;
         mFacePositionPaint = new Paint();
         mFacePositionPaint.setColor(selectedColor);
 
@@ -84,11 +75,6 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         mBoxPaint.setColor(selectedColor);
         mBoxPaint.setStyle(Paint.Style.STROKE);
         mBoxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
-    }
-
-
-    public void setmRlistener(ResultListener mRlistener) {
-        this.mRlistener = mRlistener;
     }
 
     void setId(int id) {
@@ -108,51 +94,53 @@ class FaceGraphic extends GraphicOverlay.Graphic {
     /**
      * Draws the face annotations for position on the supplied canvas.
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void draw(Canvas canvas) {
         Face face = mFace;
         if (face == null) {
             return;
         }
-
-        //setAwesomeFace(canvas);
-        //mFacePositionPaint.setColor( Color.BLACK);
-        //mRlistener.previewImage(canvas);
         // Draws a rectangle at the position of the detected face, with the face's track id below.
+
+
         float x = translateX(face.getPosition().x + face.getWidth() / 2);
         float y = translateY(face.getPosition().y + face.getHeight() / 2);
+        // Draws a circle at the position of the detected face, with the face's track id below.
+
+        canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
         /// Draws a rectangle around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);
         float yOffset = scaleY(face.getHeight() / 2.0f);
         mLeft = x - xOffset;
         mTop = y - yOffset;
         mRight = x + xOffset;
-        mBottom = y + yOffset+10.0f;
-        canvas.drawText("" + mFaceId, mLeft-3, mTop-2 , mIdPaint);
+        mBottom = y + yOffset + 15f;
+        canvas.drawText("" + mFaceId, mLeft - 3, mTop - 2, mIdPaint);
 
         canvas.drawRect(mLeft, mTop, mRight, mBottom, mBoxPaint);
-
-
+        canvas.drawOval(mLeft,mTop,mRight,mBottom,mBoxPaint);
 
 
     }
-    int getFaceColor(){
+
+    int getFaceColor() {
         return mFaceColor;
     }
 
     public int getTop() {
-        return (int)mTop;
+        return (int) mTop;
     }
 
     public int getRight() {
-        return (int)mRight;
+        return (int) mRight;
     }
 
     public int getLeft() {
-        return (int)mLeft;
+        return (int) mLeft;
     }
 
     public int getBottom() {
-        return (int)mBottom;
+        return (int) mBottom;
     }
 }

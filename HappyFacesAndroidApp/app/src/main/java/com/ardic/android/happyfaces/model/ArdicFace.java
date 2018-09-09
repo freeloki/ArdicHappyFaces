@@ -180,6 +180,11 @@ public class ArdicFace {
                 name = "Özgür";
                 surname = "Özkök";
                 break;
+            case "paperguy":
+                mDrawable = mContext.getResources().getDrawable(R.drawable.guest_prof);
+                name = "Paper";
+                surname = "Guy";
+                break;
             case "perihanmirkelam":
                 mDrawable = mContext.getResources().getDrawable(R.drawable.perihanmirkelam);
                 name = "Perihan";
