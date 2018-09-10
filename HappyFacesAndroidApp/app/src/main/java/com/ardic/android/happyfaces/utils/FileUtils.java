@@ -9,13 +9,13 @@ import java.io.FileOutputStream;
 
 public class FileUtils {
 
-    public static synchronized boolean writeImageToFile(final Bitmap bmp, final String faceId) {
+    public static synchronized boolean writeImageToFile(final Bitmap bmp, final String faceId, String filename) {
 
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/faces__");
+        File myDir = new File(root + "/faces/"+filename);
         myDir.mkdirs();
 
-        String fname = "Image_" + faceId + "_" + System.currentTimeMillis() + ".png";
+        String fname = "Image_" + faceId + "_" + System.currentTimeMillis() + ".jpg";
         File file = new File(myDir, fname);
           Log.i("PreviewImage", "" + file);
         if (file.exists())

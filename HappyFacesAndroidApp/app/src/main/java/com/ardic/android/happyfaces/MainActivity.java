@@ -45,7 +45,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 public class MainActivity extends Activity implements ResultListener {
     private static final String TAG = "MainActivity";
@@ -60,8 +63,12 @@ public class MainActivity extends Activity implements ResultListener {
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     private TensorFlowBridge mTfTensorFlowBridge;
     private MyFaceDetector myFaceDetector;
-    private ArrayList<Integer> mFaceColorList;
+    //private PriorityQueue<Integer> mQueueTensorFlow;
+    private Map<Integer, List<Bitmap>> mMapWriteToFile = new HashMap<Integer, List<Bitmap>>();
+    private  ArrayList<Bitmap> mTotalPersonBitmap=new ArrayList<>();
     private int mCurrentFaceId = -1;
+    private String mPrevTFTitle=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,11 +137,7 @@ public class MainActivity extends Activity implements ResultListener {
 
     private void createCameraSource() {
 
-        //set the tfbridge
-        //tFbridge=new TensorFlowBridge(context);
 
-        mFaceColorList = new ArrayList<>();
-        mFaceColorList.add(-1);
         // You can use your own settings for your detector
         FaceDetector detector = new FaceDetector.Builder(getApplicationContext())
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
@@ -285,23 +288,25 @@ public class MainActivity extends Activity implements ResultListener {
     }
 
     @Override
-    public void previewImage(final Bitmap bmp, final int mCurrentFaceId) {
+    public void previewImage(final Bitmap bmp, final int faceId) {
 
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
-                Log.i("PreviewImage", "TF Detector faceID: " + mCurrentFaceId);
+                Log.i("PreviewImage", "TF Detector faceID: " + faceId);
                 mSampleInputPhotoPreview.setImageBitmap(bmp);
                 long temp = System.currentTimeMillis();
                 List<ArdicFace> tfresult = mTfTensorFlowBridge.recognizeTensorFlowImage(bmp);
                 Log.i("PreviewImage", tfresult.size() + " Possible Faces Detected in :" + (System.currentTimeMillis() - temp) + " ms.");
 
                 if (!tfresult.isEmpty() && tfresult.size() == 1 && tfresult.get(0).getConfidence() > TensorFlowBridge.CONFIDENCE_PERCENTAGE) {
+                    mPrevTFTitle=tfresult.get(0).getTitle();
                     previewProfilePhoto(tfresult.get(0));
                 } else {
                     ArdicFace guest = new ArdicFace("NONE", "NONE", 0, getApplicationContext());
+                    mPrevTFTitle="NOT_FOUND";
                     previewProfilePhoto(guest);
                     mResultTextView.setText("Welcome Guest, We couldn't recognize you just for now :( But you look like:\n[");
                     for (ArdicFace face : tfresult) {
@@ -326,11 +331,13 @@ public class MainActivity extends Activity implements ResultListener {
             public void run() {
                 mProfilePhotopreview.setImageDrawable(face.getDrawable());
                 mSampleOutputPhotoPreview.setImageDrawable(face.getDrawable());
+
+                mProfileName.setText(face.getName());
+                mProfileSurname.setText(face.getSurname());
                 if (!"New".equals(face.getName())) {
-                    mProfileName.setText(face.getName());
-                    mProfileSurname.setText(face.getSurname());
                     mResultTextView.setText("Welcome, " + face.getName() + " have a nice day.(%" + face.getPercentage() + ")");
                 }
+
             }
         });
 
@@ -362,18 +369,24 @@ public class MainActivity extends Activity implements ResultListener {
 
                         if (mCurrentFaceId != thisFace.getId())  //give to TF
                         {
+
                             //  Log.i("Control", "1");
                             if (myFaceDetector.isFace(newFrame)) {
                                 previewImage(resizedbitmap1, thisFace.getId());
                                 mCurrentFaceId = thisFace.getId();
+                                mTotalPersonBitmap.clear();
+
                                 Log.i("PreviewImage", "TF Detector FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                                 Log.i("PreviewImage", "TF Detector Size:   " + width + " x " + height);
                             }
                         }
+                        //mTotalPersonBitmap.add(resizedbitmap1);
+                        //if(newFrame.getMetadata().getId() %5==0){
 
+                        //}
                         //TODO: Write face to file here.
 
-                        if ((newFrame.getMetadata().getId() % 10 == 0) && FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(mCurrentFaceId)) && myFaceDetector.isFace(newFrame)) {
+                        if ((newFrame.getMetadata().getId() % 5 == 0) && mPrevTFTitle!=null && FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(mCurrentFaceId), mPrevTFTitle) && myFaceDetector.isFace(newFrame)) {
                             Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                             Log.i("PreviewImage", "Size:   " + width + " x " + height);
                             Log.i("PreviewImage", "File Write Success !!! ");
