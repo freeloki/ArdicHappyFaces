@@ -18,11 +18,11 @@ public class TensorFlowBridge {
     private static final float IMAGE_STD = 255;
     private static final String INPUT_NAME = "Placeholder";
     private static final String OUTPUT_NAME = "final_result";
-    public static final float CONFIDENCE_PERCENTAGE = 0.90f;
+    public static final float CONFIDENCE_PERCENTAGE = 0.85f;
     //private static final String MODEL_FILE = "file:///android_asset/100_192_mobile_net_2.pb";
     //private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_160_output_graph.pb";
     //mobilenet_v2_100_128_output_graph
-    private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_160_optimized_graph.pb";
+    private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_160_optimized_graph_3.pb";
     //private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_128_output_graph.pb";
 
 

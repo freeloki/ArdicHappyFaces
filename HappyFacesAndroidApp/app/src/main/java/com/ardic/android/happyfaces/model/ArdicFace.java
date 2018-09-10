@@ -216,6 +216,11 @@ public class ArdicFace {
                 name = "Taalai";
                 surname = "Almasova";
                 break;
+            case "teddybear":
+                mDrawable = mContext.getResources().getDrawable(R.drawable.teddybear);
+                name = "Teddy";
+                surname = "Bear";
+                break;
             case "tunckahveci":
                 mDrawable = mContext.getResources().getDrawable(R.drawable.tunckahveci);
                 name = "Tunç";

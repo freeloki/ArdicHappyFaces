@@ -380,17 +380,20 @@ public class MainActivity extends Activity implements ResultListener {
                                 Log.i("PreviewImage", "TF Detector Size:   " + width + " x " + height);
                             }
                         }
+                        else{
+                            if (/*(newFrame.getMetadata().getId() % 5 == 0) && */mPrevTFTitle!=null && FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(mCurrentFaceId), mPrevTFTitle) && myFaceDetector.isFace(newFrame)) {
+                                Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
+                                Log.i("PreviewImage", "Size:   " + width + " x " + height);
+                                Log.i("PreviewImage", "File Write Success !!! ");
+                            }
+                        }
                         //mTotalPersonBitmap.add(resizedbitmap1);
                         //if(newFrame.getMetadata().getId() %5==0){
 
                         //}
                         //TODO: Write face to file here.
 
-                        if ((newFrame.getMetadata().getId() % 5 == 0) && mPrevTFTitle!=null && FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(mCurrentFaceId), mPrevTFTitle) && myFaceDetector.isFace(newFrame)) {
-                            Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
-                            Log.i("PreviewImage", "Size:   " + width + " x " + height);
-                            Log.i("PreviewImage", "File Write Success !!! ");
-                        }
+
 
                     }
 
