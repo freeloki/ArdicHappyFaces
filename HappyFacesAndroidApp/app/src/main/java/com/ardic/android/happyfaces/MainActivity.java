@@ -8,16 +8,11 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
 import android.graphics.ImageFormat;
-import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -28,27 +23,25 @@ import android.widget.TextView;
 
 import com.ardic.android.happyfaces.camera.CameraSourcePreview;
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
+import com.ardic.android.happyfaces.detector.MyFaceDetector;
 import com.ardic.android.happyfaces.model.ArdicFace;
+import com.ardic.android.happyfaces.tensorflow.TensorFlowBridge;
 import com.ardic.android.happyfaces.tracker.GraphicFaceTrackerFactory;
 import com.ardic.android.happyfaces.utils.FileUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 public class MainActivity extends Activity implements ResultListener {
     private static final String TAG = "MainActivity";

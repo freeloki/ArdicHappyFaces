@@ -1,8 +1,9 @@
-package com.ardic.android.happyfaces;
+package com.ardic.android.happyfaces.detector;
 
 
 import android.util.SparseArray;
 
+import com.ardic.android.happyfaces.ResultListener;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;

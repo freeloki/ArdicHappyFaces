@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.ardic.android.happyfaces;
+package com.ardic.android.happyfaces.tensorflow;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.support.v4.os.TraceCompat;

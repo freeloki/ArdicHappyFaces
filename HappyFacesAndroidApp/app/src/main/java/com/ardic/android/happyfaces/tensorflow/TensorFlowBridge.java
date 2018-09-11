@@ -1,4 +1,4 @@
-package com.ardic.android.happyfaces;
+package com.ardic.android.happyfaces.tensorflow;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,8 +9,6 @@ import com.ardic.android.happyfaces.model.ArdicFace;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class TensorFlowBridge {
     private static final int INPUT_SIZE = 160;

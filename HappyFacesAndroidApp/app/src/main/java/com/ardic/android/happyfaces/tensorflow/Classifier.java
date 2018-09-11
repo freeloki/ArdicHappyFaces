@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.ardic.android.happyfaces;
+package com.ardic.android.happyfaces.tensorflow;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
