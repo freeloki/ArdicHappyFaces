@@ -113,12 +113,34 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         float xOffset = scaleX(face.getWidth() / 2.0f);
         float yOffset = scaleY(face.getHeight() / 2.0f);
         mLeft = x - xOffset;
-        mTop = y - yOffset;
+        mTop = y - yOffset+5f;
         mRight = x + xOffset;
         mBottom = y + yOffset + 15f;
         canvas.drawText("" + mFaceId, mLeft - 3, mTop - 2, mIdPaint);
 
         canvas.drawRect(mLeft, mTop, mRight, mBottom, mBoxPaint);
+        Log.i("PreviewImage"," #####");
+
+        Log.i("PreviewImage"," x " + x);
+
+        Log.i("PreviewImage"," y " + y);
+
+        Log.i("PreviewImage"," w " + xOffset);
+
+        Log.i("PreviewImage"," h " + yOffset);
+
+
+
+
+        Log.i("PreviewImage"," " + mLeft);
+        Log.i("PreviewImage"," " + mTop);
+
+        Log.i("PreviewImage"," " + mRight);
+
+        Log.i("PreviewImage"," " + mBottom);
+        Log.i("PreviewImage"," #####");
+
+
         canvas.drawOval(mLeft,mTop,mRight,mBottom,mBoxPaint);
 
 
