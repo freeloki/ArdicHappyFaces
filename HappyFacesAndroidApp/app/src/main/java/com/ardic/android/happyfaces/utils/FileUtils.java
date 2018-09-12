@@ -31,7 +31,7 @@ public class FileUtils {
             file.delete();
         try {
             FileOutputStream out = new FileOutputStream(file);
-            getCroppedBitmap(bmp).compress(Bitmap.CompressFormat.JPEG, 100, out);
+            // getCroppedBitmap(bmp).compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
         } catch (Exception e) {
@@ -45,14 +45,17 @@ public class FileUtils {
     public static Bitmap getCroppedBitmap(Bitmap bitmap) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
+        Canvas canvas = new Canvas(bitmap);
 
-        final int color = Color.BLACK;
+        final int color = Color.TRANSPARENT;
         final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final Paint paint2 = new Paint();
+        paint2.setColor(Color.BLACK);
+        paint2.setAntiAlias(true);
+       // final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
+        //canvas.drawARGB(255, 0, 0, 0);
         paint.setColor(color);
 
         float x = bitmap.getWidth() / 2.0f;
@@ -69,13 +72,14 @@ public class FileUtils {
         float mRight = x + mRightOffset;
         float mBottom = y + mBottomOffset;
 
-
+       // canvas.drawRect(mLeft, mTop, mRight, mBottom, paint2);
 
         canvas.drawOval(mLeft, mTop, mRight, mBottom, paint);
 
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
+       // paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
 
+        canvas.setBitmap(bitmap);
+        canvas.drawBitmap(bitmap, mLeft, mTop, paint);
 
         return output;
     }

@@ -175,10 +175,10 @@ public class MainActivity extends Activity implements ResultListener {
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(getApplicationContext(), myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                //.setRequestedPreviewSize(960, 720)
-                .setRequestedPreviewSize(640, 480)
+                .setRequestedPreviewSize(960, 720)
+                //.setRequestedPreviewSize(640, 480)
                 .setAutoFocusEnabled(false)
-                .setRequestedFps(30.0f)
+                .setRequestedFps(15.0f)
                 .build();
 
 
@@ -318,10 +318,10 @@ public class MainActivity extends Activity implements ResultListener {
     public void onFaceFrame(final Frame newFrame, final SparseArray<Face> faceSparseArray) {
 
 
-     /*   new Thread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void run() {*/
+        //    new Thread(new Runnable() {
+        //     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        //     @Override
+        //   public void run() {
         YuvImage yuvImage = new YuvImage(newFrame.getGrayscaleImageData().array(), ImageFormat.NV21, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight(), null);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         yuvImage.compressToJpeg(new Rect(0, 0, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight()), 100, byteArrayOutputStream);
@@ -336,8 +336,9 @@ public class MainActivity extends Activity implements ResultListener {
 
 
             if (x1 >= 0 && y1 >= 0 && width + x1 <= tempBitmap.getWidth() && height + y1 <= tempBitmap.getHeight()) {
-                final Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
+                Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
 
+                resizedbitmap1 = FileUtils.getCroppedBitmap(resizedbitmap1);
 
                 if (!trackingIds.contains(thisFace.getId())) {
 
@@ -355,20 +356,20 @@ public class MainActivity extends Activity implements ResultListener {
 
                 //TODO: Write face to file here.
 
-                if ((newFrame.getMetadata().getId() % 5 == 0) && myFaceDetector.isFace(newFrame) &&
-                        FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
+            ///  if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
+              //          FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
                     // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                     // Log.i("PreviewImage", "Size:   " + width + " x " + height);
                     // Log.i("PreviewImage", "File Write Success !!! ");
-                }
+             //   }
 
             }
 
 
         }
-        //}
+        //  }
 
-        //  }).start();
+        //   }).start();
     }
 
 

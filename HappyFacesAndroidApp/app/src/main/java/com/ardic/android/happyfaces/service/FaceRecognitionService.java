@@ -11,6 +11,7 @@ import com.ardic.android.happyfaces.listener.ResultListener;
 import com.ardic.android.happyfaces.model.ArdicFace;
 import com.ardic.android.happyfaces.model.FaceResultViewHolder;
 import com.ardic.android.happyfaces.tensorflow.TensorFlowBridge;
+import com.ardic.android.happyfaces.utils.FileUtils;
 
 import java.util.List;
 

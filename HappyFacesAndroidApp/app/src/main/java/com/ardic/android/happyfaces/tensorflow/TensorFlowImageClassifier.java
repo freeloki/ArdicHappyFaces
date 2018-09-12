@@ -48,7 +48,7 @@ public class TensorFlowImageClassifier implements Classifier {
     private String outputName;
     private int inputSize;
     private int imageMean;
-    private static int numClasses=32;
+    private static int numClasses=25;
     private float imageStd;
 
     // Pre-allocated buffers.
