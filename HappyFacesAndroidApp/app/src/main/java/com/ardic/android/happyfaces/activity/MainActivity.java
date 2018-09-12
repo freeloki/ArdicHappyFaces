@@ -1,10 +1,14 @@
-package com.ardic.android.happyfaces;
+package com.ardic.android.happyfaces.activity;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +16,10 @@ import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -21,11 +28,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ardic.android.happyfaces.R;
+import com.ardic.android.happyfaces.listener.ResultListener;
 import com.ardic.android.happyfaces.camera.CameraSourcePreview;
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.ardic.android.happyfaces.detector.MyFaceDetector;
 import com.ardic.android.happyfaces.model.ArdicFace;
-import com.ardic.android.happyfaces.tensorflow.TensorFlowBridge;
+import com.ardic.android.happyfaces.model.FaceResultViewHolder;
+import com.ardic.android.happyfaces.service.FaceRecognitionService;
 import com.ardic.android.happyfaces.tracker.GraphicFaceTrackerFactory;
 import com.ardic.android.happyfaces.utils.FileUtils;
 import com.google.android.gms.common.ConnectionResult;
@@ -39,9 +49,8 @@ import com.google.android.gms.vision.face.FaceDetector;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainActivity extends Activity implements ResultListener {
     private static final String TAG = "MainActivity";
@@ -54,13 +63,14 @@ public class MainActivity extends Activity implements ResultListener {
     private TextView mResultTextView, mProfileName, mProfileSurname;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
-    private TensorFlowBridge mTfTensorFlowBridge;
     private MyFaceDetector myFaceDetector;
-    //private PriorityQueue<Integer> mQueueTensorFlow;
-    private Map<Integer, List<Bitmap>> mMapWriteToFile = new HashMap<Integer, List<Bitmap>>();
-    private  ArrayList<Bitmap> mTotalPersonBitmap=new ArrayList<>();
+    private ArrayList<Bitmap> mTotalPersonBitmap = new ArrayList<>();
     private int mCurrentFaceId = -1;
-    private String mPrevTFTitle=null;
+    private String mPrevTFTitle = null;
+    private FaceRecognitionService mService;
+    private boolean mBound = false;
+
+    private List<Integer> trackingIds = new CopyOnWriteArrayList<>();
 
 
     @Override
@@ -68,9 +78,12 @@ public class MainActivity extends Activity implements ResultListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
 
+
+        Intent intent = new Intent(this, FaceRecognitionService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
         mPreview = findViewById(R.id.preview);
 
-        mTfTensorFlowBridge = new TensorFlowBridge(getApplicationContext());
 
         Log.i("humf", "preview size: " + mPreview.getHeight() + "|" + mPreview.getWidth());
         mGraphicOverlay = findViewById(R.id.faceOverlay);
@@ -150,7 +163,7 @@ public class MainActivity extends Activity implements ResultListener {
         //  myFaceDetector.
 
         MultiProcessor multiProcessor = new MultiProcessor.Builder(new GraphicFaceTrackerFactory(mGraphicOverlay)).build();
-       // multiProcessor.receiveDetections();
+        // multiProcessor.receiveDetections();
 
         myFaceDetector.setProcessor(multiProcessor);
 
@@ -162,9 +175,10 @@ public class MainActivity extends Activity implements ResultListener {
         // You can use your own settings for CameraSource
         mCameraSource = new CameraSource.Builder(getApplicationContext(), myFaceDetector)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedPreviewSize(960, 720)
+                //.setRequestedPreviewSize(960, 720)
+                .setRequestedPreviewSize(640, 480)
                 .setAutoFocusEnabled(false)
-                .setRequestedFps(10.0f)
+                .setRequestedFps(30.0f)
                 .build();
 
 
@@ -199,6 +213,9 @@ public class MainActivity extends Activity implements ResultListener {
         if (mCameraSource != null) {
             mCameraSource.release();
         }
+
+        unbindService(mConnection);
+        mBound = false;
     }
 
     /**
@@ -280,57 +297,18 @@ public class MainActivity extends Activity implements ResultListener {
         }
     }
 
-    @Override
-    public void previewImage(final Bitmap bmp, final int faceId) {
 
-
+    public void previewResult(final FaceResultViewHolder result) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                mSampleInputPhotoPreview.setImageBitmap(result.getInputPreviewBmp());
+                mProfilePhotopreview.setImageDrawable(result.getFace().getDrawable());
+                mSampleOutputPhotoPreview.setImageDrawable(result.getFace().getDrawable());
 
-                Log.i("PreviewImage", "TF Detector faceID: " + faceId);
-                mSampleInputPhotoPreview.setImageBitmap(bmp);
-                long temp = System.currentTimeMillis();
-                List<ArdicFace> tfresult = mTfTensorFlowBridge.recognizeTensorFlowImage(bmp);
-                Log.i("PreviewImage", tfresult.size() + " Possible Faces Detected in :" + (System.currentTimeMillis() - temp) + " ms.");
-
-                if (!tfresult.isEmpty() && tfresult.size() == 1 && tfresult.get(0).getConfidence() > TensorFlowBridge.CONFIDENCE_PERCENTAGE) {
-                    mPrevTFTitle=tfresult.get(0).getTitle();
-                    previewProfilePhoto(tfresult.get(0));
-                } else {
-                    ArdicFace guest = new ArdicFace("NONE", "NONE", 0, getApplicationContext());
-                    mPrevTFTitle="NOT_FOUND";
-                    previewProfilePhoto(guest);
-                    mResultTextView.setText("Welcome Guest, We couldn't recognize you just for now :( But you look like:\n[");
-                    for (ArdicFace face : tfresult) {
-
-                        if (tfresult.get(tfresult.size() - 1).getName().equals(face.getName())) {
-                            mResultTextView.append(" " + face.getTitle() + " (%" + face.getPercentage() + ")].");
-                        } else {
-                            mResultTextView.append(" " + face.getTitle() + " (%" + face.getPercentage() + "), ");
-                        }
-                    }
-
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void previewProfilePhoto(final ArdicFace face) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mProfilePhotopreview.setImageDrawable(face.getDrawable());
-                mSampleOutputPhotoPreview.setImageDrawable(face.getDrawable());
-
-                mProfileName.setText(face.getName());
-                mProfileSurname.setText(face.getSurname());
-                if (!"New".equals(face.getName())) {
-                    mResultTextView.setText("Welcome, " + face.getName() + " have a nice day.(%" + face.getPercentage() + ")");
-                }
-
+                mProfileName.setText(result.getFace().getName());
+                mProfileSurname.setText(result.getFace().getSurname());
+                mResultTextView.setText(result.getResultMsg());
             }
         });
 
@@ -340,60 +318,78 @@ public class MainActivity extends Activity implements ResultListener {
     public void onFaceFrame(final Frame newFrame, final SparseArray<Face> faceSparseArray) {
 
 
-        new Thread(new Runnable() {
+     /*   new Thread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
-            public void run() {
-                YuvImage yuvImage = new YuvImage(newFrame.getGrayscaleImageData().array(), ImageFormat.NV21, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight(), null);
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                yuvImage.compressToJpeg(new Rect(0, 0, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight()), 100, byteArrayOutputStream);
-                byte[] jpegArray = byteArrayOutputStream.toByteArray();
-                final Bitmap tempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
-                for (int i = 0; i < faceSparseArray.size(); i++) {
-                    Face thisFace = faceSparseArray.valueAt(i);
-                    int x1 = (int) (thisFace.getPosition().x);
-                    int y1 = (int) (thisFace.getPosition().y);
-                    int width = (int) thisFace.getWidth();
-                    int height = (int) thisFace.getHeight();
+            public void run() {*/
+        YuvImage yuvImage = new YuvImage(newFrame.getGrayscaleImageData().array(), ImageFormat.NV21, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight(), null);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        yuvImage.compressToJpeg(new Rect(0, 0, newFrame.getMetadata().getWidth(), newFrame.getMetadata().getHeight()), 100, byteArrayOutputStream);
+        byte[] jpegArray = byteArrayOutputStream.toByteArray();
+        final Bitmap tempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
+        for (int i = 0; i < faceSparseArray.size(); i++) {
+            Face thisFace = faceSparseArray.valueAt(i);
+            int x1 = (int) (thisFace.getPosition().x);
+            int y1 = (int) (thisFace.getPosition().y);
+            int width = (int) thisFace.getWidth();
+            int height = (int) thisFace.getHeight();
 
 
-                    if (x1 >= 0 && y1 >= 0 && width + x1 <= tempBitmap.getWidth() && height + y1 <= tempBitmap.getHeight()) {
-                        final Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
+            if (x1 >= 0 && y1 >= 0 && width + x1 <= tempBitmap.getWidth() && height + y1 <= tempBitmap.getHeight()) {
+                final Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
 
 
-                        if (mCurrentFaceId != thisFace.getId())  //give to TF
-                        {
+                if (!trackingIds.contains(thisFace.getId())) {
 
-                            //  Log.i("Control", "1");
-                            if (myFaceDetector.isFace(newFrame)) {
-                                previewImage(resizedbitmap1, thisFace.getId());
-                                mCurrentFaceId = thisFace.getId();
-                                mTotalPersonBitmap.clear();
-
-                                Log.i("PreviewImage", "TF Detector FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
-                                Log.i("PreviewImage", "TF Detector Size:   " + width + " x " + height);
-                            }
+                    //  Log.i("Control", "1");
+                    if (myFaceDetector.isFace(newFrame)) {
+                        if (mBound) {
+                            mService.recognizeImage(resizedbitmap1, thisFace.getId());
+                            trackingIds.add(thisFace.getId());
                         }
-
-
-
-
-
-
-                        //TODO: Write face to file here.
-
-                        if (/*(newFrame.getMetadata().getId() % 5 == 0) && */mPrevTFTitle!=null  && myFaceDetector.isFace(newFrame) &&
-                                FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(mCurrentFaceId), mPrevTFTitle)) {
-                            Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
-                            Log.i("PreviewImage", "Size:   " + width + " x " + height);
-                            Log.i("PreviewImage", "File Write Success !!! ");
-                        }
-
+                        // mTotalPersonBitmap.clear();
+                        // Log.i("PreviewImage", "TF Detector FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
+                        // Log.i("PreviewImage", "TF Detector Size:   " + width + " x " + height);
                     }
-
-
                 }
+
+                //TODO: Write face to file here.
+
+                if ((newFrame.getMetadata().getId() % 5 == 0) && myFaceDetector.isFace(newFrame) &&
+                        FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
+                    // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
+                    // Log.i("PreviewImage", "Size:   " + width + " x " + height);
+                    // Log.i("PreviewImage", "File Write Success !!! ");
+                }
+
             }
 
-        }).start();
+
+        }
+        //}
+
+        //  }).start();
     }
+
+
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            FaceRecognitionService.FaceRecognitionServiceBinder binder = (FaceRecognitionService.FaceRecognitionServiceBinder) service;
+            mService = binder.getService();
+            mBound = true;
+            mService.setResultListener(MainActivity.this);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
 }

@@ -4,7 +4,6 @@ package com.ardic.android.happyfaces.tracker;
 // Graphic Face Tracker
 //==============================================================================================
 
-import com.ardic.android.happyfaces.ResultListener;
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;

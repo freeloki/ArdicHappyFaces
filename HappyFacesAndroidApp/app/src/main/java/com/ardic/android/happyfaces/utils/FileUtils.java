@@ -2,6 +2,7 @@ package com.ardic.android.happyfaces.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -17,15 +18,15 @@ import java.io.FileOutputStream;
 public class FileUtils {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static synchronized boolean writeImageToFile(final Bitmap bmp, final String faceId, String filename) {
+    public static synchronized boolean writeImageToFile(final Bitmap bmp, final String faceId) {
 
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/aaaaa/" + filename);
+        File myDir = new File(root + "/faces/" + faceId);
         myDir.mkdirs();
 
         String fname = "Image_" + faceId + "_" + System.currentTimeMillis() + ".jpg";
         File file = new File(myDir, fname);
-        Log.i("PreviewImage", "" + file);
+        //Log.i("PreviewImage", "" + file);
         if (file.exists())
             file.delete();
         try {
@@ -46,30 +47,28 @@ public class FileUtils {
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
-        final int color = 0XFF000000;
+        final int color = Color.BLACK;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
-        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-        // canvas.drawOval();
-        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
-        //return _bmp;
+
         float x = bitmap.getWidth() / 2.0f;
         float y = bitmap.getHeight() / 2.0f;
 
-        float mLeftOffset = x * 0.82f;
-        float mTopOffset = y*0.80f;
-        float mRightOffset = x*0.82f;
-        float mBottomOffset = y*0.95f;
+        float mLeftOffset = x * 0.83f;
+        float mTopOffset = y * 0.85f;
+        float mRightOffset = x * 0.83f;
+        float mBottomOffset = y;
 
 
         float mLeft = x - mLeftOffset;
         float mTop = y - mTopOffset;
         float mRight = x + mRightOffset;
         float mBottom = y + mBottomOffset;
+
 
 
         canvas.drawOval(mLeft, mTop, mRight, mBottom, paint);
@@ -79,20 +78,5 @@ public class FileUtils {
 
 
         return output;
-    }
-
-    /**
-     * Adjusts a horizontal value of the supplied value from the preview scale to the view
-     * scale.
-     */
-    public static float scaleX(float horizontal) {
-        return horizontal * 0.80f;
-    }
-
-    /**
-     * Adjusts a vertical value of the supplied value from the preview scale to the view scale.
-     */
-    public static float scaleY(float vertical) {
-        return vertical * 0.82f;
     }
 }

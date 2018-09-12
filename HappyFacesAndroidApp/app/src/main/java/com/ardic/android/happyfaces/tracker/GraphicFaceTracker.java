@@ -27,7 +27,7 @@ public class GraphicFaceTracker extends Tracker<Face> {
     @Override
     public void onNewItem(int faceId, Face item) {
         mFaceGraphic.setId(faceId);
-        Log.i("Face", "face:" + faceId + "Obj? " + item.getPosition() + "  " + item.getLandmarks());
+        //Log.i("Face", "face:" + faceId + "Obj? " + item.getPosition() + "  " + item.getLandmarks());
     }
 
     /**
@@ -55,7 +55,7 @@ public class GraphicFaceTracker extends Tracker<Face> {
     @Override
     public void onMissing(FaceDetector.Detections<Face> detectionResults) {
         mOverlay.remove(mFaceGraphic);
-        Log.i("humf", "onMissing " + mPrevfaceColor);
+       // Log.i("humf", "onMissing " + mPrevfaceColor);
 
 
     }

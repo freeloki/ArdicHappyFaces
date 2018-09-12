@@ -24,11 +24,11 @@ public class TensorFlowBridge {
     //private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_128_output_graph.pb";
 
 
-
     private static final String LABEL_FILE =
             "file:///android_asset/labels.txt";
     private Classifier classifier;
     private Context mContext;
+
     public TensorFlowBridge(Context context) {
         mContext = context.getApplicationContext();
         try {
@@ -49,14 +49,14 @@ public class TensorFlowBridge {
     }
 
 
-    public List<ArdicFace> recognizeTensorFlowImage(Bitmap bmp) {
+    public synchronized List<ArdicFace> recognizeTensorFlowImage(Bitmap bmp) {
 
         List<ArdicFace> faces = new ArrayList<>();
         if (bmp != null) {
             Bitmap bitmaptf = Bitmap.createScaledBitmap(bmp, INPUT_SIZE, INPUT_SIZE, false);
             List<Classifier.Recognition> imgrecognize = classifier.recognizeImage(bitmaptf);
-            Log.i("Humfy", "result: " + imgrecognize.toString());
-            Log.i("humf: ", "%>>" + imgrecognize.get(0).getConfidence() + "-");
+           // Log.i("Humfy", "result: " + imgrecognize.toString());
+           // Log.i("humf: ", "%>>" + imgrecognize.get(0).getConfidence() + "-");
 
             if (!imgrecognize.isEmpty()) {
                 Classifier.Recognition mRecognition = imgrecognize.get(0);

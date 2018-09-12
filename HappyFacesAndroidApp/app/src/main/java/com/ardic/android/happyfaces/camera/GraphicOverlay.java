@@ -176,7 +176,7 @@ public class GraphicOverlay extends View {
 
         synchronized (mLock) {
             if ((mPreviewWidth != 0) && (mPreviewHeight != 0)) {
-                Log.i("HUMF","mWdthSclf" + mWidthScaleFactor + " mHeightscf" + mHeightScaleFactor);
+                //Log.i("HUMF","mWdthSclf" + mWidthScaleFactor + " mHeightscf" + mHeightScaleFactor);
                 mWidthScaleFactor = (float) canvas.getWidth() / (float) mPreviewWidth;
                 mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;
             }
