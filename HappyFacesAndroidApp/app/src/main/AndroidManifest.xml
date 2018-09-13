@@ -28,6 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SelectActivity"
+            android:label="App Settings"
+            android:theme="@style/Theme.AppCompat"
+            />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -36,7 +40,7 @@
         <service
             android:name=".service.FaceRecognitionService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -25,7 +25,10 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ardic.android.happyfaces.R;
@@ -64,15 +67,11 @@ public class MainActivity extends Activity implements ResultListener {
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     private MyFaceDetector myFaceDetector;
-    private ArrayList<Bitmap> mTotalPersonBitmap = new ArrayList<>();
-    private int mCurrentFaceId = -1;
-    private String mPrevTFTitle = null;
     private FaceRecognitionService mService;
     private boolean mBound = false;
 
     private List<Integer> trackingIds = new CopyOnWriteArrayList<>();
-
-
+    private ImageButton mButtonOptions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +93,13 @@ public class MainActivity extends Activity implements ResultListener {
         mResultTextView = findViewById(R.id.result_text_view);
         mProfileName = findViewById(R.id.profile_info_name);
         mProfileSurname = findViewById(R.id.profile_info_surname);
+        mButtonOptions=findViewById(R.id.button3);
+        mButtonOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectActivity();
+            }
+        });
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -105,6 +111,12 @@ public class MainActivity extends Activity implements ResultListener {
             createCameraSource();
         }
 
+    }
+
+    private void selectActivity() {
+        Intent intent = new Intent(this, SelectActivity.class);
+        //startActivity(intent);
+        MainActivity.this.startActivity(intent);
     }
 
     /**
@@ -356,12 +368,14 @@ public class MainActivity extends Activity implements ResultListener {
 
                 //TODO: Write face to file here.
 
-                if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
-                        FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
-                    // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
-                    // Log.i("PreviewImage", "Size:   " + width + " x " + height);
-                    // Log.i("PreviewImage", "File Write Success !!! ");
-                }
+                    if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
+                            FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
+                        // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
+                        // Log.i("PreviewImage", "Size:   " + width + " x " + height);
+                        // Log.i("PreviewImage", "File Write Success !!! ");
+                    }
+
+
 
             }
 
