@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -72,12 +74,20 @@ public class MainActivity extends Activity implements ResultListener {
 
     private List<Integer> trackingIds = new CopyOnWriteArrayList<>();
     private ImageButton mButtonOptions;
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditorPrefernces ;
+    private boolean isFileSettingsEnabled;
+    private boolean isTensorFlowEnabled;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
 
-
+        //Shared Preferences
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditorPrefernces = mPreferences.edit();
+        Log.i("Preferences", mPreferences.getString("FileEnableSettings", ""));
+        //#######################################################################
         Intent intent = new Intent(this, FaceRecognitionService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
@@ -204,6 +214,11 @@ public class MainActivity extends Activity implements ResultListener {
         super.onResume();
 
         startCameraSource();
+        //Shared Preferences
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+        //#######################################################################
     }
 
     /**
@@ -355,10 +370,12 @@ public class MainActivity extends Activity implements ResultListener {
                 if (!trackingIds.contains(thisFace.getId())) {
 
                     //  Log.i("Control", "1");
-                    if (myFaceDetector.isFace(newFrame)) {
+                    if (myFaceDetector.isFace(newFrame) ) {
                         if (mBound) {
-                            mService.recognizeImage(resizedbitmap1, thisFace.getId());
-                            trackingIds.add(thisFace.getId());
+                            if(mPreferences.getString("TensorFlowEnableSettings", "")=="true") {
+                                mService.recognizeImage(resizedbitmap1, thisFace.getId());
+                                trackingIds.add(thisFace.getId());
+                            }
                         }
                         // mTotalPersonBitmap.clear();
                         // Log.i("PreviewImage", "TF Detector FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
@@ -367,14 +384,14 @@ public class MainActivity extends Activity implements ResultListener {
                 }
 
                 //TODO: Write face to file here.
-
+                if(mPreferences.getString("FileEnableSettings", "")=="true") {
                     if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
                             FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
                         // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                         // Log.i("PreviewImage", "Size:   " + width + " x " + height);
                         // Log.i("PreviewImage", "File Write Success !!! ");
                     }
-
+                }
 
 
             }
@@ -407,4 +424,10 @@ public class MainActivity extends Activity implements ResultListener {
             mBound = false;
         }
     };
+
+    public void readPrefs(){
+       // mPreferences.getString(SelectActivity.SETTINGS_TENSORFLOW"")
+
+        //mPreferences.get
+    }
 }
