@@ -31,7 +31,7 @@ public class FileUtils {
             file.delete();
         try {
             FileOutputStream out = new FileOutputStream(file);
-            // getCroppedBitmap(bmp).compress(Bitmap.CompressFormat.JPEG, 100, out);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
         } catch (Exception e) {
@@ -45,17 +45,14 @@ public class FileUtils {
     public static Bitmap getCroppedBitmap(Bitmap bitmap) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
+        Canvas canvas = new Canvas(output);
 
-        final int color = Color.TRANSPARENT;
+        final int color = Color.BLACK;
         final Paint paint = new Paint();
-        final Paint paint2 = new Paint();
-        paint2.setColor(Color.BLACK);
-        paint2.setAntiAlias(true);
-       // final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         paint.setAntiAlias(true);
-        //canvas.drawARGB(255, 0, 0, 0);
+        canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
 
         float x = bitmap.getWidth() / 2.0f;
@@ -72,15 +69,19 @@ public class FileUtils {
         float mRight = x + mRightOffset;
         float mBottom = y + mBottomOffset;
 
-       // canvas.drawRect(mLeft, mTop, mRight, mBottom, paint2);
 
         canvas.drawOval(mLeft, mTop, mRight, mBottom, paint);
 
-       // paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
 
-        canvas.setBitmap(bitmap);
-        canvas.drawBitmap(bitmap, mLeft, mTop, paint);
 
-        return output;
+        Bitmap output2 = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas2 = new Canvas(output2);
+        canvas2.drawARGB(255, 0, 0, 0);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+        canvas2.drawBitmap(output, rect, rect, paint);
+        return output2;
     }
 }

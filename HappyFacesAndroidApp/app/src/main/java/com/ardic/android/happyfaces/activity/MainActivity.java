@@ -356,12 +356,12 @@ public class MainActivity extends Activity implements ResultListener {
 
                 //TODO: Write face to file here.
 
-            ///  if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
-              //          FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
+                if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
+                        FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
                     // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                     // Log.i("PreviewImage", "Size:   " + width + " x " + height);
                     // Log.i("PreviewImage", "File Write Success !!! ");
-             //   }
+                }
 
             }
 
