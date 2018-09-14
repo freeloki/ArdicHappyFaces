@@ -5,42 +5,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SelectActivity"
+    tools:context=".activity.SettingsActivity"
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:layout_gravity="center"
-        android:orientation="vertical">
 
 
+        <CheckBox
+            android:id="@+id/turnOnTensorflow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turn on Tensorflow"
+            android:textColor="@color/awesomeTextColor"
+            android:textSize="30sp"
+            android:layout_margin="50dp"/>
 
         <CheckBox
             android:id="@+id/checkBoxSaveFile"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Save Images to file"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
-            android:textSize="30dp"
-            android:checked="true"
-            android:textColor="@color/awesomeTextColor"/>
-        <CheckBox
-            android:id="@+id/TurnonTensorflow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Turn on Tensorflow"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
-            android:textSize="30dp"
-            android:checked="true"
-            android:textColor="@color/awesomeTextColor"/>
+            android:textColor="@color/awesomeTextColor"
+            android:textSize="30sp"
+            android:layout_margin="50dp"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/EditTextNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="50dp"
+                    android:text="Number of Frames"
+                    android:textColor="@color/awesomeTextColor"
+                    android:textSize="30sp"
+                    android:visibility="invisible"/>
+
+                <EditText
+                    android:id="@+id/NumberOfFrameseditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:ems="3"
+                    android:inputType="numberSigned"
+                    android:text="1"
+                    android:maxLength="3"
+                    android:visibility="invisible"
+                    android:background="@color/awesomeTextColor"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="25sp" />
+
+        </LinearLayout>
+
 
 </LinearLayout>

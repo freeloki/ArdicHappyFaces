@@ -61,7 +61,7 @@
 
             <!-- Profile Info Layout Start -->
 
-            <LinearLayout
+         <!--   <LinearLayout
                 android:id="@+id/switchLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,14 +69,8 @@
                 android:layout_gravity="right"
                >
 
-                <ImageButton
-                    android:id="@+id/button3"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginRight="40dp"
-                    android:text="Button"
-                    android:background="@drawable/settings"/>
-            </LinearLayout>
+
+            </LinearLayout> -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -99,6 +93,14 @@
                     android:layout_height="@dimen/beautiful_information_layout_height"
                     android:gravity="center"
                     android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/settingsActivityBtn"
+                        android:layout_width="@dimen/button_settings_width"
+                        android:layout_height="@dimen/button_settings_height"
+                        android:background="@drawable/settings"
+                        android:text="Button"
+                        android:layout_gravity="end"/>
 
                     <TextView
                         android:layout_width="wrap_content"

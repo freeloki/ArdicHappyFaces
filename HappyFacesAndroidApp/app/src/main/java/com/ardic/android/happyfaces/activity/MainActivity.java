@@ -17,20 +17,16 @@ import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ardic.android.happyfaces.R;
@@ -38,7 +34,6 @@ import com.ardic.android.happyfaces.listener.ResultListener;
 import com.ardic.android.happyfaces.camera.CameraSourcePreview;
 import com.ardic.android.happyfaces.camera.GraphicOverlay;
 import com.ardic.android.happyfaces.detector.MyFaceDetector;
-import com.ardic.android.happyfaces.model.ArdicFace;
 import com.ardic.android.happyfaces.model.FaceResultViewHolder;
 import com.ardic.android.happyfaces.service.FaceRecognitionService;
 import com.ardic.android.happyfaces.tracker.GraphicFaceTrackerFactory;
@@ -53,7 +48,6 @@ import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -75,26 +69,30 @@ public class MainActivity extends Activity implements ResultListener {
     private List<Integer> trackingIds = new CopyOnWriteArrayList<>();
     private ImageButton mButtonOptions;
     private SharedPreferences mPreferences;
-    private SharedPreferences.Editor mEditorPrefernces ;
+    private SharedPreferences.Editor editor;
     private boolean isFileSettingsEnabled;
     private boolean isTensorFlowEnabled;
+    private int mNumberofFrames;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_layout_activity);
-
+        isFileSettingsEnabled = true;
+        isTensorFlowEnabled = true;
+        mNumberofFrames=1;
         //Shared Preferences
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditorPrefernces = mPreferences.edit();
-        Log.i("Preferences", mPreferences.getString("FileEnableSettings", ""));
-        //#######################################################################
+        mPreferences = getSharedPreferences(SettingsActivity.SETTINGS_PREF,Context.MODE_PRIVATE);
+        editor = mPreferences.edit();
+        initSharedPreferences();
+        readSharedPreferences();
+        /*************************************************************************/
+        /** service                                                          */
         Intent intent = new Intent(this, FaceRecognitionService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
+        /*************************************************************************/
         mPreview = findViewById(R.id.preview);
 
-
-        Log.i("humf", "preview size: " + mPreview.getHeight() + "|" + mPreview.getWidth());
         mGraphicOverlay = findViewById(R.id.faceOverlay);
 
         mSampleInputPhotoPreview = findViewById(R.id.input_photo);
@@ -103,11 +101,11 @@ public class MainActivity extends Activity implements ResultListener {
         mResultTextView = findViewById(R.id.result_text_view);
         mProfileName = findViewById(R.id.profile_info_name);
         mProfileSurname = findViewById(R.id.profile_info_surname);
-        mButtonOptions=findViewById(R.id.button3);
+        mButtonOptions = findViewById(R.id.settingsActivityBtn);
         mButtonOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectActivity();
+                startSettingsActivity();
             }
         });
         // Check for the camera permission before accessing the camera.  If the
@@ -123,10 +121,9 @@ public class MainActivity extends Activity implements ResultListener {
 
     }
 
-    private void selectActivity() {
-        Intent intent = new Intent(this, SelectActivity.class);
-        //startActivity(intent);
-        MainActivity.this.startActivity(intent);
+    private void startSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -215,8 +212,10 @@ public class MainActivity extends Activity implements ResultListener {
 
         startCameraSource();
         //Shared Preferences
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = mPreferences.edit();
+        readSharedPreferences();
 
         //#######################################################################
     }
@@ -366,13 +365,13 @@ public class MainActivity extends Activity implements ResultListener {
                 Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
 
                 resizedbitmap1 = FileUtils.getCroppedBitmap(resizedbitmap1);
-
+                Log.i("Frames", mNumberofFrames+"   TF: " +isTensorFlowEnabled+"    File: "+isFileSettingsEnabled);
                 if (!trackingIds.contains(thisFace.getId())) {
 
                     //  Log.i("Control", "1");
-                    if (myFaceDetector.isFace(newFrame) ) {
+                    if (myFaceDetector.isFace(newFrame)) {
                         if (mBound) {
-                            if(mPreferences.getString("TensorFlowEnableSettings", "")=="true") {
+                            if (isTensorFlowEnabled == true) {
                                 mService.recognizeImage(resizedbitmap1, thisFace.getId());
                                 trackingIds.add(thisFace.getId());
                             }
@@ -384,8 +383,9 @@ public class MainActivity extends Activity implements ResultListener {
                 }
 
                 //TODO: Write face to file here.
-                if(mPreferences.getString("FileEnableSettings", "")=="true") {
-                    if (/*(newFrame.getMetadata().getId() % 5 == 0) && */myFaceDetector.isFace(newFrame) &&
+                if (isFileSettingsEnabled == true) {
+
+                    if (mNumberofFrames>-1 && myFaceDetector.isFace(newFrame) &&
                             FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
                         // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                         // Log.i("PreviewImage", "Size:   " + width + " x " + height);
@@ -425,9 +425,30 @@ public class MainActivity extends Activity implements ResultListener {
         }
     };
 
-    public void readPrefs(){
-       // mPreferences.getString(SelectActivity.SETTINGS_TENSORFLOW"")
+    private void initSharedPreferences() {
+        if (!mPreferences.contains(SettingsActivity.SETTINGS_FILE) && !mPreferences.contains(SettingsActivity.SETTINGS_TENSORFLOW)) {
 
-        //mPreferences.get
+            editor.putBoolean(SettingsActivity.SETTINGS_FILE, true);
+            editor.putBoolean(SettingsActivity.SETTINGS_TENSORFLOW, true);
+            editor.putInt(SettingsActivity.SETTINGS_FRAMES, mNumberofFrames);
+            Log.i("initShared", "enter");
+            editor.commit();
+            readSharedPreferences();
+        }
+
+    }
+
+    private void readSharedPreferences() {
+        if (mPreferences.contains(SettingsActivity.SETTINGS_FILE) && mPreferences.contains(SettingsActivity.SETTINGS_TENSORFLOW)) {
+            isFileSettingsEnabled = mPreferences.getBoolean(SettingsActivity.SETTINGS_FILE, false);
+            isTensorFlowEnabled = mPreferences.getBoolean(SettingsActivity.SETTINGS_TENSORFLOW, false);
+            if(isFileSettingsEnabled==true){
+                mNumberofFrames=mPreferences.getInt(SettingsActivity.SETTINGS_FRAMES, 1);
+                Log.i("Frames init", mNumberofFrames+"");
+            }
+            Log.i("Frames main", mNumberofFrames+ "     "+isTensorFlowEnabled+"    "+isFileSettingsEnabled);
+        }
+
+
     }
 }
