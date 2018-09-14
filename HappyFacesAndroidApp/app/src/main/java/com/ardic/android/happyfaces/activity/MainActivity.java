@@ -80,9 +80,9 @@ public class MainActivity extends Activity implements ResultListener {
         setContentView(R.layout.camera_layout_activity);
         isFileSettingsEnabled = true;
         isTensorFlowEnabled = true;
-        mNumberofFrames=1;
+        mNumberofFrames = 1;
         //Shared Preferences
-        mPreferences = getSharedPreferences(SettingsActivity.SETTINGS_PREF,Context.MODE_PRIVATE);
+        mPreferences = getSharedPreferences(SettingsActivity.SETTINGS_PREF, Context.MODE_PRIVATE);
         editor = mPreferences.edit();
         initSharedPreferences();
         readSharedPreferences();
@@ -365,7 +365,7 @@ public class MainActivity extends Activity implements ResultListener {
                 Bitmap resizedbitmap1 = Bitmap.createBitmap(tempBitmap, x1, y1, width, height);
 
                 resizedbitmap1 = FileUtils.getCroppedBitmap(resizedbitmap1);
-                Log.i("Frames", mNumberofFrames+"   TF: " +isTensorFlowEnabled+"    File: "+isFileSettingsEnabled);
+                Log.i("Frames", mNumberofFrames + "   TF: " + isTensorFlowEnabled + "    File: " + isFileSettingsEnabled);
                 if (!trackingIds.contains(thisFace.getId())) {
 
                     //  Log.i("Control", "1");
@@ -385,7 +385,7 @@ public class MainActivity extends Activity implements ResultListener {
                 //TODO: Write face to file here.
                 if (isFileSettingsEnabled == true) {
 
-                    if (mNumberofFrames>-1 && myFaceDetector.isFace(newFrame) &&
+                    if (mNumberofFrames > 0 && (newFrame.getMetadata().getId() % mNumberofFrames) == 0 && myFaceDetector.isFace(newFrame) &&
                             FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
                         // Log.i("PreviewImage", "FrameID: " + newFrame.getMetadata().getId() + "\nFrameTimeStamp: " + newFrame.getMetadata().getTimestampMillis());
                         // Log.i("PreviewImage", "Size:   " + width + " x " + height);
@@ -442,11 +442,11 @@ public class MainActivity extends Activity implements ResultListener {
         if (mPreferences.contains(SettingsActivity.SETTINGS_FILE) && mPreferences.contains(SettingsActivity.SETTINGS_TENSORFLOW)) {
             isFileSettingsEnabled = mPreferences.getBoolean(SettingsActivity.SETTINGS_FILE, false);
             isTensorFlowEnabled = mPreferences.getBoolean(SettingsActivity.SETTINGS_TENSORFLOW, false);
-            if(isFileSettingsEnabled==true){
-                mNumberofFrames=mPreferences.getInt(SettingsActivity.SETTINGS_FRAMES, 1);
-                Log.i("Frames init", mNumberofFrames+"");
+            if (isFileSettingsEnabled == true) {
+                mNumberofFrames = mPreferences.getInt(SettingsActivity.SETTINGS_FRAMES, 1);
+                Log.i("Frames init", mNumberofFrames + "");
             }
-            Log.i("Frames main", mNumberofFrames+ "     "+isTensorFlowEnabled+"    "+isFileSettingsEnabled);
+            Log.i("Frames main", mNumberofFrames + "     " + isTensorFlowEnabled + "    " + isFileSettingsEnabled);
         }
 
 
