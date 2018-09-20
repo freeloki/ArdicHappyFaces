@@ -18,7 +18,9 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -73,6 +75,8 @@ public class MainActivity extends Activity implements ResultListener {
     private boolean isFileSettingsEnabled;
     private boolean isTensorFlowEnabled;
     private int mNumberofFrames;
+    private static final long REMOVE_DELAY_MS = 3000L;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -371,9 +375,14 @@ public class MainActivity extends Activity implements ResultListener {
                     //  Log.i("Control", "1");
                     if (myFaceDetector.isFace(newFrame)) {
                         if (mBound) {
-                            if (isTensorFlowEnabled == true) {
+                            if (isTensorFlowEnabled) {
                                 mService.recognizeImage(resizedbitmap1, thisFace.getId());
                                 trackingIds.add(thisFace.getId());
+                                /**
+                                 * remove id from list and try to recognize it again.
+                                 */
+                                removeTrackingIdFromList(thisFace.getId());
+
                             }
                         }
                         // mTotalPersonBitmap.clear();
@@ -383,7 +392,7 @@ public class MainActivity extends Activity implements ResultListener {
                 }
 
                 //TODO: Write face to file here.
-                if (isFileSettingsEnabled == true) {
+                if (isFileSettingsEnabled) {
 
                     if (mNumberofFrames > 0 && (newFrame.getMetadata().getId() % mNumberofFrames) == 0 && myFaceDetector.isFace(newFrame) &&
                             FileUtils.writeImageToFile(resizedbitmap1, String.valueOf(thisFace.getId()))) {
@@ -450,5 +459,15 @@ public class MainActivity extends Activity implements ResultListener {
         }
 
 
+    }
+
+    private void removeTrackingIdFromList(final int faceIdToRemove) {
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                trackingIds.remove(faceIdToRemove);
+                Log.i(TAG, "Removing Tracking ID: " + faceIdToRemove + " \nTrackingIDSize :" + trackingIds.size());
+            }
+        }, REMOVE_DELAY_MS);
     }
 }

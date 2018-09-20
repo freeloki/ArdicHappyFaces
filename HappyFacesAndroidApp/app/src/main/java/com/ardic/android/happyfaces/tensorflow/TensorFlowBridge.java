@@ -20,7 +20,7 @@ public class TensorFlowBridge {
     //private static final String MODEL_FILE = "file:///android_asset/100_192_mobile_net_2.pb";
     //private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_160_output_graph.pb";
     //mobilenet_v2_100_128_output_graph
-    private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_160_output_graph_new5.pb";
+    private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_160_output_graph_20_09_2018.pb";
     //private static final String MODEL_FILE = "file:///android_asset/mobilenet_v2_100_128_output_graph.pb";
 
 
