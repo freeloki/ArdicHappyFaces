@@ -465,8 +465,11 @@ public class MainActivity extends Activity implements ResultListener {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                trackingIds.remove(faceIdToRemove);
-                Log.i(TAG, "Removing Tracking ID: " + faceIdToRemove + " \nTrackingIDSize :" + trackingIds.size());
+                if (trackingIds.contains(faceIdToRemove)) {
+                    Log.i(TAG, "Removing Tracking ID: " + faceIdToRemove + " \nTrackingIDSize :" + trackingIds.size());
+                    trackingIds.remove(new Integer(faceIdToRemove));
+
+                }
             }
         }, REMOVE_DELAY_MS);
     }
