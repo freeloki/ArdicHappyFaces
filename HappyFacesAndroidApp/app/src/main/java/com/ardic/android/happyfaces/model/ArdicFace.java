@@ -91,7 +91,7 @@ public class ArdicFace {
             case "alpparkan":
                 mDrawable = mContext.getResources().getDrawable(R.drawable.alpparkan);
                 name = "Alp";
-                surname = "Park";
+                surname = "Parkan";
                 break;
             case "barisinanc":
                 mDrawable = mContext.getResources().getDrawable(R.drawable.barisinanc);
@@ -200,7 +200,6 @@ public class ArdicFace {
                 name = "Sinan";
                 surname = "Payaslıoğlu";
                 break;
-
             case "sonerugraskan":
                 mDrawable = mContext.getResources().getDrawable(R.drawable.sonerugraskan);
                 name = "Soner";

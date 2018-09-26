@@ -4,6 +4,7 @@ barisinanc
 ceyhunerturk
 duygukalinyilmaz
 elifcakmak
+farshaddelirabdinia
 haluktufekci
 hulyakaraerkekkahveci
 huseyinbashan
@@ -13,10 +14,12 @@ mehmetaksayan
 mertacel
 metinpar
 oguzcakir
+ozgurozkok
 perihanmirkelam
 samiozdil
 sinanpayaslioglu
 sukrankomurcu
+suleymanfakir
 taalaialmasova
 teddybear
 tunckahveci

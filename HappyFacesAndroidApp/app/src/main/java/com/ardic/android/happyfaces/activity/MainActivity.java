@@ -451,7 +451,7 @@ public class MainActivity extends Activity implements ResultListener {
         if (mPreferences.contains(SettingsActivity.SETTINGS_FILE) && mPreferences.contains(SettingsActivity.SETTINGS_TENSORFLOW)) {
             isFileSettingsEnabled = mPreferences.getBoolean(SettingsActivity.SETTINGS_FILE, false);
             isTensorFlowEnabled = mPreferences.getBoolean(SettingsActivity.SETTINGS_TENSORFLOW, false);
-            if (isFileSettingsEnabled == true) {
+            if (isFileSettingsEnabled) {
                 mNumberofFrames = mPreferences.getInt(SettingsActivity.SETTINGS_FRAMES, 1);
                 Log.i("Frames init", mNumberofFrames + "");
             }
@@ -468,7 +468,6 @@ public class MainActivity extends Activity implements ResultListener {
                 if (trackingIds.contains(faceIdToRemove)) {
                     Log.i(TAG, "Removing Tracking ID: " + faceIdToRemove + " \nTrackingIDSize :" + trackingIds.size());
                     trackingIds.remove(new Integer(faceIdToRemove));
-
                 }
             }
         }, REMOVE_DELAY_MS);
